@@ -76,6 +76,12 @@ QPicoSpeaker::QPicoSpeaker(QWidget *parent) :
     connect(ui->actionOpen, &QAction::triggered, [=] {
         openFile();
     });
+    connect(ui->actionSaveText, &QAction::triggered, [=] {
+        saveText();
+    });
+    connect(ui->actionSaveAudio, &QAction::triggered, [=] {
+        saveAudio();
+    });
     connect(ui->actionClose, &QAction::triggered, [=] {
         close();
     });
@@ -153,12 +159,11 @@ void QPicoSpeaker::stop() {
 
 void QPicoSpeaker::openFile() {
     QString read = "";
-    QString homePath = QDir::homePath();
-    QString path = QFileDialog::getOpenFileName(this, tr("Open Image"), homePath,
-                            "Text files ( *.txt *.text)");
-    QFileInfo finfo(path);
+    QString filePath = QFileDialog::getOpenFileName(this, tr("Open Text"), QDir::homePath(),
+                            tr("Text files") + "( *.txt *.text)");
+    QFileInfo finfo(filePath);
     if(finfo.exists() && finfo.isFile()) {
-        QFile file(path);
+        QFile file(filePath);
         if(!file.open(QIODevice::ReadOnly)) {
             QMessageBox::information(0,"error", file.errorString());
         }
@@ -167,7 +172,7 @@ void QPicoSpeaker::openFile() {
             read += in.readLine() + "\n";
         }
         file.close();
-        if(path != "") {
+        if(filePath != "") {
             ui->tePlay->setText(read);
         }
     }
@@ -184,10 +189,42 @@ void QPicoSpeaker::openInfo() {
 }
 
 void QPicoSpeaker::saveText() {
-
+    QString filePath = QFileDialog::getSaveFileName(
+                this, tr("Save File"), QDir::homePath(),
+                tr("Text files") + " (*.txt *.text)");
+    QFileInfo finfo(filePath);
+    if(finfo.exists() && finfo.isFile()) {
+        QFile file(filePath);
+        if(file.open(QIODevice::ReadWrite)) {
+            file.resize(0);
+            QTextStream stream(&file);
+            stream << ui->tePlay->toPlainText() << endl;
+        }
+        file.close();
+    } else {
+        QFile file(filePath);
+        if(file.open(QIODevice::ReadWrite)) {
+            QTextStream stream(&file);
+            stream << ui->tePlay->toPlainText() << endl;
+        }
+        file.close();
+    }
 }
 
 void QPicoSpeaker::saveAudio() {
+    QString filePath = QFileDialog::getSaveFileName(
+                this, tr("Save File"), QDir::homePath(),
+                tr("Wave audio file") + " (*.wav)");
 
+    QFileInfo finfo(filePath);
+    if(finfo.exists() && finfo.isFile()) {
+        QFile file("/tmp/new.wav");
+        file.copy(filePath);
+        file.close();
+    } else {
+        QFile file("/tmp/new.wav");
+        file.copy(filePath);
+        file.close();
+    }
 }
 

@@ -1,10 +1,18 @@
 #ifndef TTS_H
 #define TTS_H
 #include <string>
+#include <unistd.h>
 
 enum Source {
     FROM_TEXT = 0,
     FROM_FILE,
+};
+
+// not implemented now, needed for later versions
+enum Engine {
+    GOOGLE, // internet connection needed
+    ESPEAK,
+    PICO2WAVE,
 };
 
 class TextToSpeech {
@@ -20,7 +28,7 @@ class TextToSpeech {
         std::string m_speed = "1.0";
         std::string m_pitch = "0";
         Source m_source;
-        int m_pid;
+        pid_t m_pid;
         int m_status; 
         void checkLanguage(std::string& lang); 
 

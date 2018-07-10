@@ -3,6 +3,7 @@
 
 #include "aboutinfo.h"
 #include <QMainWindow>
+#include <QDir>
 #include <QtMultimedia/QMediaPlayer>
 
 

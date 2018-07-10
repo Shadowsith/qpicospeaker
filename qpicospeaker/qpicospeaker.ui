@@ -385,7 +385,7 @@ p, li { white-space: pre-wrap; }
      <rect>
       <x>30</x>
       <y>270</y>
-      <width>141</width>
+      <width>401</width>
       <height>24</height>
      </rect>
     </property>
@@ -421,9 +421,6 @@ p, li { white-space: pre-wrap; }
     <addaction name="actionCopy"/>
     <addaction name="actionInsert"/>
     <addaction name="separator"/>
-    <addaction name="actionPlay"/>
-    <addaction name="actionPause"/>
-    <addaction name="actionStop"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
@@ -445,8 +442,17 @@ p, li { white-space: pre-wrap; }
     <addaction name="actionQPicoSpeaker"/>
     <addaction name="menu_Language"/>
    </widget>
+   <widget class="QMenu" name="menuMedia">
+    <property name="title">
+     <string>&amp;Media</string>
+    </property>
+    <addaction name="actionPlay"/>
+    <addaction name="actionPause"/>
+    <addaction name="actionStop"/>
+   </widget>
    <addaction name="menuFile"/>
    <addaction name="menuEdit"/>
+   <addaction name="menuMedia"/>
    <addaction name="menuSettings"/>
    <addaction name="menuHelp"/>
   </widget>
@@ -455,7 +461,8 @@ p, li { white-space: pre-wrap; }
     <bool>true</bool>
    </property>
    <property name="icon">
-    <iconset theme="emblem-information"/>
+    <iconset theme="emblem-information">
+     <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
     <string>&amp;About</string>
@@ -490,7 +497,7 @@ p, li { white-space: pre-wrap; }
   </action>
   <action name="actionSaveAudio">
    <property name="enabled">
-    <bool>false</bool>
+    <bool>true</bool>
    </property>
    <property name="icon">
     <iconset theme="document-save">
@@ -601,18 +608,29 @@ p, li { white-space: pre-wrap; }
   </action>
   <action name="actionSaveText">
    <property name="enabled">
-    <bool>false</bool>
+    <bool>true</bool>
    </property>
    <property name="icon">
-    <iconset theme="document-save-as"/>
+    <iconset theme="document-save-as">
+     <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
-    <string>Save Text</string>
+    <string>Sa&amp;ve Text</string>
    </property>
   </action>
   <action name="actionEnglsih">
    <property name="text">
-    <string>English</string>
+    <string>&amp;English</string>
+   </property>
+  </action>
+  <action name="actionPlay_2">
+   <property name="text">
+    <string>Play</string>
+   </property>
+  </action>
+  <action name="actionPause_2">
+   <property name="text">
+    <string>Pause</string>
    </property>
   </action>
  </widget>

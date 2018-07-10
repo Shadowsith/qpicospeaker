@@ -70,12 +70,15 @@ void TextToSpeech::checkLanguage(std::string& lang) {
 }
 
 void TextToSpeech::setSpeedAndPitch() {
-    if (m_pid = fork()) {
+    m_pid = fork();
+    if (m_pid > 0) {
         waitpid(m_pid, &m_status, 0);
-    } else {
+    } else if (m_pid == 0){
         execl(m_soxExec.c_str(), m_soxExec.c_str(),  m_out.c_str(),
                 "/tmp/new.wav", "tempo", m_speed.c_str(),
                 "pitch", m_pitch.c_str(), NULL);
+    } else {
+        std::cout << "fork() failed" << std::endl;
     }
 }
 
@@ -96,34 +99,43 @@ bool TextToSpeech::checkProgram(const std::string cmd) {
 }
 
 void TextToSpeech::clearTmp() {
-    if (m_pid = fork()) {
+    m_pid = fork();
+    if (m_pid > 0) {
         waitpid(m_pid, &m_status, 0);
-    } else {
+    } else if (m_pid == 0){
         execl(m_rmExec.c_str(), m_rmExec.c_str(), m_out.c_str(), NULL); 
+    } else {
+        std::cout << "fork() failed" << std::endl;
     }
 }
 
 void TextToSpeech::createAudio(std::string text) {
     //pico2wave -l=en-US -w=/tmp/test.wav "$1"
-    if (m_pid = fork()) {
+    m_pid = fork();
+    if (m_pid > 0) {
         waitpid(m_pid, &m_status, 0);
-    } else {
+    } else if (m_pid == 0) {
         std::string out = "-w=" + m_out; 
         text = "\"" + text + "\"";
         execl(m_picoExec.c_str(), m_picoExec.c_str(), m_lang.c_str(), 
             out.c_str(), text.c_str(), NULL);
+    } else {
+        std::cout << "fork() failed" << std::endl;
     }
 }
 
 void TextToSpeech::createAudio() {
     //pico2wave -l=en-US -w=/tmp/test.wav "$1"
+    m_pid = fork();
     std::string out = "-w=" + m_out; 
-    if (m_pid = fork()) {
+    if (m_pid > 0) {
         waitpid(m_pid, &m_status, 0);
-    } else {
+    } else if (m_pid == 0){
         m_text = "\"" + m_text + "\"";
         execl(m_picoExec.c_str(), m_picoExec.c_str(), m_lang.c_str(), 
             out.c_str(), m_text.c_str(), NULL);
+    } else {
+        std::cout << "fork() failed" << std::endl;
     }
 }
 

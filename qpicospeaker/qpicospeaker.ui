@@ -320,6 +320,9 @@ p, li { white-space: pre-wrap; }
       <property name="orientation">
        <enum>Qt::Horizontal</enum>
       </property>
+      <property name="tickInterval">
+       <number>10</number>
+      </property>
      </widget>
      <widget class="QLabel" name="lblVolume">
       <property name="geometry">
@@ -406,7 +409,8 @@ p, li { white-space: pre-wrap; }
     </property>
     <addaction name="actionNew"/>
     <addaction name="actionOpen"/>
-    <addaction name="actionSave_As"/>
+    <addaction name="actionSaveText"/>
+    <addaction name="actionSaveAudio"/>
     <addaction name="actionClose"/>
    </widget>
    <widget class="QMenu" name="menuEdit">
@@ -431,9 +435,15 @@ p, li { white-space: pre-wrap; }
     <property name="title">
      <string>Setti&amp;ngs</string>
     </property>
+    <widget class="QMenu" name="menu_Language">
+     <property name="title">
+      <string>&amp;Language</string>
+     </property>
+     <addaction name="actionEnglsih"/>
+    </widget>
     <addaction name="separator"/>
     <addaction name="actionQPicoSpeaker"/>
-    <addaction name="actionLanguage"/>
+    <addaction name="menu_Language"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuEdit"/>
@@ -441,8 +451,11 @@ p, li { white-space: pre-wrap; }
    <addaction name="menuHelp"/>
   </widget>
   <action name="actionAbout">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
    <property name="icon">
-    <iconset theme="help-about"/>
+    <iconset theme="emblem-information"/>
    </property>
    <property name="text">
     <string>&amp;About</string>
@@ -475,13 +488,16 @@ p, li { white-space: pre-wrap; }
     <string>Ctrl+O</string>
    </property>
   </action>
-  <action name="actionSave_As">
+  <action name="actionSaveAudio">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="icon">
     <iconset theme="document-save">
      <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
-    <string>&amp;Save As</string>
+    <string>&amp;Save Audio</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+S</string>
@@ -500,6 +516,9 @@ p, li { white-space: pre-wrap; }
    </property>
   </action>
   <action name="actionCut">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="icon">
     <iconset theme="edit-cut">
      <normaloff>.</normaloff>.</iconset>
@@ -509,6 +528,9 @@ p, li { white-space: pre-wrap; }
    </property>
   </action>
   <action name="actionCopy">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="icon">
     <iconset theme="edit-copy">
      <normaloff>.</normaloff>.</iconset>
@@ -518,6 +540,9 @@ p, li { white-space: pre-wrap; }
    </property>
   </action>
   <action name="actionInsert">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="icon">
     <iconset theme="edit-paste">
      <normaloff>.</normaloff>.</iconset>
@@ -528,7 +553,8 @@ p, li { white-space: pre-wrap; }
   </action>
   <action name="actionPlay">
    <property name="icon">
-    <iconset theme="media-playback-start"/>
+    <iconset theme="media-playback-start">
+     <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
     <string>P&amp;lay</string>
@@ -539,10 +565,11 @@ p, li { white-space: pre-wrap; }
   </action>
   <action name="actionPause">
    <property name="icon">
-    <iconset theme="media-playback-pause"/>
+    <iconset theme="media-playback-pause">
+     <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
-    <string>Pause</string>
+    <string>Pa&amp;use</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+P</string>
@@ -550,7 +577,8 @@ p, li { white-space: pre-wrap; }
   </action>
   <action name="actionStop">
    <property name="icon">
-    <iconset theme="media-playback-stop"/>
+    <iconset theme="media-playback-stop">
+     <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
     <string>&amp;Stop</string>
@@ -560,19 +588,31 @@ p, li { white-space: pre-wrap; }
    </property>
   </action>
   <action name="actionQPicoSpeaker">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="icon">
-    <iconset theme="audio-volume-high"/>
+    <iconset theme="audio-volume-high">
+     <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
-    <string>QPicoSpeaker</string>
+    <string>&amp;QPicoSpeaker</string>
    </property>
   </action>
-  <action name="actionLanguage">
+  <action name="actionSaveText">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="icon">
-    <iconset theme="languages"/>
+    <iconset theme="document-save-as"/>
    </property>
    <property name="text">
-    <string>Language</string>
+    <string>Save Text</string>
+   </property>
+  </action>
+  <action name="actionEnglsih">
+   <property name="text">
+    <string>English</string>
    </property>
   </action>
  </widget>

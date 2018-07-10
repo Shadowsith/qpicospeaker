@@ -26,13 +26,16 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
         main.cpp \
         qpicospeaker.cpp \
-    texttospeech.cpp
+    texttospeech.cpp \
+    aboutinfo.cpp
 
 HEADERS += \
         qpicospeaker.h \
-    texttospeech.h
+    texttospeech.h \
+    aboutinfo.h
 
 FORMS += \
-        qpicospeaker.ui
+        qpicospeaker.ui \
+    aboutinfo.ui
 
 DISTFILES +=

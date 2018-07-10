@@ -1,6 +1,7 @@
 #ifndef QPICOSPEAKER_H
 #define QPICOSPEAKER_H
 
+#include "aboutinfo.h"
 #include <QMainWindow>
 #include <QtMultimedia/QMediaPlayer>
 
@@ -19,11 +20,16 @@ public:
 
 private:
     Ui::QPicoSpeaker *ui;
+    AboutInfo* m_info;
     QMediaPlayer *player = new QMediaPlayer;
     void play();
     void stop();
     void resize(bool checked);
     QString m_text = "";
+    void openFile();
+    void openInfo();
+    void saveText();
+    void saveAudio();
 };
 
 #endif // QPICOSPEAKER_H

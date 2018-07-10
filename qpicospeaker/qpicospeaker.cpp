@@ -1,5 +1,6 @@
 #include "qpicospeaker.h"
 #include "ui_qpicospeaker.h"
+#include "aboutinfo.h"
 #include <qslider.h>
 #include <thread>
 #include <qthread.h>
@@ -10,9 +11,13 @@
 #include <QCheckBox>
 #include <QScrollArea>
 #include <QComboBox>
+#include <QFileDialog>
 #include <QAction>
 #include <QLabel>
 #include <QPushButton>
+#include <QFile>
+#include <QMessageBox>
+#include <QTextStream>
 #include <QtMultimedia/QMediaPlayer>
 
 QPicoSpeaker::QPicoSpeaker(QWidget *parent) :
@@ -56,15 +61,21 @@ QPicoSpeaker::QPicoSpeaker(QWidget *parent) :
     /* Media player */
     connect(player, &QMediaPlayer::stateChanged, [=] {
         if(player->state() == QMediaPlayer::StoppedState) {
-            ui->btnPlay->setText("⯈ Play");
+            ui->btnPlay->setText("▶ Play");
         }
         else if(player->state() == QMediaPlayer::PausedState) {
-            ui->btnPlay->setText("⯈ Resume");
+            ui->btnPlay->setText("▶ Resume");
         } else {
             ui->btnPlay->setText("⏸ Pause");
         }
     });
     /* Menu bar */
+    connect(ui->actionNew, &QAction::triggered, [=] {
+        ui->tePlay->setText("");
+    });
+    connect(ui->actionOpen, &QAction::triggered, [=] {
+        openFile();
+    });
     connect(ui->actionClose, &QAction::triggered, [=] {
         close();
     });
@@ -76,6 +87,9 @@ QPicoSpeaker::QPicoSpeaker(QWidget *parent) :
     });
     connect(ui->actionStop, &QAction::triggered, [=] {
        player->stop();
+    });
+    connect(ui->actionAbout, &QAction::triggered, [=] {
+        openInfo();
     });
     /* init */
     ui->cbSettings->setChecked(false);
@@ -135,5 +149,45 @@ void QPicoSpeaker::resize(bool checked) {
 
 void QPicoSpeaker::stop() {
     player->stop();
+}
+
+void QPicoSpeaker::openFile() {
+    QString read = "";
+    QString homePath = QDir::homePath();
+    QString path = QFileDialog::getOpenFileName(this, tr("Open Image"), homePath,
+                            "Text files ( *.txt *.text)");
+    QFileInfo finfo(path);
+    if(finfo.exists() && finfo.isFile()) {
+        QFile file(path);
+        if(!file.open(QIODevice::ReadOnly)) {
+            QMessageBox::information(0,"error", file.errorString());
+        }
+        QTextStream in(&file);
+        while(!in.atEnd()) {
+            read += in.readLine() + "\n";
+        }
+        file.close();
+        if(path != "") {
+            ui->tePlay->setText(read);
+        }
+    }
+}
+
+void QPicoSpeaker::openInfo() {
+    m_info = AboutInfo::open();
+    if (m_info != 0) {
+        const int fHeight = m_info->height();
+        const int fWidth = m_info->width();
+        m_info->setFixedSize(fWidth, fHeight);
+        m_info->show();
+    }
+}
+
+void QPicoSpeaker::saveText() {
+
+}
+
+void QPicoSpeaker::saveAudio() {
+
 }
 

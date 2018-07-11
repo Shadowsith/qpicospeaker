@@ -4,7 +4,7 @@
 #include <qslider.h>
 #include <thread>
 #include <qthread.h>
-#include <texttospeech.h>
+#include <src/texttospeech.h>
 #include <qprocess.h>
 #include <QUrl>
 #include <QTextEdit>

@@ -9,19 +9,19 @@ QPicoSpeaker is a Qt text to speech (TTS) GUI for the pico2wave console applicat
 ---
 
 ## Third party requirements:
+* qt5 + qt5-multimedia
 * pico2wave
 * sox
 
 ## Install requirements:
-### Debian
+### Debian/Ubuntu
 <code>sudo apt-get install sox libttspico-utils</code>
 
-### Ubuntu
-<code>sudo apt-get install sox libttspico-utils</code>
+For building you also need qt5 + multimedia packages:
+<code>sudo apt-get install qt5-default qtmultimedia5-dev</code>
 
 ### Arch Linux
-From AUR: [svox-pico-bin](https://aur.archlinux.org/packages/svox-pico-bin/)<br>
-E.g. <code>trizen -S svox-pico-bin && sudo pacman -S sox</code>
+Form AUR e.g: <code>sudo trizen -S qpicospeaker-git</code>
 
 ## Supported languages (TTS):
 * English (US)
@@ -34,14 +34,14 @@ E.g. <code>trizen -S svox-pico-bin && sudo pacman -S sox</code>
 ## Implemented features
 * Write a text in the textinput and let it say from the TTS engine
 * Change **speak, loudness and pitch** form the TTS software
-
-## Upcomming features
 * Load/save textfile form/to textinput field
 * Save output file to the location what you want
 * Logo/Icon
 
-## Future features
+## Upcomming features
 * Translation to other languages
+
+## Future planned
 * Other Linux TTS engines:
     * Connection to Google Translate TTS
     * eSpeak

@@ -1,0 +1,20 @@
+[Desktop Entry]
+Version=0.9
+Name=QPicoSpeaker
+Comment=A Qt frontend for pico2wave
+Type=Application
+Comment[de]=Ein Qt-Frontend for pico2wave
+Comment[dk]=En Qt frontend til pico2wave
+Comment[en]=A Qt frontend for pico2wave
+Commment[es]=Una interfaz Qt para pico2wave
+Comment[fr]=Un frontend Qt pour pico2wave
+Comment[hu]=A Qt frontend a pico2wave-hez
+Comment[it]=Un frontend Qt per pico2wave
+Comment[nl]=Een Qt-frontend voor pico2wave
+Comment[no]=Qt frontend for pico2wave
+Comment[pl]=Frontend Qt dla pico2wave
+Comment[vi]=Một lối vào Qt cho pico2wave
+Exec=/usr/bin/qpicospeaker
+Icon=/usr/share/qpicospeaker/data/icons/qpicospeaker.svg
+Terminal=false
+Categories=AudioVideo;Audio;Player;Qt;

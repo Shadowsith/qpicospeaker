@@ -15,6 +15,6 @@ Comment[no]=Qt frontend for pico2wave
 Comment[pl]=Frontend Qt dla pico2wave
 Comment[vi]=Một lối vào Qt cho pico2wave
 Exec=/usr/bin/qpicospeaker
-Icon=/usr/share/qpicospeaker/data/icons/qpicospeaker.svg
+Icon=qpicospeaker
 Terminal=false
 Categories=AudioVideo;Audio;Player;Qt;

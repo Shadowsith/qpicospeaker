@@ -71,21 +71,9 @@ void TextToSpeech::checkLanguage(std::string& lang) {
 
 void TextToSpeech::setSpeedAndPitch() {
     std::string cmd =
-        m_soxExec+" "+m_out+" "+"/tmp/new.wav"+" "+"tempo"+" "+
+        m_sox+" "+m_out+" "+"/tmp/new.wav"+" "+"tempo"+" "+
         m_speed+" "+"pitch"+" "+m_pitch;
     std::system(cmd.c_str());
-    /*
-    m_pid = fork();
-    if (m_pid > 0) {
-        waitpid(m_pid, &m_status, 0);
-    } else if (m_pid == 0){
-        execl(m_soxExec.c_str(), m_soxExec.c_str(),  m_out.c_str(),
-                "/tmp/new.wav", "tempo", m_speed.c_str(),
-                "pitch", m_pitch.c_str(), NULL);
-    } else {
-        std::cout << "fork() failed" << std::endl;
-    }
-    */
 }
 
 bool TextToSpeech::checkProgram(const std::string cmd) {
@@ -105,63 +93,23 @@ bool TextToSpeech::checkProgram(const std::string cmd) {
 }
 
 void TextToSpeech::clearTmp() {
-    std::string cmd = m_rmExec+" "+m_out;
+    std::string cmd = m_rm+" "+m_out;
     std::system(cmd.c_str());
-    /*
-    m_pid = fork();
-    if (m_pid > 0) {
-        waitpid(m_pid, &m_status, 0);
-    } else if (m_pid == 0){
-        execl(m_rmExec.c_str(), m_rmExec.c_str(), m_out.c_str(), NULL); 
-    } else {
-        std::cout << "fork() failed" << std::endl;
-    }
-    */
 }
 
 void TextToSpeech::createAudio(std::string text) {
     std::string out = "-w=" + m_out; 
     text = "\"" + text + "\"";
     std::string cmd = 
-        m_picoExec+" "+m_lang+" "+out+" "+text;
+        m_pico+" "+m_lang+" "+out+" "+text;
     std::system(cmd.c_str());
-
-
-    //pico2wave -l=en-US -w=/tmp/test.wav "$1"
-    /*
-    m_pid = fork();
-    if (m_pid > 0) {
-        waitpid(m_pid, &m_status, 0);
-    } else if (m_pid == 0) {
-        std::string out = "-w=" + m_out; 
-        text = "\"" + text + "\"";
-        execl(m_picoExec.c_str(), m_picoExec.c_str(), m_lang.c_str(), 
-            out.c_str(), text.c_str(), NULL);
-    } else {
-        std::cout << "fork() failed" << std::endl;
-    }
-    */
 }
 
 void TextToSpeech::createAudio() {
     std::string out = "-w=" + m_out; 
     m_text = "\"" + m_text + "\"";
-    std::string cmd = m_picoExec+" "+m_lang+" "+out+" "+m_text; 
+    std::string cmd = m_pico+" "+m_lang+" "+out+" "+m_text; 
     std::system(cmd.c_str());
-    //pico2wave -l=en-US -w=/tmp/test.wav "$1"
-    /*
-    m_pid = fork();
-    std::string out = "-w=" + m_out; 
-    if (m_pid > 0) {
-        waitpid(m_pid, &m_status, 0);
-    } else if (m_pid == 0){
-        m_text = "\"" + m_text + "\"";
-        execl(m_picoExec.c_str(), m_picoExec.c_str(), m_lang.c_str(), 
-            out.c_str(), m_text.c_str(), NULL);
-    } else {
-        std::cout << "fork() failed" << std::endl;
-    }
-    */
 }
 
 

@@ -18,10 +18,10 @@ enum Engine {
 class TextToSpeech {
       private:
         std::string m_lang = "-l=";
-        std::string m_picoExec = "/usr/bin/pico2wave";
-        std::string m_soxExec = "/usr/bin/sox"; 
-        std::string m_rmExec = "/usr/bin/rm"; 
         std::string m_out = "/tmp/picoTmp.wav";
+        std::string m_pico = "pico2wave";
+        std::string m_rm = "rm";
+        std::string m_sox = "sox";
         std::string m_in = "";
         std::string m_new = "/tmp/new.wav";
         std::string m_text = "";

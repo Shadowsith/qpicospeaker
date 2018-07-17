@@ -21,7 +21,7 @@ public:
 
 private:
     Ui::QPicoSpeaker *ui;
-    AboutInfo* m_info;
+    AboutInfo* info;
     QMediaPlayer *player = new QMediaPlayer;
     void play();
     void stop();

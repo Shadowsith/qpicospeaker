@@ -27,6 +27,9 @@ QPicoSpeaker::QPicoSpeaker(QWidget *parent) :
     /* buttons */
     ui->setupUi(this);
     connect(ui->btnClose, &QPushButton::clicked, [=] {
+        if(AboutInfo::isAlloc()) {
+            info->close();
+        }
         close();
     });
     connect(ui->btnPlay, &QPushButton::clicked, [=] {
@@ -105,6 +108,7 @@ QPicoSpeaker::QPicoSpeaker(QWidget *parent) :
 QPicoSpeaker::~QPicoSpeaker()
 {
     delete ui;
+    delete player;
 }
 
 void QPicoSpeaker::play() {
@@ -114,9 +118,9 @@ void QPicoSpeaker::play() {
         QString speed = ui->lblSpeedVal->text();
         QString pitch = ui->lblPitchVal->text();
         TextToSpeech t(lang.toStdString(), speed.toStdString(),
-                       pitch.toStdString(), "", m_text.toStdString(), FROM_TEXT);
+                       pitch.toStdString(), "", m_text.toStdString());
         //TextToSpeech t(lang.toStdString(), speed.toStdString());
-        t.process();
+        t.start();
         player->setMedia(QUrl::fromLocalFile("/tmp/new.wav"));
         player->setVolume(ui->hsVolume->value());
         player->play();
@@ -179,12 +183,12 @@ void QPicoSpeaker::openFile() {
 }
 
 void QPicoSpeaker::openInfo() {
-    m_info = AboutInfo::open();
-    if (m_info != 0) {
-        const int fHeight = m_info->height();
-        const int fWidth = m_info->width();
-        m_info->setFixedSize(fWidth, fHeight);
-        m_info->show();
+    info = AboutInfo::open();
+    if (info != 0) {
+        const int fHeight = info->height();
+        const int fWidth = info->width();
+        info->setFixedSize(fWidth, fHeight);
+        info->show();
     }
 }
 

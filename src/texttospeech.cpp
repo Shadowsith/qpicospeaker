@@ -1,20 +1,9 @@
 #include <iostream>
 #include <string>
-#include <fstream>
-#include <sstream>
-#include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <time.h>
-#include <unistd.h>
-#include <sys/wait.h>
-#include <sys/stat.h>
 #include <cstdio>
-#include <memory>
-#include <stdexcept>
-#include <array>
 #include <regex>
-#include <thread>
 #include "texttospeech.h"
 
     /*
@@ -28,7 +17,7 @@
     */
 
 TextToSpeech::TextToSpeech(std::string lang, std::string speed,
-                           std::string pitch, std::string output, std::string input, Source from) {
+                           std::string pitch, std::string output, std::string input) {
     checkLanguage(lang);
     if(speed != "") {
         m_speed = speed;
@@ -42,7 +31,6 @@ TextToSpeech::TextToSpeech(std::string lang, std::string speed,
     if(input != "") {
         m_in = input;
     }
-    m_source = from;
 }
 
 TextToSpeech::~TextToSpeech() {}
@@ -113,31 +101,10 @@ void TextToSpeech::createAudio() {
 }
 
 
-void TextToSpeech::loadText(std::string filePath) {
-    std::ifstream file(filePath); 
-    for(std::string line; std::getline(file,line); ) {
-        m_text += line; 
-    }
-}
-
-void TextToSpeech::work() {
-    switch(m_source) {
-    case Source::FROM_TEXT: {
-        m_text = m_in;
-    } break;
-    case Source::FROM_FILE: {
-        loadText(m_in);
-    } break;
-    default: break;
-    }
+void TextToSpeech::start() {
+    m_text = m_in;
     createAudio(m_text);
     setSpeedAndPitch();
-    //play(m_new);
     clearTmp();
-}
-
-void TextToSpeech::process() {
-    std::thread th(&TextToSpeech::work, this);
-    th.join();
 }
 

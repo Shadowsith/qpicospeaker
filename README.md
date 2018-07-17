@@ -54,14 +54,14 @@ There is a offical maintained package in the AUR:
 * Connection to Google Translate TTS
 
 ## Future planned
-* Other Linux TTS engines:
-    * eSpeak
+* eSpeak speech synthesizer as alternative to pico2wave and Google
 
 ## Screenshots
 <div style="display: block;">
    <img src="https://shadowsith.de/qpicospeaker/qpicospeaker_example1.png" width="300px" heigth="400px">
    <img src="https://shadowsith.de/qpicospeaker/qpicospeaker_example2.png" width="300px" heigth="400px">
 </div>
+
 ## License
 * Source code is licensed under MIT 
 * Logo and GIMP Project are public domain (CC0)

@@ -23,3 +23,11 @@ AboutInfo* AboutInfo::open() {
         return instance;
     }
 }
+
+bool AboutInfo::isAlloc() {
+    if(instance) {
+        return true;
+    } else {
+        return false;
+    }
+}

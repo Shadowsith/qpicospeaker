@@ -3,11 +3,6 @@
 #include <string>
 #include <unistd.h>
 
-enum Source {
-    FROM_TEXT = 0,
-    FROM_FILE,
-};
-
 // not implemented now, needed for later versions
 enum Engine {
     GOOGLE, // internet connection needed
@@ -27,13 +22,10 @@ class TextToSpeech {
         std::string m_text = "";
         std::string m_speed = "1.0";
         std::string m_pitch = "0";
-        Source m_source;
-        pid_t m_pid;
-        int m_status; 
         void checkLanguage(std::string& lang); 
 
     public:
-        TextToSpeech(std::string lang, std::string speed, std::string pitch, std::string output, std::string input, Source from);
+        TextToSpeech(std::string lang, std::string speed, std::string pitch, std::string output, std::string input);
         ~TextToSpeech();
         void setSpeedAndPitch();
         bool checkProgram(const std::string cmd); 
@@ -41,8 +33,7 @@ class TextToSpeech {
         void createAudio();
         void createAudio(std::string text);
         void loadText(std::string filePath); 
-        void process();
-        void work();
+        void start();
 };
 
 #endif //TTS_H

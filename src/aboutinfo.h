@@ -13,6 +13,8 @@ class AboutInfo : public QWidget
 
 public:
     static AboutInfo* open();
+    static bool isAlloc();
+
 
 private:
     explicit AboutInfo(QWidget *parent = 0);

@@ -436,7 +436,8 @@ p, li { white-space: pre-wrap; }
      <property name="title">
       <string>&amp;Language</string>
      </property>
-     <addaction name="actionEnglsih"/>
+     <addaction name="actionEnglish"/>
+     <addaction name="actionGerman"/>
     </widget>
     <addaction name="separator"/>
     <addaction name="actionQPicoSpeaker"/>
@@ -618,7 +619,7 @@ p, li { white-space: pre-wrap; }
     <string>Sa&amp;ve Text</string>
    </property>
   </action>
-  <action name="actionEnglsih">
+  <action name="actionEnglish">
    <property name="text">
     <string>&amp;English</string>
    </property>
@@ -631,6 +632,11 @@ p, li { white-space: pre-wrap; }
   <action name="actionPause_2">
    <property name="text">
     <string>Pause</string>
+   </property>
+  </action>
+  <action name="actionGerman">
+   <property name="text">
+    <string>German</string>
    </property>
   </action>
  </widget>

@@ -100,6 +100,14 @@ QPicoSpeaker::QPicoSpeaker(QWidget *parent) :
     connect(ui->actionAbout, &QAction::triggered, [=] {
         openInfo();
     });
+    /* translations */
+    connect(ui->actionEnglish, &QAction::triggered, [=] {
+
+    });
+    connect(ui->actionGerman, &QAction::triggered, [=] {
+
+    });
+
     /* init */
     ui->cbSettings->setChecked(false);
     resize(false);

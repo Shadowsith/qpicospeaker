@@ -4,6 +4,7 @@
 #include "aboutinfo.h"
 #include <QMainWindow>
 #include <QDir>
+#include <QTranslator>
 #include <QtMultimedia/QMediaPlayer>
 
 
@@ -23,6 +24,7 @@ private:
     Ui::QPicoSpeaker *ui;
     AboutInfo* info;
     QMediaPlayer *player = new QMediaPlayer;
+    QTranslator tl;
     void play();
     void stop();
     void resize(bool checked);

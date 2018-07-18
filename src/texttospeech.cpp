@@ -16,8 +16,8 @@
         it-IT
     */
 
-TextToSpeech::TextToSpeech(std::string lang, std::string speed,
-                           std::string pitch, std::string output, std::string input) {
+TextToSpeech::TextToSpeech(const int& lang,
+    std::string& speed, std::string& pitch, std::string output, std::string& input) {
     checkLanguage(lang);
     if(speed != "") {
         m_speed = speed;
@@ -35,25 +35,15 @@ TextToSpeech::TextToSpeech(std::string lang, std::string speed,
 
 TextToSpeech::~TextToSpeech() {}
 
-void TextToSpeech::checkLanguage(std::string& lang) {
-    std::transform(lang.begin(), lang.end(), lang.begin(), ::tolower); 
-    if(lang == "english-uk") {
-        m_lang += "en-GB";
-    } 
-    else if(lang == "german") {
-        m_lang += "de-DE"; 
-    }
-    else if (lang == "spain") {
-        m_lang += "es-ES";
-    }
-    else if (lang == "french") {
-        m_lang += "fr-FR";
-    }
-    else if (lang == "italian") {
-        m_lang += "it-IT";
-    }
-    else {
-        m_lang += "en-US"; 
+void TextToSpeech::checkLanguage(const int& lang) {
+    switch(lang) {
+        case 0: m_lang += "en-US"; break;
+        case 1: m_lang += "en-GB"; break;
+        case 2: m_lang += "de-DE"; break;
+        case 3: m_lang += "es-ES"; break;
+        case 4: m_lang += "fr-FR"; break;
+        case 5: m_lang += "it-IT"; break;
+        default: m_lang += "en-US"; break;
     }
 }
 

@@ -22,10 +22,11 @@ class TextToSpeech {
         std::string m_text = "";
         std::string m_speed = "1.0";
         std::string m_pitch = "0";
-        void checkLanguage(std::string& lang); 
+        void checkLanguage(const int& lang);
 
     public:
-        TextToSpeech(std::string lang, std::string speed, std::string pitch, std::string output, std::string input);
+        TextToSpeech(const int& lang, std::string& speed, std::string& pitch,
+                std::string output, std::string& input);
         ~TextToSpeech();
         void setSpeedAndPitch();
         bool checkProgram(const std::string cmd); 

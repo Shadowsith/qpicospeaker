@@ -19,23 +19,36 @@
 #include <QFile>
 #include <QMessageBox>
 #include <QTextStream>
+#include <QCloseEvent>
 #include <QtMultimedia/QMediaPlayer>
 
 QPicoSpeaker::QPicoSpeaker(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::QPicoSpeaker)
 {
-    /* buttons */
+    conWin();
+    conMenu();
+    conTranl();
+    //conMisc();
+
+    /* init */
+    ui->cbSettings->setChecked(false);
+    resize(false);
+}
+
+QPicoSpeaker::~QPicoSpeaker()
+{
+    delete ui;
+    delete player;
+}
+
+void QPicoSpeaker::conWin() {
     ui->setupUi(this);
-    QApplication::instance()->installTranslator(&tl);
     connect(ui->btnClose, &QPushButton::clicked, [=] {
-        if(AboutInfo::isAlloc()) {
-            info->close();
-        }
-        close();
+        QApplication::instance()->exit();
     });
     connect(ui->btnPlay, &QPushButton::clicked, [=] {
-        play();
+        std::thread thp(&QPicoSpeaker::play, this); thp.join();
     });
     connect(ui->btnStop, &QPushButton::clicked, [=] {
         stop();
@@ -43,7 +56,6 @@ QPicoSpeaker::QPicoSpeaker(QWidget *parent) :
     connect(ui->cbSettings, &QCheckBox::stateChanged, [=] {
         resize(ui->cbSettings->isChecked());
     });
-
     /* slider */
     connect(ui->hsSpeed, &QSlider::valueChanged, [=] {
         QString val = QString::number(ui->hsSpeed->value());
@@ -74,7 +86,9 @@ QPicoSpeaker::QPicoSpeaker(QWidget *parent) :
             ui->btnPlay->setText("⏸ Pause");
         }
     });
-    /* Menu bar */
+}
+
+void QPicoSpeaker::conMenu() {
     connect(ui->actionNew, &QAction::triggered, [=] {
         ui->tePlay->setText("");
     });
@@ -102,35 +116,31 @@ QPicoSpeaker::QPicoSpeaker(QWidget *parent) :
     connect(ui->actionAbout, &QAction::triggered, [=] {
         openInfo();
     });
-    /* translations */
+}
+
+void QPicoSpeaker::conTranl() {
+    QApplication::instance()->installTranslator(&tl);
     connect(ui->actionEnglish, &QAction::triggered, [=] {
 
     });
     connect(ui->actionGerman, &QAction::triggered, [=] {
-        std::cout << tl.load("qpicospeaker_de", "/home/philip/Projekte/qt/picospeak/lang") << std::endl;
+        tl.load("qpicospeaker_de", QDir::homePath()+QString("/Projekte/qt/picospeak/lang"));
         ui->retranslateUi(this);
     });
-
-    /* init */
-    ui->cbSettings->setChecked(false);
-    resize(false);
 }
 
-QPicoSpeaker::~QPicoSpeaker()
-{
-    delete ui;
-    delete player;
+void QPicoSpeaker::closeEvent(QCloseEvent *cev) {
+    cev->accept();
+    QApplication::instance()->exit();
 }
 
 void QPicoSpeaker::play() {
     if(player->state() == QMediaPlayer::StoppedState) {
-        m_text = ui->tePlay->toPlainText();
-        QString lang = ui->cmbLang->currentText();
-        QString speed = ui->lblSpeedVal->text();
-        QString pitch = ui->lblPitchVal->text();
-        TextToSpeech t(lang.toStdString(), speed.toStdString(),
-                       pitch.toStdString(), "", m_text.toStdString());
-        //TextToSpeech t(lang.toStdString(), speed.toStdString());
+        const int lang = ui->cmbLang->currentIndex();
+        std::string text  = ui->tePlay->toPlainText().toStdString();
+        std::string speed = ui->lblSpeedVal->text().toStdString();
+        std::string pitch = ui->lblPitchVal->text().toStdString();
+        TextToSpeech t(lang, speed, pitch, "", text);
         t.start();
         player->setMedia(QUrl::fromLocalFile("/tmp/new.wav"));
         player->setVolume(ui->hsVolume->value());

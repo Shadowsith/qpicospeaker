@@ -44,7 +44,10 @@
 }</string>
     </property>
     <property name="currentText">
-     <string>English-US</string>
+     <string>Italian</string>
+    </property>
+    <property name="currentIndex">
+     <number>5</number>
     </property>
     <property name="maxVisibleItems">
      <number>10</number>
@@ -636,7 +639,7 @@ p, li { white-space: pre-wrap; }
   </action>
   <action name="actionGerman">
    <property name="text">
-    <string>German</string>
+    <string>&amp;German</string>
    </property>
   </action>
  </widget>

@@ -26,6 +26,11 @@ private:
     AboutInfo* info;
     QMediaPlayer *player = new QMediaPlayer;
     QTranslator tl;
+    void conWin();
+    void conMenu();
+    void conTranl();
+    //@Override
+    void closeEvent(QCloseEvent *cev);
     void play();
     void stop();
     void resize(bool checked);

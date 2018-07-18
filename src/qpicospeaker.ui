@@ -44,10 +44,10 @@
 }</string>
     </property>
     <property name="currentText">
-     <string>Italian</string>
+     <string>English-US</string>
     </property>
     <property name="currentIndex">
-     <number>5</number>
+     <number>0</number>
     </property>
     <property name="maxVisibleItems">
      <number>10</number>
@@ -216,7 +216,7 @@ p, li { white-space: pre-wrap; }
      <widget class="QLabel" name="lblPitchVal">
       <property name="geometry">
        <rect>
-        <x>310</x>
+        <x>350</x>
         <y>90</y>
         <width>40</width>
         <height>20</height>
@@ -231,7 +231,7 @@ p, li { white-space: pre-wrap; }
        <rect>
         <x>10</x>
         <y>10</y>
-        <width>58</width>
+        <width>81</width>
         <height>18</height>
        </rect>
       </property>
@@ -242,7 +242,7 @@ p, li { white-space: pre-wrap; }
      <widget class="QLabel" name="lblSpeedVal">
       <property name="geometry">
        <rect>
-        <x>310</x>
+        <x>350</x>
         <y>10</y>
         <width>40</width>
         <height>20</height>
@@ -260,7 +260,7 @@ p, li { white-space: pre-wrap; }
        <rect>
         <x>10</x>
         <y>90</y>
-        <width>58</width>
+        <width>81</width>
         <height>18</height>
        </rect>
       </property>
@@ -271,9 +271,9 @@ p, li { white-space: pre-wrap; }
      <widget class="QSlider" name="hsSpeed">
       <property name="geometry">
        <rect>
-        <x>110</x>
+        <x>120</x>
         <y>10</y>
-        <width>181</width>
+        <width>201</width>
         <height>31</height>
        </rect>
       </property>
@@ -296,9 +296,9 @@ p, li { white-space: pre-wrap; }
      <widget class="QSlider" name="hsPitch">
       <property name="geometry">
        <rect>
-        <x>110</x>
+        <x>120</x>
         <y>90</y>
-        <width>181</width>
+        <width>201</width>
         <height>31</height>
        </rect>
       </property>
@@ -332,7 +332,7 @@ p, li { white-space: pre-wrap; }
        <rect>
         <x>10</x>
         <y>50</y>
-        <width>58</width>
+        <width>81</width>
         <height>18</height>
        </rect>
       </property>
@@ -343,7 +343,7 @@ p, li { white-space: pre-wrap; }
      <widget class="QLabel" name="lblVolumeVal">
       <property name="geometry">
        <rect>
-        <x>310</x>
+        <x>350</x>
         <y>50</y>
         <width>40</width>
         <height>20</height>
@@ -356,9 +356,9 @@ p, li { white-space: pre-wrap; }
      <widget class="QSlider" name="hsVolume">
       <property name="geometry">
        <rect>
-        <x>110</x>
+        <x>120</x>
         <y>50</y>
-        <width>181</width>
+        <width>201</width>
         <height>31</height>
        </rect>
       </property>
@@ -441,6 +441,9 @@ p, li { white-space: pre-wrap; }
      </property>
      <addaction name="actionEnglish"/>
      <addaction name="actionGerman"/>
+     <addaction name="actionSpain"/>
+     <addaction name="actionFrench"/>
+     <addaction name="actionItalian"/>
     </widget>
     <addaction name="separator"/>
     <addaction name="actionQPicoSpeaker"/>
@@ -448,7 +451,7 @@ p, li { white-space: pre-wrap; }
    </widget>
    <widget class="QMenu" name="menuMedia">
     <property name="title">
-     <string>&amp;Media</string>
+     <string>&amp;Audio</string>
     </property>
     <addaction name="actionPlay"/>
     <addaction name="actionPause"/>
@@ -640,6 +643,21 @@ p, li { white-space: pre-wrap; }
   <action name="actionGerman">
    <property name="text">
     <string>&amp;German</string>
+   </property>
+  </action>
+  <action name="actionSpain">
+   <property name="text">
+    <string>&amp;Spain</string>
+   </property>
+  </action>
+  <action name="actionFrench">
+   <property name="text">
+    <string>&amp;French</string>
+   </property>
+  </action>
+  <action name="actionItalian">
+   <property name="text">
+    <string>&amp;Italian</string>
    </property>
   </action>
  </widget>

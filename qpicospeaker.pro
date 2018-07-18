@@ -39,6 +39,10 @@ FORMS += \
     src/aboutinfo.ui
 
 TRANSLATIONS += \
-    lang/qpicospeaker_de.ts
+    lang/qpicospeaker_en.ts \
+    lang/qpicospeaker_es.ts \
+    lang/qpicospeaker_de.ts \
+    lang/qpicospeaker_fr.ts \
+    lang/qpicospeaker_it.ts
 
 DISTFILES +=

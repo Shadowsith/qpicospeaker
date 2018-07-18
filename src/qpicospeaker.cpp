@@ -29,7 +29,6 @@ QPicoSpeaker::QPicoSpeaker(QWidget *parent) :
     conWin();
     conMenu();
     conTranl();
-    //conMisc();
 
     /* init */
     ui->cbSettings->setChecked(false);
@@ -78,12 +77,12 @@ void QPicoSpeaker::conWin() {
     /* Media player */
     connect(player, &QMediaPlayer::stateChanged, [=] {
         if(player->state() == QMediaPlayer::StoppedState) {
-            ui->btnPlay->setText("▶ Play");
+            ui->btnPlay->setText(tr("▶ Play"));
         }
         else if(player->state() == QMediaPlayer::PausedState) {
-            ui->btnPlay->setText("▶ Resume");
+            ui->btnPlay->setText(tr("▶ Resume"));
         } else {
-            ui->btnPlay->setText("⏸ Pause");
+            ui->btnPlay->setText(tr("⏸ Pause"));
         }
     });
 }
@@ -119,12 +118,18 @@ void QPicoSpeaker::conMenu() {
 }
 
 void QPicoSpeaker::conTranl() {
+    //TODO make install path for translation files
     QApplication::instance()->installTranslator(&tl);
     connect(ui->actionEnglish, &QAction::triggered, [=] {
-
+        tl.load("qpicospeaker_en", QDir::homePath()+QString("/Projekte/qt/picospeak/lang"));
+        ui->retranslateUi(this);
     });
     connect(ui->actionGerman, &QAction::triggered, [=] {
         tl.load("qpicospeaker_de", QDir::homePath()+QString("/Projekte/qt/picospeak/lang"));
+        ui->retranslateUi(this);
+    });
+    connect(ui->actionSpain, &QAction::triggered, [=] {
+        tl.load("qpicospeaker_es", QDir::homePath()+QString("/Projekte/qt/picospeak/lang"));
         ui->retranslateUi(this);
     });
 }
@@ -190,6 +195,7 @@ void QPicoSpeaker::openFile() {
     if(finfo.exists() && finfo.isFile()) {
         QFile file(filePath);
         if(!file.open(QIODevice::ReadOnly)) {
+            //Some translation here?
             QMessageBox::information(0,"error", file.errorString());
         }
         QTextStream in(&file);
@@ -239,7 +245,7 @@ void QPicoSpeaker::saveText() {
 void QPicoSpeaker::saveAudio() {
     QString filePath = QFileDialog::getSaveFileName(
                 this, tr("Save File"), QDir::homePath(),
-                tr("Wave audio file") + " (*.wav)");
+                tr("Wave audio files") + " (*.wav)");
 
     QFileInfo finfo(filePath);
     if(finfo.exists() && finfo.isFile()) {

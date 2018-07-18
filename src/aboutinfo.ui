@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>209</width>
-    <height>198</height>
+    <width>229</width>
+    <height>203</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -75,7 +75,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>Licence:</string>
+    <string>License:</string>
    </property>
   </widget>
   <widget class="QLabel" name="lblVerVal">
@@ -88,7 +88,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>0.9</string>
+    <string notr="true">1.0</string>
    </property>
   </widget>
   <widget class="QLabel" name="lblQtVal">
@@ -101,7 +101,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>5.11.0</string>
+    <string notr="true">5.11.0</string>
    </property>
   </widget>
   <widget class="QLabel" name="lblDevVal">
@@ -122,7 +122,7 @@
     <rect>
      <x>110</x>
      <y>120</y>
-     <width>81</width>
+     <width>111</width>
      <height>31</height>
     </rect>
    </property>

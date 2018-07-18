@@ -1,14 +1,15 @@
 #include "qpicospeaker.h"
 #include "ui_qpicospeaker.h"
 #include "aboutinfo.h"
-#include <qslider.h>
+#include <iostream>
+#include <QApplication>
+#include <QSlider>
 #include <thread>
-#include <qthread.h>
 #include <src/texttospeech.h>
-#include <qprocess.h>
 #include <QUrl>
 #include <QTextEdit>
 #include <QCheckBox>
+#include <QMessageBox>
 #include <QScrollArea>
 #include <QComboBox>
 #include <QFileDialog>
@@ -26,6 +27,7 @@ QPicoSpeaker::QPicoSpeaker(QWidget *parent) :
 {
     /* buttons */
     ui->setupUi(this);
+    QApplication::instance()->installTranslator(&tl);
     connect(ui->btnClose, &QPushButton::clicked, [=] {
         if(AboutInfo::isAlloc()) {
             info->close();
@@ -105,7 +107,8 @@ QPicoSpeaker::QPicoSpeaker(QWidget *parent) :
 
     });
     connect(ui->actionGerman, &QAction::triggered, [=] {
-
+        std::cout << tl.load("qpicospeaker_de", "/home/philip/Projekte/qt/picospeak/lang") << std::endl;
+        ui->retranslateUi(this);
     });
 
     /* init */

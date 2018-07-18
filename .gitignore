@@ -1,4 +1,5 @@
 .clang_complete
 *.o
+*.qm
 build-qpicospeaker-Desktop-Debug/
 qpicospeaker.pro.user

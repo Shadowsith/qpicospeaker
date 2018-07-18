@@ -15,11 +15,10 @@ public:
     static AboutInfo* open();
     static bool isAlloc();
 
-
 private:
     explicit AboutInfo(QWidget *parent = 0);
-    ~AboutInfo();
     Ui::AboutInfo *ui;
+    ~AboutInfo();
     static AboutInfo* instance;
 
 };

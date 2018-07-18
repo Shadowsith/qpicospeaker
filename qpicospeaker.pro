@@ -38,4 +38,7 @@ FORMS += \
     src/qpicospeaker.ui \
     src/aboutinfo.ui
 
+TRANSLATIONS += \
+    lang/qpicospeaker_de.ts
+
 DISTFILES +=

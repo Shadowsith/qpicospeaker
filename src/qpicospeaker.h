@@ -2,6 +2,7 @@
 #define QPICOSPEAKER_H
 
 #include "aboutinfo.h"
+#include <QApplication>
 #include <QMainWindow>
 #include <QDir>
 #include <QTranslator>

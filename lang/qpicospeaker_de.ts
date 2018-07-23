@@ -16,7 +16,7 @@
     <message>
         <location filename="../src/aboutinfo.ui" line="39"/>
         <source>Qt Version:</source>
-        <translation>Qt-Version:</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/aboutinfo.ui" line="52"/>
@@ -32,10 +32,6 @@
         <location filename="../src/aboutinfo.ui" line="78"/>
         <source>License:</source>
         <translation>Lizenz:</translation>
-    </message>
-    <message>
-        <source>Licence:</source>
-        <translation type="vanished">Lizenz:</translation>
     </message>
     <message>
         <location filename="../src/aboutinfo.ui" line="117"/>
@@ -61,38 +57,42 @@
         <translation>QPicoSpeaker</translation>
     </message>
     <message>
-        <location filename="../src/qpicospeaker.ui" line="47"/>
-        <location filename="../src/qpicospeaker.ui" line="57"/>
+        <location filename="../src/qpicospeaker.ui" line="50"/>
+        <location filename="../src/qpicospeaker.ui" line="60"/>
         <source>English-US</source>
-        <translation>Englisch-US</translation>
+        <translation>Englisch (US)</translation>
     </message>
     <message>
-        <location filename="../src/qpicospeaker.ui" line="62"/>
+        <location filename="../src/qpicospeaker.ui" line="65"/>
         <source>English-UK</source>
-        <translation>Englisch-GB</translation>
+        <translation>Englisch (GB)</translation>
     </message>
     <message>
-        <location filename="../src/qpicospeaker.ui" line="67"/>
+        <location filename="../src/qpicospeaker.ui" line="70"/>
+        <location filename="../src/qpicospeaker.ui" line="648"/>
         <source>German</source>
         <translation>Deutsch</translation>
     </message>
     <message>
-        <location filename="../src/qpicospeaker.ui" line="72"/>
-        <source>Spain</source>
+        <location filename="../src/qpicospeaker.ui" line="75"/>
+        <location filename="../src/qpicospeaker.ui" line="653"/>
+        <source>Spanish</source>
         <translation>Spanisch</translation>
     </message>
     <message>
-        <location filename="../src/qpicospeaker.ui" line="77"/>
+        <location filename="../src/qpicospeaker.ui" line="80"/>
+        <location filename="../src/qpicospeaker.ui" line="658"/>
         <source>French</source>
         <translation>Französisch</translation>
     </message>
     <message>
-        <location filename="../src/qpicospeaker.ui" line="82"/>
+        <location filename="../src/qpicospeaker.ui" line="85"/>
+        <location filename="../src/qpicospeaker.ui" line="663"/>
         <source>Italian</source>
         <translation>Italienisch</translation>
     </message>
     <message>
-        <location filename="../src/qpicospeaker.ui" line="96"/>
+        <location filename="../src/qpicospeaker.ui" line="99"/>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
@@ -101,266 +101,218 @@ p, li { white-space: pre-wrap; }
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/qpicospeaker.ui" line="113"/>
-        <source>Language:</source>
-        <translation>Sprache:</translation>
+        <location filename="../src/qpicospeaker.ui" line="116"/>
+        <location filename="../src/qpicospeaker.ui" line="443"/>
+        <source>Language</source>
+        <translation>Sprache</translation>
     </message>
     <message>
-        <location filename="../src/qpicospeaker.ui" line="129"/>
-        <source>Close</source>
-        <translation>Schließen</translation>
-    </message>
-    <message>
-        <location filename="../src/qpicospeaker.ui" line="151"/>
-        <source>Enter text for playback:</source>
-        <translation>Text hier einfügen:</translation>
-    </message>
-    <message>
-        <location filename="../src/qpicospeaker.ui" line="170"/>
-        <source>■ Stop</source>
-        <translation>■ Stop</translation>
-    </message>
-    <message>
-        <location filename="../src/qpicospeaker.ui" line="192"/>
-        <location filename="../src/qpicospeaker.cpp" line="80"/>
-        <source>▶ Play</source>
-        <translation>▶ Start</translation>
-    </message>
-    <message>
-        <location filename="../src/qpicospeaker.ui" line="226"/>
-        <source>0</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../src/qpicospeaker.ui" line="239"/>
-        <source>Speed:</source>
-        <translation>Tempo:</translation>
-    </message>
-    <message>
-        <location filename="../src/qpicospeaker.ui" line="255"/>
-        <source>1.0</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../src/qpicospeaker.ui" line="268"/>
-        <source>Pitch:</source>
-        <translation>Tonhöhe:</translation>
-    </message>
-    <message>
-        <location filename="../src/qpicospeaker.ui" line="340"/>
-        <source>Volume:</source>
-        <translation>Lautstärke:</translation>
-    </message>
-    <message>
-        <location filename="../src/qpicospeaker.ui" line="353"/>
-        <source>50</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../src/qpicospeaker.ui" line="396"/>
-        <source>Advanced Settings:</source>
-        <translation>Optionen:</translation>
-    </message>
-    <message>
-        <location filename="../src/qpicospeaker.ui" line="411"/>
-        <source>Fi&amp;le</source>
-        <translation>&amp;Datei</translation>
-    </message>
-    <message>
-        <location filename="../src/qpicospeaker.ui" line="421"/>
-        <source>Edit</source>
-        <translation>Bearbeiten</translation>
-    </message>
-    <message>
-        <location filename="../src/qpicospeaker.ui" line="430"/>
-        <source>Help</source>
-        <translation>Hilfe</translation>
-    </message>
-    <message>
-        <location filename="../src/qpicospeaker.ui" line="436"/>
-        <source>Setti&amp;ngs</source>
-        <translation>&amp;Einstellungen</translation>
-    </message>
-    <message>
-        <location filename="../src/qpicospeaker.ui" line="440"/>
-        <source>&amp;Language</source>
-        <translation>&amp;Sprache</translation>
-    </message>
-    <message>
-        <location filename="../src/qpicospeaker.ui" line="454"/>
-        <source>&amp;Audio</source>
-        <translation>&amp;Audio</translation>
-    </message>
-    <message>
-        <location filename="../src/qpicospeaker.ui" line="650"/>
-        <source>&amp;Spain</source>
-        <translation>&amp;Spanisch</translation>
-    </message>
-    <message>
-        <location filename="../src/qpicospeaker.ui" line="655"/>
-        <source>&amp;French</source>
-        <translation>&amp;Französisch</translation>
-    </message>
-    <message>
-        <location filename="../src/qpicospeaker.ui" line="660"/>
-        <source>&amp;Italian</source>
-        <translation>&amp;Italienisch</translation>
-    </message>
-    <message>
-        <source>&amp;Media</source>
-        <translation type="vanished">&amp;Audio</translation>
-    </message>
-    <message>
-        <location filename="../src/qpicospeaker.ui" line="475"/>
-        <source>&amp;About</source>
-        <translation>&amp;Über</translation>
-    </message>
-    <message>
-        <location filename="../src/qpicospeaker.ui" line="487"/>
-        <source>&amp;New</source>
-        <translation>&amp;Neu</translation>
-    </message>
-    <message>
-        <location filename="../src/qpicospeaker.ui" line="490"/>
-        <source>Ctrl+N</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../src/qpicospeaker.ui" line="499"/>
-        <source>&amp;Open</source>
-        <translation>&amp;Öffnen</translation>
-    </message>
-    <message>
-        <location filename="../src/qpicospeaker.ui" line="502"/>
-        <source>Ctrl+O</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../src/qpicospeaker.ui" line="514"/>
-        <source>&amp;Save Audio</source>
-        <translation>&amp;Audio speichern</translation>
-    </message>
-    <message>
-        <location filename="../src/qpicospeaker.ui" line="517"/>
-        <source>Ctrl+S</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../src/qpicospeaker.ui" line="526"/>
+        <location filename="../src/qpicospeaker.ui" line="132"/>
+        <location filename="../src/qpicospeaker.ui" line="529"/>
         <source>&amp;Close</source>
         <translation>&amp;Schließen</translation>
     </message>
     <message>
-        <location filename="../src/qpicospeaker.ui" line="529"/>
+        <location filename="../src/qpicospeaker.ui" line="154"/>
+        <source>Enter text for playback:</source>
+        <translation>Text hier eingeben:</translation>
+    </message>
+    <message>
+        <location filename="../src/qpicospeaker.ui" line="173"/>
+        <location filename="../src/qpicospeaker.ui" line="601"/>
+        <source>&amp;Stop</source>
+        <translation>&amp;Schließen</translation>
+    </message>
+    <message>
+        <location filename="../src/qpicospeaker.ui" line="195"/>
+        <location filename="../src/qpicospeaker.ui" line="577"/>
+        <location filename="../src/qpicospeaker.cpp" line="80"/>
+        <source>&amp;Play</source>
+        <translation>&amp;Start</translation>
+    </message>
+    <message>
+        <location filename="../src/qpicospeaker.ui" line="229"/>
+        <source>0</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../src/qpicospeaker.ui" line="242"/>
+        <source>Speed:</source>
+        <translation>Tempo:</translation>
+    </message>
+    <message>
+        <location filename="../src/qpicospeaker.ui" line="258"/>
+        <source>1.0</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../src/qpicospeaker.ui" line="271"/>
+        <source>Pitch:</source>
+        <translation>Tonhöhe:</translation>
+    </message>
+    <message>
+        <location filename="../src/qpicospeaker.ui" line="343"/>
+        <source>Volume:</source>
+        <translation>Lautstärke:</translation>
+    </message>
+    <message>
+        <location filename="../src/qpicospeaker.ui" line="356"/>
+        <source>50</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../src/qpicospeaker.ui" line="399"/>
+        <source>Advanced Settings:</source>
+        <translation>Erweiterte Einstellungen:</translation>
+    </message>
+    <message>
+        <location filename="../src/qpicospeaker.ui" line="414"/>
+        <source>Fi&amp;le</source>
+        <translation>&amp;Datei</translation>
+    </message>
+    <message>
+        <location filename="../src/qpicospeaker.ui" line="424"/>
+        <source>&amp;Edit</source>
+        <translation>&amp;Bearbeiten</translation>
+    </message>
+    <message>
+        <location filename="../src/qpicospeaker.ui" line="433"/>
+        <source>Help</source>
+        <translation>Hilfe</translation>
+    </message>
+    <message>
+        <location filename="../src/qpicospeaker.ui" line="439"/>
+        <source>Setti&amp;ngs</source>
+        <translation>&amp;Einstellungen</translation>
+    </message>
+    <message>
+        <location filename="../src/qpicospeaker.ui" line="457"/>
+        <source>&amp;Audio</source>
+        <translation>&amp;Audio</translation>
+    </message>
+    <message>
+        <location filename="../src/qpicospeaker.ui" line="478"/>
+        <source>&amp;About</source>
+        <translation>&amp;Über</translation>
+    </message>
+    <message>
+        <location filename="../src/qpicospeaker.ui" line="490"/>
+        <source>&amp;New</source>
+        <translation>&amp;Neu</translation>
+    </message>
+    <message>
+        <location filename="../src/qpicospeaker.ui" line="493"/>
+        <source>Ctrl+N</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../src/qpicospeaker.ui" line="502"/>
+        <source>&amp;Open</source>
+        <translation>&amp;Öffnen</translation>
+    </message>
+    <message>
+        <location filename="../src/qpicospeaker.ui" line="505"/>
+        <source>Ctrl+O</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../src/qpicospeaker.ui" line="517"/>
+        <source>&amp;Save Audio</source>
+        <translation>&amp;Audio speichern</translation>
+    </message>
+    <message>
+        <location filename="../src/qpicospeaker.ui" line="520"/>
+        <source>Ctrl+S</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../src/qpicospeaker.ui" line="532"/>
         <source>Ctrl+Del</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/qpicospeaker.ui" line="541"/>
+        <location filename="../src/qpicospeaker.ui" line="544"/>
         <source>&amp;Cut</source>
         <translation>&amp;Ausschneiden</translation>
     </message>
     <message>
-        <location filename="../src/qpicospeaker.ui" line="553"/>
-        <source>C&amp;opy</source>
+        <location filename="../src/qpicospeaker.ui" line="556"/>
+        <source>&amp;Copy</source>
         <translation>&amp;Kopieren</translation>
     </message>
     <message>
-        <location filename="../src/qpicospeaker.ui" line="565"/>
+        <location filename="../src/qpicospeaker.ui" line="568"/>
         <source>&amp;Paste</source>
         <translation>&amp;Einfügen</translation>
     </message>
     <message>
-        <location filename="../src/qpicospeaker.ui" line="574"/>
-        <source>P&amp;lay</source>
-        <translation>&amp;Abspielen</translation>
-    </message>
-    <message>
-        <location filename="../src/qpicospeaker.ui" line="577"/>
-        <location filename="../src/qpicospeaker.ui" line="589"/>
+        <location filename="../src/qpicospeaker.ui" line="580"/>
+        <location filename="../src/qpicospeaker.ui" line="592"/>
         <source>Ctrl+P</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/qpicospeaker.ui" line="586"/>
-        <source>Pa&amp;use</source>
+        <location filename="../src/qpicospeaker.ui" line="589"/>
+        <location filename="../src/qpicospeaker.cpp" line="85"/>
+        <source>&amp;Pause</source>
         <translation>&amp;Pause</translation>
     </message>
     <message>
-        <location filename="../src/qpicospeaker.ui" line="598"/>
-        <source>&amp;Stop</source>
-        <translation>&amp;Stoppen</translation>
-    </message>
-    <message>
-        <location filename="../src/qpicospeaker.ui" line="601"/>
+        <location filename="../src/qpicospeaker.ui" line="604"/>
         <source>Ctrl+H</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/qpicospeaker.ui" line="613"/>
+        <location filename="../src/qpicospeaker.ui" line="616"/>
         <source>&amp;QPicoSpeaker</source>
-        <translation></translation>
+        <translation>&amp;QPicoSpeaker</translation>
     </message>
     <message>
-        <location filename="../src/qpicospeaker.ui" line="625"/>
-        <source>Sa&amp;ve Text</source>
+        <location filename="../src/qpicospeaker.ui" line="628"/>
+        <source>&amp;Save Text</source>
         <translation>&amp;Text speichern</translation>
     </message>
     <message>
-        <location filename="../src/qpicospeaker.ui" line="630"/>
-        <source>&amp;English</source>
-        <translation>&amp;Englisch</translation>
+        <location filename="../src/qpicospeaker.ui" line="633"/>
+        <source>English</source>
+        <translation>Englisch</translation>
     </message>
     <message>
-        <location filename="../src/qpicospeaker.ui" line="635"/>
+        <location filename="../src/qpicospeaker.ui" line="638"/>
         <source>Play</source>
         <translation>Start</translation>
     </message>
     <message>
-        <location filename="../src/qpicospeaker.ui" line="640"/>
+        <location filename="../src/qpicospeaker.ui" line="643"/>
         <source>Pause</source>
         <translation>Pause</translation>
     </message>
     <message>
-        <location filename="../src/qpicospeaker.ui" line="645"/>
-        <source>&amp;German</source>
-        <translation>&amp;Deutsch</translation>
-    </message>
-    <message>
         <location filename="../src/qpicospeaker.cpp" line="83"/>
-        <source>▶ Resume</source>
-        <translation>▶ Weiter</translation>
+        <source>&amp;Resume</source>
+        <translation>&amp;Weiter</translation>
     </message>
     <message>
-        <location filename="../src/qpicospeaker.cpp" line="85"/>
-        <source>⏸ Pause</source>
-        <translation>⏸ Pause</translation>
-    </message>
-    <message>
-        <location filename="../src/qpicospeaker.cpp" line="194"/>
+        <location filename="../src/qpicospeaker.cpp" line="192"/>
         <source>Open Text</source>
-        <translation>Text öffnen</translation>
+        <translation>Textdatei öffnen</translation>
     </message>
     <message>
-        <location filename="../src/qpicospeaker.cpp" line="195"/>
-        <location filename="../src/qpicospeaker.cpp" line="227"/>
+        <location filename="../src/qpicospeaker.cpp" line="193"/>
+        <location filename="../src/qpicospeaker.cpp" line="225"/>
         <source>Text files</source>
         <translation>Textdateien</translation>
     </message>
     <message>
-        <location filename="../src/qpicospeaker.cpp" line="226"/>
-        <location filename="../src/qpicospeaker.cpp" line="249"/>
+        <location filename="../src/qpicospeaker.cpp" line="224"/>
+        <location filename="../src/qpicospeaker.cpp" line="247"/>
         <source>Save File</source>
         <translation>Datei speichern</translation>
     </message>
     <message>
-        <location filename="../src/qpicospeaker.cpp" line="250"/>
+        <location filename="../src/qpicospeaker.cpp" line="248"/>
         <source>Wave audio files</source>
-        <translation>Wave Audiodateien</translation>
-    </message>
-    <message>
-        <source>Wave audio file</source>
-        <translation type="vanished">Wavedatei</translation>
+        <translation>Wave Audiodatei</translation>
     </message>
 </context>
 </TS>

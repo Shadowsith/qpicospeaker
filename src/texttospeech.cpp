@@ -4,37 +4,34 @@
 #include <stdlib.h>
 #include <cstdio>
 #include <regex>
+#include <vector>
 #include "texttospeech.h"
 
-    /*
-        supported languages:
-        en-US
-        en-GB
-        de-DE
-        es-ES
-        fr-FR
-        it-IT
-    */
+// constructor & destructor -----------------------------------------------------------------------
+TextToSpeech::TextToSpeech(const int& lang,
+    std::string& speed, std::string& pitch, std::string output, std::string& text) {
+    checkLanguage(lang);
+    if(speed != "")     m_speed = speed;
+    if(pitch != "")     m_pitch = pitch;
+    if(output != "")    m_out = output;
+    if(text != "")     m_text = text;
+    m_eng = Engine::PICO2WAVE;
+}
 
 TextToSpeech::TextToSpeech(const int& lang,
-    std::string& speed, std::string& pitch, std::string output, std::string& input) {
+    std::string& speed, std::string& pitch, std::string output, 
+    std::string& input, Engine eng) {
     checkLanguage(lang);
-    if(speed != "") {
-        m_speed = speed;
-    }
-    if(pitch != "") {
-        m_pitch = pitch;
-    }
-    if(output != "") {
-        m_out = output;
-    }
-    if(input != "") {
-        m_in = input;
-    }
+    if(speed != "")     m_speed = speed;
+    if(pitch != "")     m_pitch = pitch;
+    if(output != "")    m_out = output;
+    if(input != "")     m_in = input;
+    m_eng = eng; 
 }
 
 TextToSpeech::~TextToSpeech() {}
 
+// privat methods --------------------------------------------------------------------------------- 
 void TextToSpeech::checkLanguage(const int& lang) {
     switch(lang) {
         case 0: m_lang += "en-US"; break;
@@ -47,13 +44,45 @@ void TextToSpeech::checkLanguage(const int& lang) {
     }
 }
 
-void TextToSpeech::setSpeedAndPitch() {
-    std::string cmd =
-        m_sox+" "+m_out+" "+"/tmp/new.wav"+" "+"tempo"+" "+
-        m_speed+" "+"pitch"+" "+m_pitch;
-    std::system(cmd.c_str());
+
+void TextToSpeech::recordFiles() {
+    for (size_t i = 0; i < m_gMsgParts.size(); i++) {
+        std::string out = "/tmp/gTmp" + std::to_string(i) + ".wav";
+        std::string message = "\"" + m_google + m_gMsgParts[i] + "de" + "\"";
+        m_cmd = "mplayer "+message+" -vc null -vo null -ao pcm:fast:waveheader:file="+out;
+        std::system(m_cmd.c_str());
+    }
 }
 
+
+void TextToSpeech::saveParts() {
+    std::vector<std::string> words = split(m_text," ");  
+    std::string request = "";
+    for(auto& word : words) {
+        if(request.length()+word.length()+1 <= m_gRequestLength) {
+            request += word + " ";
+        } else {
+            m_gMsgParts.push_back(request);
+            request = word + " ";
+            m_gTmpFiles++;
+        }
+    }
+}
+
+std::vector<std::string> TextToSpeech::split(std::string &str, const std::string delimiter) {
+    std::vector<std::string> parts;
+    std::size_t pos = 0;
+    std::string token;
+    while((pos = str.find(delimiter)) != std::string::npos){
+        token = str.substr(0,pos);
+        parts.push_back(token);
+        str.erase(0, pos + delimiter.length());
+    }
+    parts.push_back(str);
+    return parts;
+} 
+
+// public methods ----------------------------------------------------------------------------------
 bool TextToSpeech::checkProgram(const std::string cmd) {
     std::array<char, 128> buffer;
     std::string result;
@@ -71,29 +100,43 @@ bool TextToSpeech::checkProgram(const std::string cmd) {
 }
 
 void TextToSpeech::clearTmp() {
-    std::string cmd = m_rm+" "+m_out;
-    std::system(cmd.c_str());
-}
-
-void TextToSpeech::createAudio(std::string text) {
-    std::string out = "-w=" + m_out; 
-    text = "\"" + text + "\"";
-    std::string cmd = 
-        m_pico+" "+m_lang+" "+out+" "+text;
-    std::system(cmd.c_str());
+    switch(m_eng) {
+        case Engine::ESPEAK: break;
+        case Engine::PICO2WAVE: 
+            m_cmd = m_rm+" "+m_out;
+            break;
+        case Engine::GOOGLE:
+            m_cmd = m_rm+" /tmp/gTmp*.wav";
+            break;
+    }
+    std::system(m_cmd.c_str());
 }
 
 void TextToSpeech::createAudio() {
-    std::string out = "-w=" + m_out; 
-    m_text = "\"" + m_text + "\"";
-    std::string cmd = m_pico+" "+m_lang+" "+out+" "+m_text; 
-    std::system(cmd.c_str());
+    switch(m_eng) {
+        case Engine::ESPEAK: break;
+        case Engine::GOOGLE: { 
+            saveParts();
+            recordFiles();
+            m_cmd = m_sox+" "+"/tmp/gTmp*.wav"+" "+"new.wav";
+            std::system(m_cmd.c_str());
+        } break;
+        case Engine::PICO2WAVE: {
+            std::string out = "-w=" + m_out; 
+            m_text = "\"" + m_text + "\"";
+            m_cmd = m_pico+" "+m_lang+" "+out+" "+m_text; 
+            std::system(m_cmd.c_str());
+        } break;
+    }
 }
 
+void TextToSpeech::setSpeedAndPitch() {
+    m_cmd = m_sox+" "+m_out+" "+"/tmp/new.wav"+" "+"tempo"+" "+m_speed+" "+"pitch"+" "+m_pitch;
+    std::system(m_cmd.c_str());
+}
 
 void TextToSpeech::start() {
-    m_text = m_in;
-    createAudio(m_text);
+    createAudio();
     setSpeedAndPitch();
     clearTmp();
 }

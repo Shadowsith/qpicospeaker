@@ -26,6 +26,7 @@ private:
     AboutInfo* info;
     QMediaPlayer *player = new QMediaPlayer;
     QTranslator tl;
+    void setSpecialCharsToUiItms();
     void conWin();
     void conMenu();
     void conTranl();

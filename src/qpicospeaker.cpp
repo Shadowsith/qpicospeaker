@@ -29,6 +29,7 @@ QPicoSpeaker::QPicoSpeaker(QWidget *parent) :
     conWin();
     conMenu();
     conTranl();
+    setSpecialCharsToUiItms();
 
     /* init */
     ui->cbSettings->setChecked(false);
@@ -77,12 +78,12 @@ void QPicoSpeaker::conWin() {
     /* Media player */
     connect(player, &QMediaPlayer::stateChanged, [=] {
         if(player->state() == QMediaPlayer::StoppedState) {
-            ui->btnPlay->setText(tr("▶ Play"));
+            ui->btnPlay->setText(tr("&Play"));
         }
         else if(player->state() == QMediaPlayer::PausedState) {
-            ui->btnPlay->setText(tr("▶ Resume"));
+            ui->btnPlay->setText(tr("&Resume"));
         } else {
-            ui->btnPlay->setText(tr("⏸ Pause"));
+            ui->btnPlay->setText(tr("&Pause"));
         }
     });
 }
@@ -134,6 +135,11 @@ void QPicoSpeaker::conTranl() {
     });
 }
 
+void QPicoSpeaker::setSpecialCharsToUiItms() {
+    ui->lblEng->setText(ui->lblEng->text() + ":");
+    ui->lblLang->setText(ui->lblLang->text() + ":");
+}
+
 void QPicoSpeaker::closeEvent(QCloseEvent *cev) {
     cev->accept();
     QApplication::instance()->exit();
@@ -166,6 +172,10 @@ void QPicoSpeaker::resize(bool checked) {
                                  ui->lblLang->width(), ui->lblLang->height());
         ui->cmbLang->setGeometry(ui->cmbLang->x(), ui->cmbLang->y()-shrink,
                                  ui->cmbLang->width(), ui->cmbLang->height());
+        ui->lblEng->setGeometry(ui->lblEng->x(), ui->lblEng->y()-shrink,
+                                ui->lblEng->width(), ui->lblEng->height());
+        ui->cmbEng->setGeometry(ui->cmbEng->x(), ui->cmbEng->y()-shrink,
+                                 ui->cmbEng->width(), ui->cmbEng->height());
         ui->cbSettings->setGeometry(ui->cbSettings->x(), ui->cbSettings->y()-shrink,
                                     ui->cbSettings->width(), ui->cbSettings->height());
         ui->saSliders->show();
@@ -177,7 +187,11 @@ void QPicoSpeaker::resize(bool checked) {
                                  ui->lblLang->width(), ui->lblLang->height());
         ui->cmbLang->setGeometry(ui->cmbLang->x(), ui->cmbLang->y()+growth,
                                  ui->cmbLang->width(), ui->cmbLang->height());
-        ui->cbSettings->setGeometry(ui->cbSettings->x(), ui->cbSettings->y()+growth,
+                ui->lblEng->setGeometry(ui->lblEng->x(), ui->lblEng->y()+growth,
+                                 ui->lblEng->width(), ui->lblEng->height());
+        ui->cmbEng->setGeometry(ui->cmbEng->x(), ui->cmbEng->y()+growth,
+                                 ui->cmbEng->width(), ui->cmbEng->height());
+                ui->cbSettings->setGeometry(ui->cbSettings->x(), ui->cbSettings->y()+growth,
                                     ui->cbSettings->width(), ui->cbSettings->height());
         ui->saSliders->hide();
     }

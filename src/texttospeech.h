@@ -37,9 +37,7 @@ class TextToSpeech {
         std::vector<std::string> split(std::string &str, const std::string delimter);
 
     public:
-        TextToSpeech(const int& lang, std::string& speed, std::string& pitch,
-                std::string output, std::string& text);
-
+        TextToSpeech();
         TextToSpeech(const int& lang, std::string& speed, std::string& pitch,
                 std::string output, std::string& text, Engine eng);
         ~TextToSpeech();

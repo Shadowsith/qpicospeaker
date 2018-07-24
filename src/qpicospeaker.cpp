@@ -148,11 +148,22 @@ void QPicoSpeaker::closeEvent(QCloseEvent *cev) {
 void QPicoSpeaker::play() {
     if(player->state() == QMediaPlayer::StoppedState) {
         const int lang = ui->cmbLang->currentIndex();
+        const int eng = ui->cmbEng->currentIndex();
         std::string text  = ui->tePlay->toPlainText().toStdString();
         std::string speed = ui->lblSpeedVal->text().toStdString();
         std::string pitch = ui->lblPitchVal->text().toStdString();
-        TextToSpeech t(lang, speed, pitch, "", text);
-        t.start();
+
+        switch(eng) {
+            case 0: {
+                TextToSpeech t(lang, speed, pitch, "", text, Engine::ESPEAK);
+            } break;
+            case 1: {
+                TextToSpeech t(lang, speed, pitch, "", text, Engine::GOOGLE);
+            } break;
+            default: //TextToSpeech t(lang, speed, pitch, "", text, Engine::PICO2WAVE);
+                    TextToSpeech t(lang, speed, pitch, "", text, Engine::PICO2WAVE);
+                    t.start();
+        }
         player->setMedia(QUrl::fromLocalFile("/tmp/new.wav"));
         player->setVolume(ui->hsVolume->value());
         player->play();

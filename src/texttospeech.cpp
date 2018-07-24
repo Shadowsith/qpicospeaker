@@ -8,24 +8,16 @@
 #include "texttospeech.h"
 
 // constructor & destructor -----------------------------------------------------------------------
-TextToSpeech::TextToSpeech(const int& lang,
-    std::string& speed, std::string& pitch, std::string output, std::string& text) {
-    checkLanguage(lang);
-    if(speed != "")     m_speed = speed;
-    if(pitch != "")     m_pitch = pitch;
-    if(output != "")    m_out = output;
-    if(text != "")     m_text = text;
-    m_eng = Engine::PICO2WAVE;
-}
+TextToSpeech::TextToSpeech() {};
 
 TextToSpeech::TextToSpeech(const int& lang,
     std::string& speed, std::string& pitch, std::string output, 
-    std::string& input, Engine eng) {
+    std::string& text, Engine eng) {
     checkLanguage(lang);
     if(speed != "")     m_speed = speed;
     if(pitch != "")     m_pitch = pitch;
     if(output != "")    m_out = output;
-    if(input != "")     m_in = input;
+    if(text != "")      m_text = text;
     m_eng = eng; 
 }
 
@@ -140,4 +132,7 @@ void TextToSpeech::start() {
     setSpeedAndPitch();
     clearTmp();
 }
+
+// operators-----------------------------------------------------------------------------------------
+
 

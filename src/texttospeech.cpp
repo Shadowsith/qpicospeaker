@@ -13,26 +13,43 @@ TextToSpeech::TextToSpeech() {};
 TextToSpeech::TextToSpeech(const int& lang,
     std::string& speed, std::string& pitch, std::string output, 
     std::string& text, Engine eng) {
+    m_eng = eng;
     checkLanguage(lang);
     if(speed != "")     m_speed = speed;
     if(pitch != "")     m_pitch = pitch;
     if(output != "")    m_out = output;
     if(text != "")      m_text = text;
-    m_eng = eng; 
 }
 
 TextToSpeech::~TextToSpeech() {}
 
 // privat methods --------------------------------------------------------------------------------- 
 void TextToSpeech::checkLanguage(const int& lang) {
-    switch(lang) {
-        case 0: m_lang += "en-US"; break;
-        case 1: m_lang += "en-GB"; break;
-        case 2: m_lang += "de-DE"; break;
-        case 3: m_lang += "es-ES"; break;
-        case 4: m_lang += "fr-FR"; break;
-        case 5: m_lang += "it-IT"; break;
-        default: m_lang += "en-US"; break;
+    switch(m_eng) {
+        case Engine::ESPEAK: break;
+        case Engine::GOOGLE: {
+            switch(lang) {
+                case 0: m_lang = "&tl=en"; break;
+                case 1: m_lang = "&tl=en"; break;
+                case 2: m_lang = "&tl=de"; break;
+                case 3: m_lang = "&tl=es"; break;
+                case 4: m_lang = "&tl=fr"; break;
+                case 5: m_lang = "&tl=it"; break;
+                default: m_lang = "&tl=en"; break;
+            }
+            std::cout << m_lang << std::endl;
+        } break;
+        case Engine::PICO2WAVE: {
+            switch(lang) {
+                case 0: m_lang += "en-US"; break;
+                case 1: m_lang += "en-GB"; break;
+                case 2: m_lang += "de-DE"; break;
+                case 3: m_lang += "es-ES"; break;
+                case 4: m_lang += "fr-FR"; break;
+                case 5: m_lang += "it-IT"; break;
+                default: m_lang += "en-US"; break;
+            }
+        } break;
     }
 }
 
@@ -40,7 +57,8 @@ void TextToSpeech::checkLanguage(const int& lang) {
 void TextToSpeech::recordFiles() {
     for (size_t i = 0; i < m_gMsgParts.size(); i++) {
         std::string out = "/tmp/gTmp" + std::to_string(i) + ".wav";
-        std::string message = "\"" + m_google + m_gMsgParts[i] + "de" + "\"";
+        std::string message = "\"" + m_google + m_gMsgParts[i] + m_lang + "\"";
+        std::cout << message << std::endl;
         m_cmd = "mplayer "+message+" -vc null -vo null -ao pcm:fast:waveheader:file="+out;
         std::system(m_cmd.c_str());
     }
@@ -59,6 +77,8 @@ void TextToSpeech::saveParts() {
             m_gTmpFiles++;
         }
     }
+    m_gMsgParts.push_back(request);
+
 }
 
 std::vector<std::string> TextToSpeech::split(std::string &str, const std::string delimiter) {
@@ -108,9 +128,10 @@ void TextToSpeech::createAudio() {
     switch(m_eng) {
         case Engine::ESPEAK: break;
         case Engine::GOOGLE: { 
+            std::cout << "GoogleAudio" << std::endl;
             saveParts();
             recordFiles();
-            m_cmd = m_sox+" "+"/tmp/gTmp*.wav"+" "+"new.wav";
+            m_cmd = m_sox+" "+"/tmp/gTmp*.wav"+" "+m_out;
             std::system(m_cmd.c_str());
         } break;
         case Engine::PICO2WAVE: {
@@ -130,7 +151,7 @@ void TextToSpeech::setSpeedAndPitch() {
 void TextToSpeech::start() {
     createAudio();
     setSpeedAndPitch();
-    clearTmp();
+    //clearTmp();
 }
 
 // operators-----------------------------------------------------------------------------------------

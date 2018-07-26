@@ -159,6 +159,7 @@ void QPicoSpeaker::play() {
             } break;
             case 1: {
                 TextToSpeech t(lang, speed, pitch, "", text, Engine::GOOGLE);
+                t.start();
             } break;
             default: //TextToSpeech t(lang, speed, pitch, "", text, Engine::PICO2WAVE);
                     TextToSpeech t(lang, speed, pitch, "", text, Engine::PICO2WAVE);

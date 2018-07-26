@@ -238,6 +238,11 @@ p, li { white-space: pre-wrap; }
         <height>18</height>
        </rect>
       </property>
+      <property name="styleSheet">
+       <string notr="true">#lblSpeed {
+	text-decoration: underline
+}</string>
+      </property>
       <property name="text">
        <string>Speed:</string>
       </property>
@@ -266,6 +271,11 @@ p, li { white-space: pre-wrap; }
         <width>81</width>
         <height>18</height>
        </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">#lblPitch {
+	text-decoration: underline
+}</string>
       </property>
       <property name="text">
        <string>Pitch:</string>
@@ -338,6 +348,11 @@ p, li { white-space: pre-wrap; }
         <width>81</width>
         <height>18</height>
        </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">#lblVolume {
+	text-decoration: underline
+}</string>
       </property>
       <property name="text">
        <string>Volume:</string>

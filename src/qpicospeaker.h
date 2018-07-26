@@ -30,12 +30,14 @@ private:
     void conWin();
     void conMenu();
     void conTranl();
+    void clearTmp();
     //@Override
     void closeEvent(QCloseEvent *cev);
     void play();
     void stop();
     void resize(bool checked);
     QString m_text = "";
+    QString m_audio = "/tmp/picospeak.wav";
     void openFile();
     void openInfo();
     void saveText();

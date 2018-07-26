@@ -27,16 +27,19 @@ SOURCES += \
     src/texttospeech.cpp \
     src/aboutinfo.cpp \
     src/qpicospeaker.cpp \
-    src/main.cpp
+    src/main.cpp \
+    src/settings.cpp
 
 HEADERS += \
     src/qpicospeaker.h \
     src/texttospeech.h \
-    src/aboutinfo.h
+    src/aboutinfo.h \
+    src/settings.h
 
 FORMS += \
     src/qpicospeaker.ui \
-    src/aboutinfo.ui
+    src/aboutinfo.ui \
+    src/settings.ui
 
 TRANSLATIONS += \
     lang/qpicospeaker_en.ts \

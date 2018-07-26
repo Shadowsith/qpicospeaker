@@ -8,10 +8,8 @@
 #include "texttospeech.h"
 
 // constructor & destructor -----------------------------------------------------------------------
-TextToSpeech::TextToSpeech() {};
-
 TextToSpeech::TextToSpeech(const int& lang,
-    std::string& speed, std::string& pitch, std::string output, 
+    std::string& speed, std::string& pitch, std::string& output,
     std::string& text, Engine eng) {
     m_eng = eng;
     checkLanguage(lang);
@@ -56,10 +54,10 @@ void TextToSpeech::checkLanguage(const int& lang) {
 
 void TextToSpeech::recordFiles() {
     for (size_t i = 0; i < m_gMsgParts.size(); i++) {
-        std::string out = "/tmp/gTmp" + std::to_string(i) + ".wav";
+        std::string tmp = "/tmp/gTmp" + std::to_string(i) + ".wav";
         std::string message = "\"" + m_google + m_gMsgParts[i] + m_lang + "\"";
         std::cout << message << std::endl;
-        m_cmd = "mplayer "+message+" -vc null -vo null -ao pcm:fast:waveheader:file="+out;
+        m_cmd = "mplayer "+message+" -vc null -vo null -ao pcm:fast:waveheader:file="+tmp;
         std::system(m_cmd.c_str());
     }
 }
@@ -115,10 +113,10 @@ void TextToSpeech::clearTmp() {
     switch(m_eng) {
         case Engine::ESPEAK: break;
         case Engine::PICO2WAVE: 
-            m_cmd = m_rm+" "+m_out;
+            m_cmd = m_rm+" "+m_tmp;
             break;
         case Engine::GOOGLE:
-            m_cmd = m_rm+" /tmp/gTmp*.wav";
+            m_cmd = m_rm+" /tmp/gTmp*.wav "+m_tmp;
             break;
     }
     std::system(m_cmd.c_str());
@@ -131,27 +129,27 @@ void TextToSpeech::createAudio() {
             std::cout << "GoogleAudio" << std::endl;
             saveParts();
             recordFiles();
-            m_cmd = m_sox+" "+"/tmp/gTmp*.wav"+" "+m_out;
+            m_cmd = m_sox+" "+"/tmp/gTmp*.wav"+" "+m_tmp;
             std::system(m_cmd.c_str());
         } break;
         case Engine::PICO2WAVE: {
-            std::string out = "-w=" + m_out; 
+            std::string tmp = "-w=" + m_tmp;
             m_text = "\"" + m_text + "\"";
-            m_cmd = m_pico+" "+m_lang+" "+out+" "+m_text; 
+            m_cmd = m_pico+" "+m_lang+" "+tmp+" "+m_text;
             std::system(m_cmd.c_str());
         } break;
     }
 }
 
 void TextToSpeech::setSpeedAndPitch() {
-    m_cmd = m_sox+" "+m_out+" "+"/tmp/new.wav"+" "+"tempo"+" "+m_speed+" "+"pitch"+" "+m_pitch;
+    m_cmd = m_sox+" "+m_tmp+" "+m_out+" "+"tempo"+" "+m_speed+" "+"pitch"+" "+m_pitch;
     std::system(m_cmd.c_str());
 }
 
 void TextToSpeech::start() {
     createAudio();
     setSpeedAndPitch();
-    //clearTmp();
+    clearTmp();
 }
 
 // operators-----------------------------------------------------------------------------------------

@@ -45,6 +45,7 @@ QPicoSpeaker::~QPicoSpeaker()
 void QPicoSpeaker::conWin() {
     ui->setupUi(this);
     connect(ui->btnClose, &QPushButton::clicked, [=] {
+        clearTmp();
         QApplication::instance()->exit();
     });
     connect(ui->btnPlay, &QPushButton::clicked, [=] {
@@ -124,14 +125,17 @@ void QPicoSpeaker::conTranl() {
     connect(ui->actionEnglish, &QAction::triggered, [=] {
         tl.load("qpicospeaker_en", QDir::homePath()+QString("/Projekte/qt/picospeak/lang"));
         ui->retranslateUi(this);
+        setSpecialCharsToUiItms();
     });
     connect(ui->actionGerman, &QAction::triggered, [=] {
         tl.load("qpicospeaker_de", QDir::homePath()+QString("/Projekte/qt/picospeak/lang"));
         ui->retranslateUi(this);
+        setSpecialCharsToUiItms();
     });
     connect(ui->actionSpain, &QAction::triggered, [=] {
         tl.load("qpicospeaker_es", QDir::homePath()+QString("/Projekte/qt/picospeak/lang"));
         ui->retranslateUi(this);
+        setSpecialCharsToUiItms();
     });
 }
 
@@ -140,8 +144,14 @@ void QPicoSpeaker::setSpecialCharsToUiItms() {
     ui->lblLang->setText(ui->lblLang->text() + ":");
 }
 
+void QPicoSpeaker::clearTmp() {
+    QFile f(m_audio);
+    f.remove();
+}
+
 void QPicoSpeaker::closeEvent(QCloseEvent *cev) {
     cev->accept();
+    clearTmp();
     QApplication::instance()->exit();
 }
 
@@ -152,20 +162,21 @@ void QPicoSpeaker::play() {
         std::string text  = ui->tePlay->toPlainText().toStdString();
         std::string speed = ui->lblSpeedVal->text().toStdString();
         std::string pitch = ui->lblPitchVal->text().toStdString();
+        std::string output = m_audio.toStdString();
 
         switch(eng) {
             case 0: {
-                TextToSpeech t(lang, speed, pitch, "", text, Engine::ESPEAK);
+                TextToSpeech t(lang, speed, pitch, output, text, Engine::ESPEAK);
             } break;
             case 1: {
-                TextToSpeech t(lang, speed, pitch, "", text, Engine::GOOGLE);
+                TextToSpeech t(lang, speed, pitch, output, text, Engine::GOOGLE);
                 t.start();
             } break;
             default: //TextToSpeech t(lang, speed, pitch, "", text, Engine::PICO2WAVE);
-                    TextToSpeech t(lang, speed, pitch, "", text, Engine::PICO2WAVE);
+                    TextToSpeech t(lang, speed, pitch, output, text, Engine::PICO2WAVE);
                     t.start();
         }
-        player->setMedia(QUrl::fromLocalFile("/tmp/new.wav"));
+        player->setMedia(QUrl::fromLocalFile(m_audio));
         player->setVolume(ui->hsVolume->value());
         player->play();
     } else if (player->state() == QMediaPlayer::PlayingState) {

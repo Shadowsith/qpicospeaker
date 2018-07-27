@@ -33,6 +33,8 @@ private:
     void clearTmp();
     //@Override
     void closeEvent(QCloseEvent *cev);
+    //@Override
+    void changeEvent(QEvent* ev);
     void play();
     void stop();
     void resize(bool checked);

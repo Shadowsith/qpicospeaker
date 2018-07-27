@@ -14,10 +14,10 @@ class AboutInfo : public QWidget
 public:
     static AboutInfo* open();
     static bool isAlloc();
+    Ui::AboutInfo *ui;
 
 private:
     explicit AboutInfo(QWidget *parent = 0);
-    Ui::AboutInfo *ui;
     ~AboutInfo();
     static AboutInfo* instance;
 

@@ -1,5 +1,6 @@
 #include "qpicospeaker.h"
 #include "ui_qpicospeaker.h"
+#include "ui_aboutinfo.h"
 #include "aboutinfo.h"
 #include <iostream>
 #include <QApplication>
@@ -7,6 +8,7 @@
 #include <thread>
 #include <src/texttospeech.h>
 #include <QUrl>
+#include <QEvent>
 #include <QTextEdit>
 #include <QCheckBox>
 #include <QMessageBox>
@@ -136,17 +138,14 @@ void QPicoSpeaker::conTranl() {
     connect(ui->actionEnglish, &QAction::triggered, [=] {
         tl.load("qpicospeaker_en", QDir::homePath()+QString("/Projekte/qt/picospeak/lang"));
         ui->retranslateUi(this);
-        setSpecialCharsToUiItms();
     });
     connect(ui->actionGerman, &QAction::triggered, [=] {
         tl.load("qpicospeaker_de", QDir::homePath()+QString("/Projekte/qt/picospeak/lang"));
         ui->retranslateUi(this);
-        setSpecialCharsToUiItms();
     });
     connect(ui->actionSpanish, &QAction::triggered, [=] {
         tl.load("qpicospeaker_es", QDir::homePath()+QString("/Projekte/qt/picospeak/lang"));
         ui->retranslateUi(this);
-        setSpecialCharsToUiItms();
     });
 }
 
@@ -158,6 +157,15 @@ void QPicoSpeaker::setSpecialCharsToUiItms() {
 void QPicoSpeaker::clearTmp() {
     QFile f(m_audio);
     f.remove();
+}
+
+void QPicoSpeaker::changeEvent(QEvent *ev) {
+    if(ev->type() == QEvent::LanguageChange) {
+        setSpecialCharsToUiItms();
+        if(info->isAlloc()) {
+            info->ui->retranslateUi(info);
+        }
+    }
 }
 
 void QPicoSpeaker::closeEvent(QCloseEvent *cev) {

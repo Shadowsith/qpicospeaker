@@ -14,10 +14,10 @@ class Settings : public QWidget
 public:
     static Settings* open();
     static bool isAlloc();
+    Ui::Settings *ui;
 
 private:
     explicit Settings(QWidget *parent = 0);
-    Ui::Settings *ui;
     ~Settings();
     static Settings* instance;
 

@@ -35,7 +35,6 @@ void TextToSpeech::checkLanguage(const int& lang) {
                 case 5: m_lang = "&tl=it"; break;
                 default: m_lang = "&tl=en"; break;
             }
-            std::cout << m_lang << std::endl;
         } break;
         case Engine::PICO2WAVE: {
             switch(lang) {
@@ -56,7 +55,6 @@ void TextToSpeech::recordFiles() {
     for (size_t i = 0; i < m_gMsgParts.size(); i++) {
         std::string tmp = "/tmp/gTmp" + std::to_string(i) + ".wav";
         std::string message = "\"" + m_google + m_gMsgParts[i] + m_lang + "\"";
-        std::cout << message << std::endl;
         m_cmd = "mplayer "+message+" -vc null -vo null -ao pcm:fast:waveheader:file="+tmp;
         std::system(m_cmd.c_str());
     }
@@ -75,8 +73,9 @@ void TextToSpeech::saveParts() {
             m_gTmpFiles++;
         }
     }
-    m_gMsgParts.push_back(request);
-
+    if(request.length() < 200) {
+        m_gMsgParts.push_back(request);
+    }
 }
 
 std::vector<std::string> TextToSpeech::split(std::string &str, const std::string delimiter) {
@@ -126,7 +125,6 @@ void TextToSpeech::createAudio() {
     switch(m_eng) {
         case Engine::ESPEAK: break;
         case Engine::GOOGLE: { 
-            std::cout << "GoogleAudio" << std::endl;
             saveParts();
             recordFiles();
             m_cmd = m_sox+" "+"/tmp/gTmp*.wav"+" "+m_tmp;

@@ -16,10 +16,11 @@ As better solution for the unstatisfied TTS situation on the Linux desktop I dev
 * qt5 + qt5-multimedia
 * pico2wave
 * sox
+* mplayer for Google TTS
 
 ## Install requirements:
 ### Debian/Ubuntu
-<code>sudo apt-get install sox libttspico-utils</code>
+<code>sudo apt-get install sox mplayer libttspico-utils</code>
 
 For building you also need qt5 + multimedia packages:<br>
 <code>sudo apt-get install qt5-default qtmultimedia5-dev</code>
@@ -31,8 +32,8 @@ There is a offical maintained package in the AUR:
 <code>trizen -S qpicospeaker-git</code>
 
 ### Tested Systems
-* Manjaro/Arch Linux
-* Ubuntu 18.04
+* Manjaro/Arch Linux (KDE)
+* Ubuntu (MATE) 18.04
 
 ## Supported languages (TTS):
 * English (US)
@@ -48,13 +49,19 @@ There is a offical maintained package in the AUR:
 * Load/save textfile form/to textinput field
 * Save output file to the location what you want
 * Logo/Icon
+* Connection to Google Translate TTS engine
 
 ## Upcomming features
+* Default Settings
 * Translation to other languages
-* Connection to Google Translate TTS
+* All Languages for Google TTS
+* Help documentation
 
 ## Future planned
 * eSpeak speech synthesizer as alternative to pico2wave and Google
+
+## Restictions
+* no male voice for Google TTS (no acces about connection string possible)
 
 ## Screenshots
 <div style="display: block;">

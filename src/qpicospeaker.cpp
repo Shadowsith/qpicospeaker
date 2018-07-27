@@ -20,6 +20,8 @@
 #include <QMessageBox>
 #include <QTextStream>
 #include <QCloseEvent>
+#include <QDesktopServices>
+#include <QStandardItemModel>
 #include <QtMultimedia/QMediaPlayer>
 
 QPicoSpeaker::QPicoSpeaker(QWidget *parent) :
@@ -34,6 +36,9 @@ QPicoSpeaker::QPicoSpeaker(QWidget *parent) :
     /* init */
     ui->cbSettings->setChecked(false);
     resize(false);
+
+    // hide Espeak QComboBox item without deleting it and change index structure
+    ui->cmbEng->setItemData(0, QSize(-1,-1), Qt::SizeHintRole);
 }
 
 QPicoSpeaker::~QPicoSpeaker()
@@ -117,6 +122,12 @@ void QPicoSpeaker::conMenu() {
     connect(ui->actionAbout, &QAction::triggered, [=] {
         openInfo();
     });
+    connect(ui->actionHelp, &QAction::triggered, [=] {
+       // TODO Open Help
+    });
+    connect(ui->actionDev, &QAction::triggered, [=] {
+        QDesktopServices::openUrl(QUrl("https://github.com/Shadowsith/qpicospeaker"));
+    });
 }
 
 void QPicoSpeaker::conTranl() {
@@ -132,7 +143,7 @@ void QPicoSpeaker::conTranl() {
         ui->retranslateUi(this);
         setSpecialCharsToUiItms();
     });
-    connect(ui->actionSpain, &QAction::triggered, [=] {
+    connect(ui->actionSpanish, &QAction::triggered, [=] {
         tl.load("qpicospeaker_es", QDir::homePath()+QString("/Projekte/qt/picospeak/lang"));
         ui->retranslateUi(this);
         setSpecialCharsToUiItms();
@@ -286,11 +297,11 @@ void QPicoSpeaker::saveAudio() {
 
     QFileInfo finfo(filePath);
     if(finfo.exists() && finfo.isFile()) {
-        QFile file("/tmp/new.wav");
+        QFile file(m_audio);
         file.copy(filePath);
         file.close();
     } else {
-        QFile file("/tmp/new.wav");
+        QFile file(m_audio);
         file.copy(filePath);
         file.close();
     }

@@ -23,7 +23,7 @@
    <widget class="QComboBox" name="cmbLang">
     <property name="geometry">
      <rect>
-      <x>140</x>
+      <x>130</x>
       <y>250</y>
       <width>115</width>
       <height>30</height>
@@ -106,7 +106,7 @@ p, li { white-space: pre-wrap; }
    <widget class="QLabel" name="lblLang">
     <property name="geometry">
      <rect>
-      <x>140</x>
+      <x>130</x>
       <y>230</y>
       <width>115</width>
       <height>20</height>
@@ -404,7 +404,7 @@ p, li { white-space: pre-wrap; }
    <widget class="QCheckBox" name="cbSettings">
     <property name="geometry">
      <rect>
-      <x>30</x>
+      <x>20</x>
       <y>300</y>
       <width>401</width>
       <height>24</height>
@@ -417,7 +417,7 @@ p, li { white-space: pre-wrap; }
    <widget class="QComboBox" name="cmbEng">
     <property name="geometry">
      <rect>
-      <x>30</x>
+      <x>20</x>
       <y>250</y>
       <width>90</width>
       <height>30</height>
@@ -450,7 +450,7 @@ p, li { white-space: pre-wrap; }
    <widget class="QLabel" name="lblEng">
     <property name="geometry">
      <rect>
-      <x>30</x>
+      <x>20</x>
       <y>230</y>
       <width>90</width>
       <height>20</height>
@@ -494,6 +494,8 @@ p, li { white-space: pre-wrap; }
      <string>Help</string>
     </property>
     <addaction name="actionAbout"/>
+    <addaction name="actionHelp"/>
+    <addaction name="actionDev"/>
    </widget>
    <widget class="QMenu" name="menuSettings">
     <property name="title">
@@ -503,9 +505,12 @@ p, li { white-space: pre-wrap; }
      <property name="title">
       <string>&amp;Language</string>
      </property>
+     <property name="icon">
+      <iconset theme="languages"/>
+     </property>
      <addaction name="actionEnglish"/>
      <addaction name="actionGerman"/>
-     <addaction name="actionSpain"/>
+     <addaction name="actionSpanish"/>
      <addaction name="actionFrench"/>
      <addaction name="actionItalian"/>
     </widget>
@@ -532,8 +537,7 @@ p, li { white-space: pre-wrap; }
     <bool>true</bool>
    </property>
    <property name="icon">
-    <iconset theme="emblem-information">
-     <normaloff>.</normaloff>.</iconset>
+    <iconset theme="help-about"/>
    </property>
    <property name="text">
     <string>&amp;About</string>
@@ -670,8 +674,7 @@ p, li { white-space: pre-wrap; }
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset theme="audio-volume-high">
-     <normaloff>.</normaloff>.</iconset>
+    <iconset theme="settings-configure"/>
    </property>
    <property name="text">
     <string>&amp;QPicoSpeaker</string>
@@ -709,7 +712,7 @@ p, li { white-space: pre-wrap; }
     <string>&amp;German</string>
    </property>
   </action>
-  <action name="actionSpain">
+  <action name="actionSpanish">
    <property name="text">
     <string>&amp;Spanish</string>
    </property>
@@ -722,6 +725,28 @@ p, li { white-space: pre-wrap; }
   <action name="actionItalian">
    <property name="text">
     <string>&amp;Italian</string>
+   </property>
+  </action>
+  <action name="actionHelp">
+   <property name="checkable">
+    <bool>false</bool>
+   </property>
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset theme="help-contents"/>
+   </property>
+   <property name="text">
+    <string>Help</string>
+   </property>
+  </action>
+  <action name="actionDev">
+   <property name="icon">
+    <iconset theme="project-development"/>
+   </property>
+   <property name="text">
+    <string>GitHub</string>
    </property>
   </action>
  </widget>

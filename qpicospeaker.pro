@@ -29,14 +29,16 @@ SOURCES += \
     src/qpicospeaker.cpp \
     src/main.cpp \
     src/settings.cpp \
-    src/configxml.cpp
+    src/configxml.cpp \
+    src/tinyxml2.cpp
 
 HEADERS += \
     src/qpicospeaker.h \
     src/texttospeech.h \
     src/aboutinfo.h \
     src/settings.h \
-    src/configxml.h
+    src/configxml.h \
+    src/tinyxml2.h
 
 FORMS += \
     src/qpicospeaker.ui \

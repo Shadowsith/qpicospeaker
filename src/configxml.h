@@ -3,10 +3,15 @@
 
 #include "ui_settings.h"
 #include "ui_qpicospeaker.h"
+#include "tinyxml2.h"
+
+using namespace tinyxml2;
 
 class ConfigXml {
     private:
-        QString m_configPath = "./qpicospeaker_conf.xml";
+        XMLDocument xml;
+        XMLNode* node;
+        QString m_configPath = "/home/philip/Projekte/qt/picospeak/src/qpicospeaker_conf.xml";
         QString m_audioPath;
 
         //enabled (visible) engines
@@ -27,20 +32,26 @@ class ConfigXml {
         bool m_IT;
 
     public:
-        ConfigXml(Ui::QPicoSpeaker *ui);
-        ConfigXml(Ui::Settings *ui);
+        ConfigXml();
+        ~ConfigXml();
         QString getAudioPath();
+        bool isEspeak();
+        bool isGoogle();
+        bool isPico();
         int getVolume();
         int getSpeed();
         int getPitch();
 
         void setAudioPath();
+        void setEspeak();
+        void setGoogle();
+        void setPico();
         void setVolume();
         void setSpeed();
         void setPitch();
 
-        void read();
-        void write();
+        void read(Ui::QPicoSpeaker *ui);
+        void write(Ui::Settings *ui);
 };
 
 #endif // SETTINGXML_H

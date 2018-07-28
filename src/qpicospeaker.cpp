@@ -31,7 +31,7 @@ QPicoSpeaker::QPicoSpeaker(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::QPicoSpeaker)
 {
-    //ConfigXml xml(ui);
+    ui->setupUi(this);
 
     conWin();
     conMenu();
@@ -43,7 +43,8 @@ QPicoSpeaker::QPicoSpeaker(QWidget *parent) :
     resize(false);
 
     // hide Espeak QComboBox item without deleting it and change index structure
-    ui->cmbEng->setItemData(0, QSize(-1,-1), Qt::SizeHintRole);
+    ConfigXml xml;
+    xml.read(ui);
 }
 
 QPicoSpeaker::~QPicoSpeaker()

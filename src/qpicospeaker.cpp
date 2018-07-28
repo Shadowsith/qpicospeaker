@@ -2,6 +2,7 @@
 #include "ui_qpicospeaker.h"
 #include "ui_aboutinfo.h"
 #include "aboutinfo.h"
+#include "configxml.h"
 #include <iostream>
 #include <QApplication>
 #include <QSlider>
@@ -30,6 +31,8 @@ QPicoSpeaker::QPicoSpeaker(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::QPicoSpeaker)
 {
+    //ConfigXml xml(ui);
+
     conWin();
     conMenu();
     conTranl();
@@ -120,6 +123,10 @@ void QPicoSpeaker::conMenu() {
     });
     connect(ui->actionStop, &QAction::triggered, [=] {
        player->stop();
+
+    });
+    connect(ui->actionSettings, &QAction::triggered, [=] {
+       openSettings();
     });
     connect(ui->actionAbout, &QAction::triggered, [=] {
         openInfo();
@@ -272,6 +279,16 @@ void QPicoSpeaker::openInfo() {
         const int fWidth = info->width();
         info->setFixedSize(fWidth, fHeight);
         info->show();
+    }
+}
+
+void QPicoSpeaker::openSettings() {
+    settings = Settings::open();
+    if (settings != 0) {
+        const int fHeight = settings->height();
+        const int fWidth = settings->width();
+        settings->setFixedSize(fWidth, fHeight);
+        settings->show();
     }
 }
 

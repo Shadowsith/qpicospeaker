@@ -1,0 +1,21 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <path>/tmp/picospeak.wav</path>
+ <engine>
+    <espeak>false</espeak>
+    <google>true</google>
+    <pico>true</pico>
+</engine>
+<slider>
+    <speed>10</speed>
+    <volume>100</volume>
+    <pitch>0</pitch>
+</silder>
+<lang>
+    <de>true</de>
+    <en>true</en>
+    <es>true</es>
+    <fr>true</fr>
+    <it>true</fr>
+</lang>
+
+

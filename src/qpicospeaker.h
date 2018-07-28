@@ -2,6 +2,7 @@
 #define QPICOSPEAKER_H
 
 #include "aboutinfo.h"
+#include "settings.h"
 #include <QApplication>
 #include <QMainWindow>
 #include <QDir>
@@ -24,6 +25,7 @@ public:
 private:
     Ui::QPicoSpeaker *ui;
     AboutInfo* info;
+    Settings* settings;
     QMediaPlayer *player = new QMediaPlayer;
     QTranslator tl;
     void setSpecialCharsToUiItms();
@@ -42,6 +44,7 @@ private:
     QString m_audio = "/tmp/picospeak.wav";
     void openFile();
     void openInfo();
+    void openSettings();
     void saveText();
     void saveAudio();
 };

@@ -28,13 +28,15 @@ SOURCES += \
     src/aboutinfo.cpp \
     src/qpicospeaker.cpp \
     src/main.cpp \
-    src/settings.cpp
+    src/settings.cpp \
+    src/configxml.cpp
 
 HEADERS += \
     src/qpicospeaker.h \
     src/texttospeech.h \
     src/aboutinfo.h \
-    src/settings.h
+    src/settings.h \
+    src/configxml.h
 
 FORMS += \
     src/qpicospeaker.ui \
@@ -48,4 +50,5 @@ TRANSLATIONS += \
     lang/qpicospeaker_fr.ts \
     lang/qpicospeaker_it.ts
 
-DISTFILES +=
+DISTFILES += \
+    src/qpicospeaker_conf.xml

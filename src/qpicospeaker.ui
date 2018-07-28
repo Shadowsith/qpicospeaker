@@ -506,7 +506,8 @@ p, li { white-space: pre-wrap; }
       <string>&amp;Language</string>
      </property>
      <property name="icon">
-      <iconset theme="languages"/>
+      <iconset theme="languages">
+       <normaloff>.</normaloff>.</iconset>
      </property>
      <addaction name="actionEnglish"/>
      <addaction name="actionGerman"/>
@@ -515,7 +516,7 @@ p, li { white-space: pre-wrap; }
      <addaction name="actionItalian"/>
     </widget>
     <addaction name="separator"/>
-    <addaction name="actionQPicoSpeaker"/>
+    <addaction name="actionSettings"/>
     <addaction name="menu_Language"/>
    </widget>
    <widget class="QMenu" name="menuMedia">
@@ -537,7 +538,8 @@ p, li { white-space: pre-wrap; }
     <bool>true</bool>
    </property>
    <property name="icon">
-    <iconset theme="help-about"/>
+    <iconset theme="help-about">
+     <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
     <string>&amp;About</string>
@@ -669,15 +671,16 @@ p, li { white-space: pre-wrap; }
     <string>Ctrl+H</string>
    </property>
   </action>
-  <action name="actionQPicoSpeaker">
+  <action name="actionSettings">
    <property name="enabled">
-    <bool>false</bool>
+    <bool>true</bool>
    </property>
    <property name="icon">
-    <iconset theme="settings-configure"/>
+    <iconset theme="settings-configure">
+     <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
-    <string>&amp;QPicoSpeaker</string>
+    <string>&amp;Settings</string>
    </property>
   </action>
   <action name="actionSaveText">
@@ -735,18 +738,20 @@ p, li { white-space: pre-wrap; }
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset theme="help-contents"/>
+    <iconset theme="help-contents">
+     <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
-    <string>Help</string>
+    <string>&amp;Help</string>
    </property>
   </action>
   <action name="actionDev">
    <property name="icon">
-    <iconset theme="project-development"/>
+    <iconset theme="project-development">
+     <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
-    <string>GitHub</string>
+    <string>&amp;GitHub</string>
    </property>
   </action>
  </widget>

@@ -2,6 +2,7 @@
 #define SETTINGS_H
 
 #include <QWidget>
+#include "ui_settings.h"
 
 namespace Ui {
 class Settings;
@@ -20,6 +21,7 @@ private:
     explicit Settings(QWidget *parent = 0);
     ~Settings();
     static Settings* instance;
+    void writeXml();
 
 };
 

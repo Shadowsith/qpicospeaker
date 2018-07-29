@@ -24,6 +24,7 @@ along with QPicoSpeaker.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "ui_settings.h"
 #include "ui_qpicospeaker.h"
+#include <QDir>
 #include "lib/tinyxml/tinyxml2.h"
 
 using namespace tinyxml2;
@@ -32,7 +33,7 @@ class ConfigXml {
     private:
         XMLDocument xml;
         XMLNode* node;
-        QString m_configPath = "/home/philip/Projekte/qt/picospeak/src/qpicospeaker_conf.xml";
+        QString m_configPath = "/.config/qpicospeaker/config.xml";
         QString m_audioPath;
 
         //enabled (visible) engines
@@ -71,6 +72,7 @@ class ConfigXml {
         void setSpeed();
         void setPitch();
 
+        void createXML();
         void read(Ui::QPicoSpeaker *ui);
         void write(Ui::Settings *ui);
 };

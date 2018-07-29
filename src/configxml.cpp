@@ -33,7 +33,8 @@ using namespace tinyxml2;
 
 ConfigXml::ConfigXml()
 {
-    xml.LoadFile(m_configPath.toStdString().c_str());
+    //TODO add file exisits and create XML if not exists
+    xml.LoadFile(QString(QDir::homePath()+m_configPath).toStdString().c_str());
     node = xml.FirstChildElement("QPicoSpeaker");
 }
 

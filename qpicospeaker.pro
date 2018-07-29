@@ -54,4 +54,4 @@ TRANSLATIONS += \
 
 DISTFILES += \
     src/qpicospeaker_conf.xml \
-    src/lib/tinyxml/LICENSE
+    src/lib/tinyxml/LICENSE.md

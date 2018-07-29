@@ -64,8 +64,8 @@ QPicoSpeaker::QPicoSpeaker(QWidget *parent) :
     resize(false);
 
     // hide Espeak QComboBox item without deleting it and change index structure
-    //ConfigXml xml;
-    //xml.read(ui);
+    ConfigXml xml;
+    xml.read(ui);
 }
 
 QPicoSpeaker::~QPicoSpeaker()

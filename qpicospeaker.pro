@@ -24,13 +24,13 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 
 SOURCES += \
+    src/qpicospeaker.cpp \
     src/texttospeech.cpp \
     src/aboutinfo.cpp \
-    src/qpicospeaker.cpp \
     src/main.cpp \
     src/settings.cpp \
     src/configxml.cpp \
-    src/tinyxml2.cpp
+    src/lib/tinyxml/tinyxml2.cpp \
 
 HEADERS += \
     src/qpicospeaker.h \
@@ -38,7 +38,7 @@ HEADERS += \
     src/aboutinfo.h \
     src/settings.h \
     src/configxml.h \
-    src/tinyxml2.h
+    src/lib/tinyxml/tinyxml2.h \
 
 FORMS += \
     src/qpicospeaker.ui \
@@ -53,4 +53,5 @@ TRANSLATIONS += \
     lang/qpicospeaker_it.ts
 
 DISTFILES += \
-    src/qpicospeaker_conf.xml
+    src/qpicospeaker_conf.xml \
+    src/lib/tinyxml/LICENSE

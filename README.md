@@ -70,6 +70,6 @@ There is a offical maintained package in the AUR:
 </div>
 
 ## License
-* Source code is licensed under MIT 
+* Project is free software and licensed under GPLv3+
 * Logo and GIMP Project are public domain (CC0)
 

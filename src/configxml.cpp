@@ -25,21 +25,28 @@ along with QPicoSpeaker.  If not, see <http://www.gnu.org/licenses/>.
 #include "lib/tinyxml/tinyxml2.h"
 #include <iostream>
 #include <string>
+#include <sys/stat.h>
+#include <unistd.h>
+#include <sys/stat.h>
+
 
 using namespace tinyxml2;
 
 // TODO outsource config file
 // TODO check if file exists
 
-ConfigXml::ConfigXml()
-{
+ConfigXml::ConfigXml() {
     //TODO add file exisits and create XML if not exists
-    xml.LoadFile(QString(QDir::homePath()+m_configPath).toStdString().c_str());
+    std::string path = QString(QDir::homePath()+m_configPath).toStdString();
+    struct stat buffer;
+    if(stat (path.c_str(), &buffer) == 0) {
+        createXML();
+    }
+    xml.LoadFile(path.c_str());
     node = xml.FirstChildElement("QPicoSpeaker");
 }
 
 ConfigXml::~ConfigXml() {}
-
 
 QString ConfigXml::getAudioPath() {
     XMLElement* path = node->FirstChildElement("path");
@@ -88,6 +95,46 @@ int ConfigXml::getPitch() {
     XMLElement* pitch = slider->FirstChildElement("pitch");
     pitch->QueryIntText(&m_pitch);
     return m_pitch;
+}
+
+void ConfigXml::createXML() {
+    std::string path = QString(QDir::homePath()+m_configPath).toStdString();
+    std::vector<XMLElement*> elem;
+    XMLDocument doc;
+    XMLDeclaration *header = doc.NewDeclaration();
+    header->SetValue("xml version=\"1.0\" encoding=\"\"");
+    doc.InsertFirstChild(header);
+    XMLNode* root = doc.NewElement("QPicoSpeaker");
+    doc.InsertEndChild(root);
+    XMLElement *rPath = doc.NewElement("path");
+    rPath->SetText("/tmp/picospeak.wav");
+    root->InsertEndChild(rPath);
+    XMLElement *rDefEngine = doc.NewElement("defEngine");
+    rDefEngine->SetText("Pico");
+    root->InsertEndChild(rDefEngine);
+    XMLElement *rEngine = doc.NewElement("engine");
+    XMLElement *rEspeak = doc.NewElement("espeak");
+    rEspeak->SetText("false");
+    XMLElement *rGoogle = doc.NewElement("google");
+    rGoogle->SetText("true");
+    XMLElement *rPico = doc.NewElement("pico");
+    rPico->SetText("true");
+    rEngine->InsertEndChild(rEspeak);
+    rEngine->InsertEndChild(rGoogle);
+    rEngine->InsertEndChild(rPico);
+    root->InsertEndChild(rEngine);
+    XMLElement *rSlider = doc.NewElement("slider");
+    elem.push_back(doc.NewElement("speed"));
+    elem.at(elem.size()-1)->SetText(10);
+    elem.push_back(doc.NewElement("volume"));
+    elem.at(elem.size()-1)->SetText(100);
+    elem.push_back(doc.NewElement("pitch"));
+    elem.at(elem.size()-1)->SetText(0);
+    for(auto& itm : elem) {
+        rSlider->InsertEndChild(itm);
+    }
+    elem.clear();
+
 }
 
 void ConfigXml::read(Ui::QPicoSpeaker *ui) {

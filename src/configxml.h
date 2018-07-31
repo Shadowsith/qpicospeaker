@@ -52,6 +52,7 @@ class ConfigXml {
         bool m_ES;
         bool m_FR;
         bool m_IT;
+        void createXML();
 
     public:
         ConfigXml();
@@ -72,9 +73,9 @@ class ConfigXml {
         void setSpeed();
         void setPitch();
 
-        void createXML();
         void read(Ui::QPicoSpeaker *ui);
         void write(Ui::Settings *ui);
+
 };
 
 #endif // SETTINGXML_H

@@ -61,6 +61,7 @@ class ConfigXml {
         bool isEspeak();
         bool isGoogle();
         bool isPico();
+        std::string getDefEngine();
         int getVolume();
         int getSpeed();
         int getPitch();
@@ -69,6 +70,7 @@ class ConfigXml {
         void setEspeak();
         void setGoogle();
         void setPico();
+        void setDefEngine();
         void setVolume();
         void setSpeed();
         void setPitch();

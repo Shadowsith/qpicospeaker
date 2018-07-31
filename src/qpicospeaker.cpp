@@ -220,9 +220,10 @@ void QPicoSpeaker::play() {
                 TextToSpeech t(lang, speed, pitch, output, text, Engine::GOOGLE);
                 t.start();
             } break;
-            default: //TextToSpeech t(lang, speed, pitch, "", text, Engine::PICO2WAVE);
-                    TextToSpeech t(lang, speed, pitch, output, text, Engine::PICO2WAVE);
-                    t.start();
+            default: {
+                TextToSpeech t(lang, speed, pitch, output, text, Engine::PICO2WAVE);
+                t.start();
+            } break;
         }
         player->setMedia(QUrl::fromLocalFile(m_audio));
         player->setVolume(ui->hsVolume->value());

@@ -20,6 +20,7 @@ along with QPicoSpeaker.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 #include "settings.h"
+#include "configxml.h"
 #include "ui_settings.h"
 #include <QPushButton>
 
@@ -27,11 +28,14 @@ Settings::Settings(QWidget *parent) : QWidget(parent),
     ui(new Ui::Settings)
 {
     ui->setupUi(this);
+
     connect(ui->btnClose, &QPushButton::clicked, [=] {
         close();
     });
     connect(ui->btnSave, &QPushButton::clicked, [=] {
     });
+    ConfigXml xml;
+    xml.read(ui);
 }
 
 Settings::~Settings() {

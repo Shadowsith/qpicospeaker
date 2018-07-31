@@ -110,6 +110,19 @@ int ConfigXml::getPitch() {
     return m_pitch;
 }
 
+void ConfigXml::setDefEngine(Engine eng) {
+    switch (eng) {
+        case Engine::ESPEAK: break;
+        case Engine::GOOGLE: {
+
+        } break;
+        case Engine::PICO2WAVE: {
+
+        } break;
+    }
+
+}
+
 void ConfigXml::createXML() {
     std::string path = QString(QDir::homePath()+m_configPath).toStdString();
     std::vector<XMLElement*> xmlVec;
@@ -185,4 +198,22 @@ void ConfigXml::read(Ui::QPicoSpeaker *ui) {
     } else {
         ui->cmbEng->setCurrentIndex(static_cast<int>(Engine::PICO2WAVE));
     }
+}
+
+void ConfigXml::read(Ui::Settings *ui) {
+    ui->sbDefVol->setValue(getVolume());
+    ui->sbDefPitch->setValue(getPitch());
+    ui->sbDefSpeed->setValue(getSpeed());
+
+    if(getDefEngine() == "Espeak") {
+        ui->cmbDefEng->setCurrentIndex(static_cast<int>(Engine::ESPEAK));
+    } else if(getDefEngine() == "Google") {
+        ui->cmbDefEng->setCurrentIndex(static_cast<int>(Engine::GOOGLE));
+    } else {
+        ui->cmbDefEng->setCurrentIndex(static_cast<int>(Engine::PICO2WAVE));
+    }
+}
+
+void ConfigXml::write(Ui::Settings *ui) {
+
 }

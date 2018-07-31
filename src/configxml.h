@@ -22,6 +22,7 @@ along with QPicoSpeaker.  If not, see <http://www.gnu.org/licenses/>.
 #ifndef SETTINGXML_H
 #define SETTINGXML_H
 
+#include "texttospeech.h"
 #include "ui_settings.h"
 #include "ui_qpicospeaker.h"
 #include <QDir>
@@ -67,15 +68,13 @@ class ConfigXml {
         int getPitch();
 
         void setAudioPath();
-        void setEspeak();
-        void setGoogle();
-        void setPico();
-        void setDefEngine();
-        void setVolume();
-        void setSpeed();
-        void setPitch();
+        void setDefEngine(Engine eng);
+        void setVolume(int volume);
+        void setSpeed(int speed);
+        void setPitch(int pitch);
 
         void read(Ui::QPicoSpeaker *ui);
+        void read(Ui::Settings *ui);
         void write(Ui::Settings *ui);
 
 };

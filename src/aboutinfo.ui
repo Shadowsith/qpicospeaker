@@ -88,7 +88,7 @@
     </rect>
    </property>
    <property name="text">
-    <string notr="true">1.0</string>
+    <string notr="true">1.5</string>
    </property>
   </widget>
   <widget class="QLabel" name="lblQtVal">
@@ -146,7 +146,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>MIT</string>
+    <string>GPL-3+</string>
    </property>
   </widget>
  </widget>

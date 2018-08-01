@@ -23,6 +23,9 @@ along with QPicoSpeaker.  If not, see <http://www.gnu.org/licenses/>.
 #include "configxml.h"
 #include "ui_settings.h"
 #include <QPushButton>
+#include <QCheckBox>
+#include <QLayout>
+#include <iostream>
 
 Settings::Settings(QWidget *parent) : QWidget(parent),
     ui(new Ui::Settings)
@@ -33,9 +36,15 @@ Settings::Settings(QWidget *parent) : QWidget(parent),
         close();
     });
     connect(ui->btnSave, &QPushButton::clicked, [=] {
+        ConfigXml xml;
+        xml.write(ui);
+    });
+    connect(ui->cbLang, &QCheckBox::stateChanged, [=] {
+        resize(ui->cbLang->isChecked());
     });
     ConfigXml xml;
     xml.read(ui);
+    resize(false);
 }
 
 Settings::~Settings() {
@@ -61,7 +70,36 @@ bool Settings::isAlloc() {
     }
 }
 
-void Settings::writeXml() {
-    // TODO XML Writing
+void Settings::resize(bool check) {
+    if(check) {
+        ui->scrollArea->show();
+        int growth = ui->scrollArea->y()+ui->scrollArea->height()-ui->cbLang->y()-10;
+        QRect close = ui->btnClose->geometry();
+        close.setTop(close.top()+growth);
+        close.setBottom(close.bottom()+growth);
+        ui->btnClose->setGeometry(close);
+        QRect save = ui->btnSave->geometry();
+        save.setY(save.y()+growth);
+        save.setBottom(save.bottom()+growth);
+        ui->btnSave->setGeometry(save);
+        QRect window = this->geometry();
+        window.setHeight(window.height()+growth);
+        this->setFixedSize(window.size());
+    } else {
+        ui->scrollArea->hide();
+        int shrink = ui->scrollArea->y()+ui->scrollArea->height()-ui->cbLang->y()-10;
+        QRect close = ui->btnClose->geometry();
+        close.setTop(close.top()-shrink);
+        close.setBottom(close.bottom()-shrink);
+        ui->btnClose->setGeometry(close);
+        QRect save = ui->btnSave->geometry();
+        std::cout << save.top() << " " << shrink << std::endl;
+        save.setY(save.y()-shrink);
+        save.setBottom(save.bottom()-shrink);
+        ui->btnSave->setGeometry(save);
+        QRect window = this->geometry();
+        window.setHeight(window.height()-shrink);
+        this->setFixedSize(window.size());
+    }
 }
 

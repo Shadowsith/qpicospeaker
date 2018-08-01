@@ -111,16 +111,37 @@ int ConfigXml::getPitch() {
 }
 
 void ConfigXml::setDefEngine(Engine eng) {
+    XMLElement* defEngine = node->FirstChildElement("DefEngine");
     switch (eng) {
         case Engine::ESPEAK: break;
         case Engine::GOOGLE: {
-
+            defEngine->SetText("Google");
         } break;
         case Engine::PICO2WAVE: {
-
+            defEngine->SetText("Pico");
         } break;
     }
+    xml.SaveFile(QString(QDir::homePath()+m_configPath).toStdString().c_str());
 
+}
+
+void ConfigXml::setPitch(int val) {
+    XMLElement* pitch = node->FirstChildElement("Slider")->FirstChildElement("Pitch");
+    pitch->SetText(val);
+    xml.SaveFile(QString(QDir::homePath()+m_configPath).toStdString().c_str());
+
+}
+
+void ConfigXml::setSpeed(int val) {
+    XMLElement* speed = node->FirstChildElement("Slider")->FirstChildElement("Speed");
+    speed->SetText(val);
+    xml.SaveFile(QString(QDir::homePath()+m_configPath).toStdString().c_str());
+}
+
+void ConfigXml::setVolume(int val) {
+    XMLElement* volume = node->FirstChildElement("Slider")->FirstChildElement("Volume");
+    volume->SetText(val);
+    xml.SaveFile(QString(QDir::homePath()+m_configPath).toStdString().c_str());
 }
 
 void ConfigXml::createXML() {
@@ -215,5 +236,8 @@ void ConfigXml::read(Ui::Settings *ui) {
 }
 
 void ConfigXml::write(Ui::Settings *ui) {
-
+    setDefEngine(static_cast<Engine>(ui->cmbDefEng->currentIndex()));
+    setPitch(ui->sbDefPitch->value());
+    setSpeed(ui->sbDefSpeed->value());
+    setVolume(ui->sbDefVol->value());
 }

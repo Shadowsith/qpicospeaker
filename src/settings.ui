@@ -215,8 +215,8 @@
     <rect>
      <x>20</x>
      <y>180</y>
-     <width>331</width>
-     <height>24</height>
+     <width>330</width>
+     <height>25</height>
     </rect>
    </property>
    <property name="text">
@@ -228,8 +228,8 @@
     <rect>
      <x>20</x>
      <y>220</y>
-     <width>331</width>
-     <height>41</height>
+     <width>330</width>
+     <height>40</height>
     </rect>
    </property>
    <property name="widgetResizable">
@@ -240,8 +240,8 @@
      <rect>
       <x>0</x>
       <y>0</y>
-      <width>329</width>
-      <height>39</height>
+      <width>328</width>
+      <height>38</height>
      </rect>
     </property>
     <widget class="QCheckBox" name="cbDE">

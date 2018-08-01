@@ -42,7 +42,7 @@ private:
     explicit Settings(QWidget *parent = 0);
     ~Settings();
     static Settings* instance;
-    void writeXml();
+    void resize(bool check);
 
 };
 

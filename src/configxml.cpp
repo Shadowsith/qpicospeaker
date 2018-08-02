@@ -243,20 +243,9 @@ void ConfigXml::read(Ui::QPicoSpeaker *ui) {
         for(size_t i = 0; i < xlVec.size(); i++) {
             cbl->setCurrentIndex(static_cast<int>(i));
             if(!xlVec[i]->BoolText()) {
-                if(i == 1) {
-                    ui->cmbLang->setItemData(
-                            0, QSize(-1,-1), Qt::SizeHintRole);
-                     ui->cmbLang->setItemData(
-                            1, QSize(-1,-1), Qt::SizeHintRole);
-                     i++;
-                } else {
-                    ui->cmbLang->setItemData(
-                            static_cast<int>(i),
-                            QSize(-1,-1), Qt::SizeHintRole);
-                }
             }
-        }
-    }
+         }
+    } xlVec.clear();
 }
 
 void ConfigXml::read(Ui::Settings *ui) {

@@ -211,7 +211,6 @@ void QPicoSpeaker::play() {
         std::string speed = ui->lblSpeedVal->text().toStdString();
         std::string pitch = ui->lblPitchVal->text().toStdString();
         std::string output = m_audio.toStdString();
-
         switch(eng) {
             case 0: {
                 TextToSpeech t(lang, speed, pitch, output, text, Engine::ESPEAK);

@@ -24,6 +24,7 @@ along with QPicoSpeaker.  If not, see <http://www.gnu.org/licenses/>.
 #include "ui_settings.h"
 #include "ui_qpicospeaker.h"
 #include "lib/tinyxml/tinyxml2.h"
+#include <QComboBox>
 #include <iostream>
 #include <string>
 #include <sys/stat.h>
@@ -38,20 +39,20 @@ using namespace tinyxml2;
 
 ConfigXml::ConfigXml() {
     //TODO add file exisits and create XML if not exists
-    std::string path = QString(QDir::homePath()+m_configPath).toStdString();
+    m_path = QString(QDir::homePath()+m_configPath).toStdString();
     std::string config_dir = QDir::homePath().toStdString()+"/.config/qpicospeaker/";
     struct stat buffer;
     if(stat (config_dir.c_str(), &buffer) != 0) {
         mkdir(config_dir.c_str(), S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
-        if(stat (path.c_str(), &buffer) != 0) {
+        if(stat (m_path.c_str(), &buffer) != 0) {
             createXML();
         }
     } else {
-         if(stat (path.c_str(), &buffer) != 0) {
+         if(stat (m_path.c_str(), &buffer) != 0) {
             createXML();
         }
     }
-    xml.LoadFile(path.c_str());
+    xml.LoadFile(m_path.c_str());
     node = xml.FirstChildElement("QPicoSpeaker");
 }
 
@@ -121,31 +122,49 @@ void ConfigXml::setDefEngine(Engine eng) {
             defEngine->SetText("Pico");
         } break;
     }
-    xml.SaveFile(QString(QDir::homePath()+m_configPath).toStdString().c_str());
-
+    xml.SaveFile(m_path.c_str());
 }
 
 void ConfigXml::setPitch(int val) {
     XMLElement* pitch = node->FirstChildElement("Slider")->FirstChildElement("Pitch");
     pitch->SetText(val);
-    xml.SaveFile(QString(QDir::homePath()+m_configPath).toStdString().c_str());
+    xml.SaveFile(m_path.c_str());
 
 }
 
 void ConfigXml::setSpeed(int val) {
     XMLElement* speed = node->FirstChildElement("Slider")->FirstChildElement("Speed");
     speed->SetText(val);
-    xml.SaveFile(QString(QDir::homePath()+m_configPath).toStdString().c_str());
+    xml.SaveFile(m_path.c_str());
 }
 
 void ConfigXml::setVolume(int val) {
     XMLElement* volume = node->FirstChildElement("Slider")->FirstChildElement("Volume");
     volume->SetText(val);
-    xml.SaveFile(QString(QDir::homePath()+m_configPath).toStdString().c_str());
+    xml.SaveFile(m_path.c_str());
+}
+
+std::vector<QCheckBox*> ConfigXml::getUiLang(Ui::Settings *ui) {
+    std::vector<QCheckBox*> uiVec;
+    uiVec.push_back(ui->cbDE);
+    uiVec.push_back(ui->cbEN);
+    uiVec.push_back(ui->cbES);
+    uiVec.push_back(ui->cbFR);
+    uiVec.push_back(ui->cbIT);
+    return uiVec;
+}
+
+std::vector<XMLElement*> ConfigXml::getXmlLang() {
+    std::vector<XMLElement*> xlVec;
+    xlVec.push_back(node->FirstChildElement("Lang")->FirstChildElement("de"));
+    xlVec.push_back(node->FirstChildElement("Lang")->FirstChildElement("en"));
+    xlVec.push_back(node->FirstChildElement("Lang")->FirstChildElement("es"));
+    xlVec.push_back(node->FirstChildElement("Lang")->FirstChildElement("fr"));
+    xlVec.push_back(node->FirstChildElement("Lang")->FirstChildElement("it"));
+    return xlVec;
 }
 
 void ConfigXml::createXML() {
-    std::string path = QString(QDir::homePath()+m_configPath).toStdString();
     std::vector<XMLElement*> xmlVec;
     XMLDocument doc;
     XMLDeclaration *header = doc.NewDeclaration();
@@ -186,8 +205,6 @@ void ConfigXml::createXML() {
     xmlVec.at(xmlVec.size()-1)->SetText(true);
     xmlVec.push_back(doc.NewElement("en"));
     xmlVec.at(xmlVec.size()-1)->SetText(true);
-    xmlVec.push_back(doc.NewElement("en"));
-    xmlVec.at(xmlVec.size()-1)->SetText(true);
     xmlVec.push_back(doc.NewElement("es"));
     xmlVec.at(xmlVec.size()-1)->SetText(true);
     xmlVec.push_back(doc.NewElement("fr"));
@@ -198,7 +215,7 @@ void ConfigXml::createXML() {
         rLang->InsertEndChild(itm);
     } xmlVec.clear();
     root->InsertEndChild(rLang);
-    XMLError xml_err = doc.SaveFile(path.c_str());
+    XMLError xml_err = xml.SaveFile(m_path.c_str());
     std::cout << xml_err << std::endl;
 }
 
@@ -219,6 +236,27 @@ void ConfigXml::read(Ui::QPicoSpeaker *ui) {
     } else {
         ui->cmbEng->setCurrentIndex(static_cast<int>(Engine::PICO2WAVE));
     }
+
+    QComboBox* cbl = ui->cmbLang;
+    std::vector<XMLElement*> xlVec = getXmlLang();
+    if(static_cast<size_t>(cbl->count()) == xlVec.size()+1) {
+        for(size_t i = 0; i < xlVec.size(); i++) {
+            cbl->setCurrentIndex(static_cast<int>(i));
+            if(!xlVec[i]->BoolText()) {
+                if(i == 1) {
+                    ui->cmbLang->setItemData(
+                            0, QSize(-1,-1), Qt::SizeHintRole);
+                     ui->cmbLang->setItemData(
+                            1, QSize(-1,-1), Qt::SizeHintRole);
+                     i++;
+                } else {
+                    ui->cmbLang->setItemData(
+                            static_cast<int>(i),
+                            QSize(-1,-1), Qt::SizeHintRole);
+                }
+            }
+        }
+    }
 }
 
 void ConfigXml::read(Ui::Settings *ui) {
@@ -233,6 +271,15 @@ void ConfigXml::read(Ui::Settings *ui) {
     } else {
         ui->cmbDefEng->setCurrentIndex(static_cast<int>(Engine::PICO2WAVE));
     }
+
+    std::vector<QCheckBox*> uiVec = getUiLang(ui);
+    std::vector<XMLElement*> xlVec = getXmlLang();
+
+    if(uiVec.size() == xlVec.size()) {
+        for(size_t i = 0; i < uiVec.size(); i++) {
+            uiVec[i]->setChecked(xlVec[i]->BoolText());
+        }
+    } xlVec.clear();
 }
 
 void ConfigXml::write(Ui::Settings *ui) {
@@ -240,4 +287,14 @@ void ConfigXml::write(Ui::Settings *ui) {
     setPitch(ui->sbDefPitch->value());
     setSpeed(ui->sbDefSpeed->value());
     setVolume(ui->sbDefVol->value());
-}
+
+    std::vector<QCheckBox*> uiVec = getUiLang(ui);
+    std::vector<XMLElement*> xlVec = getXmlLang();
+
+    if(uiVec.size() == xlVec.size()) {
+        for(size_t i = 0; i < uiVec.size(); i++) {
+            xlVec[i]->SetText(uiVec[i]->isChecked());
+        }
+    } xlVec.clear();
+    xml.SaveFile(m_path.c_str());
+ }

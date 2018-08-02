@@ -34,8 +34,9 @@ class ConfigXml {
     private:
         XMLDocument xml;
         XMLNode* node;
-        QString m_configPath = "/.config/qpicospeaker/config.xml";
+        const QString m_configPath = "/.config/qpicospeaker/config.xml";
         QString m_audioPath;
+        std::string m_path;
 
         //enabled (visible) engines
         bool m_espeak;
@@ -66,6 +67,8 @@ class ConfigXml {
         int getVolume();
         int getSpeed();
         int getPitch();
+        std::vector<QCheckBox*> getUiLang(Ui::Settings *ui);
+        std::vector<XMLElement*> getXmlLang();
 
         void setAudioPath();
         void setDefEngine(Engine eng);

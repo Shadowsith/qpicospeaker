@@ -24,11 +24,19 @@ along with QPicoSpeaker.  If not, see <http://www.gnu.org/licenses/>.
 #include <string>
 #include <vector>
 
-// not implemented now, needed for later versions
 enum Engine {
     ESPEAK,
     GOOGLE, // internet connection needed
     PICO2WAVE,
+};
+
+enum Language {
+    DE,
+    EN_US,
+    EN_UK,
+    ES,
+    FR,
+    IT,
 };
 
 class TextToSpeech {

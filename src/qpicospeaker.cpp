@@ -213,14 +213,14 @@ void QPicoSpeaker::play() {
         std::string output = m_audio.toStdString();
         switch(eng) {
             case 0: {
-                TextToSpeech t(lang, speed, pitch, output, text, Engine::ESPEAK);
+                TextToSpeech t(static_cast<Language>(lang), speed, pitch, output, text, Engine::ESPEAK);
             } break;
             case 1: {
-                TextToSpeech t(lang, speed, pitch, output, text, Engine::GOOGLE);
+                TextToSpeech t(static_cast<Language>(lang), speed, pitch, output, text, Engine::GOOGLE);
                 t.start();
             } break;
             default: {
-                TextToSpeech t(lang, speed, pitch, output, text, Engine::PICO2WAVE);
+                TextToSpeech t(static_cast<Language>(lang), speed, pitch, output, text, Engine::PICO2WAVE);
                 t.start();
             } break;
         }

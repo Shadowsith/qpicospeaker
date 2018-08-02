@@ -47,7 +47,7 @@
      <bool>false</bool>
     </property>
     <property name="currentText">
-     <string>English-US</string>
+     <string>German</string>
     </property>
     <property name="currentIndex">
      <number>0</number>
@@ -57,17 +57,17 @@
     </property>
     <item>
      <property name="text">
+      <string>German</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
       <string>English-US</string>
      </property>
     </item>
     <item>
      <property name="text">
       <string>English-UK</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>German</string>
      </property>
     </item>
     <item>

@@ -59,13 +59,13 @@ class TextToSpeech {
         int m_gTmpFiles = 1; 
         std::vector<std::string> m_gMsgParts;
 
-        void checkLanguage(const int& lang);
+        void checkLanguage(const Language& lang);
         void recordFiles();
         void saveParts();
         std::vector<std::string> split(std::string &str, const std::string delimter);
 
     public:
-        TextToSpeech(const int& lang, std::string& speed, std::string& pitch,
+        TextToSpeech(const Language lang, std::string& speed, std::string& pitch,
                 std::string& output, std::string& text, Engine eng);
         ~TextToSpeech();
         bool checkProgram(const std::string cmd); 

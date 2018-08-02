@@ -29,7 +29,7 @@ along with QPicoSpeaker.  If not, see <http://www.gnu.org/licenses/>.
 #include "texttospeech.h"
 
 // constructor & destructor -----------------------------------------------------------------------
-TextToSpeech::TextToSpeech(const int& lang,
+TextToSpeech::TextToSpeech(const Language lang,
     std::string& speed, std::string& pitch, std::string& output,
     std::string& text, Engine eng) {
     m_eng = eng;
@@ -43,28 +43,27 @@ TextToSpeech::TextToSpeech(const int& lang,
 TextToSpeech::~TextToSpeech() {}
 
 // privat methods --------------------------------------------------------------------------------- 
-void TextToSpeech::checkLanguage(const int& lang) {
+void TextToSpeech::checkLanguage(const Language& lang) {
     switch(m_eng) {
         case Engine::ESPEAK: break;
         case Engine::GOOGLE: {
             switch(lang) {
-                case 0: m_lang = "&tl=en"; break;
-                case 1: m_lang = "&tl=en"; break;
-                case 2: m_lang = "&tl=de"; break;
-                case 3: m_lang = "&tl=es"; break;
-                case 4: m_lang = "&tl=fr"; break;
-                case 5: m_lang = "&tl=it"; break;
-                default: m_lang = "&tl=en"; break;
+                case Language::DE:    m_lang = "&tl=de"; break;
+                case Language::EN_US: m_lang = "&tl=en"; break;
+                case Language::EN_UK: m_lang = "&tl=en"; break;
+                case Language::ES:    m_lang = "&tl=es"; break;
+                case Language::FR:    m_lang = "&tl=fr"; break;
+                case Language::IT:    m_lang = "&tl=it"; break;
             }
         } break;
         case Engine::PICO2WAVE: {
             switch(lang) {
-                case 0: m_lang += "en-US"; break;
-                case 1: m_lang += "en-GB"; break;
-                case 2: m_lang += "de-DE"; break;
-                case 3: m_lang += "es-ES"; break;
-                case 4: m_lang += "fr-FR"; break;
-                case 5: m_lang += "it-IT"; break;
+                case Language::DE:    m_lang += "de-DE"; break;
+                case Language::EN_US: m_lang += "en-US"; break;
+                case Language::EN_UK: m_lang += "en-GB"; break;
+                case Language::ES: m_lang += "es-ES"; break;
+                case Language::FR: m_lang += "fr-FR"; break;
+                case Language::IT: m_lang += "it-IT"; break;
                 default: m_lang += "en-US"; break;
             }
         } break;

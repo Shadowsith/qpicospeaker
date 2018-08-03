@@ -54,7 +54,11 @@ class ConfigXml {
         bool m_ES;
         bool m_FR;
         bool m_IT;
-        void createXML();
+        void createXml();
+        void createXmlEngines(XMLDocument &doc, XMLNode* root);
+        void createXmlSlider(XMLDocument &doc, XMLNode* root, std::vector<XMLElement*> &xmlVec);
+        void createXmlLang(XMLDocument &doc, XMLNode* root, std::vector<XMLElement*> &xmlVec);
+        void disableUiLang(QComboBox* cbl, std::string lang);
 
     public:
         ConfigXml();
@@ -64,6 +68,7 @@ class ConfigXml {
         bool isGoogle();
         bool isPico();
         std::string getDefEngine();
+        int getDefTextLang();
         int getVolume();
         int getSpeed();
         int getPitch();

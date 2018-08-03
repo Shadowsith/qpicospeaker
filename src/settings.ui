@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>360</width>
-    <height>320</height>
+    <height>342</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,7 +17,7 @@
    <property name="geometry">
     <rect>
      <x>20</x>
-     <y>280</y>
+     <y>300</y>
      <width>80</width>
      <height>26</height>
     </rect>
@@ -30,7 +30,7 @@
    <property name="geometry">
     <rect>
      <x>270</x>
-     <y>280</y>
+     <y>300</y>
      <width>80</width>
      <height>26</height>
     </rect>
@@ -57,7 +57,7 @@
     <rect>
      <x>20</x>
      <y>80</y>
-     <width>141</width>
+     <width>151</width>
      <height>26</height>
     </rect>
    </property>
@@ -70,7 +70,7 @@
     <rect>
      <x>20</x>
      <y>110</y>
-     <width>141</width>
+     <width>151</width>
      <height>26</height>
     </rect>
    </property>
@@ -214,7 +214,7 @@
    <property name="geometry">
     <rect>
      <x>20</x>
-     <y>180</y>
+     <y>200</y>
      <width>330</width>
      <height>25</height>
     </rect>
@@ -227,7 +227,7 @@
    <property name="geometry">
     <rect>
      <x>20</x>
-     <y>220</y>
+     <y>240</y>
      <width>330</width>
      <height>40</height>
     </rect>
@@ -310,6 +310,67 @@
      </property>
     </widget>
    </widget>
+  </widget>
+  <widget class="QLabel" name="lblDefELang">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>170</y>
+     <width>151</width>
+     <height>26</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Default TTS Language</string>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="cmbDefLang">
+   <property name="geometry">
+    <rect>
+     <x>180</x>
+     <y>170</y>
+     <width>171</width>
+     <height>26</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">#cmbDefLang {
+	padding-left: 5px;
+}</string>
+   </property>
+   <property name="currentIndex">
+    <number>0</number>
+   </property>
+   <item>
+    <property name="text">
+     <string>German</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>English-US</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>English-UK</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Spanish</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>French</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Italian</string>
+    </property>
+   </item>
   </widget>
  </widget>
  <resources/>

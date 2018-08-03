@@ -1,4 +1,4 @@
-/*
+﻿/*
 Project:     QPicoSpeaker
 Description: A Qt frontend for SVOX - pico2wave, Google TTS and eSpeak
 Author:      Philip Mayer (Shadowsith) <philip.mayer@shadowsith.de>
@@ -45,11 +45,11 @@ ConfigXml::ConfigXml() {
     if(stat (config_dir.c_str(), &buffer) != 0) {
         mkdir(config_dir.c_str(), S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
         if(stat (m_path.c_str(), &buffer) != 0) {
-            createXML();
+            createXml();
         }
     } else {
          if(stat (m_path.c_str(), &buffer) != 0) {
-            createXML();
+            createXml();
         }
     }
     xml.LoadFile(m_path.c_str());
@@ -88,6 +88,10 @@ bool ConfigXml::isPico() {
 
 std::string ConfigXml::getDefEngine() {
     return std::string(node->FirstChildElement("DefEngine")->GetText());
+}
+
+int ConfigXml::getDefTextLang() {
+    return (node->FirstChildElement("DefTextLang")->IntText());
 }
 
 int ConfigXml::getSpeed() {
@@ -164,7 +168,9 @@ std::vector<XMLElement*> ConfigXml::getXmlLang() {
     return xlVec;
 }
 
-void ConfigXml::createXML() {
+
+
+void ConfigXml::createXml() {
     std::vector<XMLElement*> xmlVec;
     XMLDocument doc;
     XMLDeclaration *header = doc.NewDeclaration();
@@ -178,6 +184,17 @@ void ConfigXml::createXML() {
     XMLElement *rDefEngine = doc.NewElement("DefEngine");
     rDefEngine->SetText("Pico");
     root->InsertEndChild(rDefEngine);
+    XMLElement *rDefTextLang = doc.NewElement("DefTextLang");
+    rDefTextLang->SetText(Language::EN_US);
+    root->InsertEndChild(rDefTextLang);
+    createXmlEngines(doc, root);
+    createXmlSlider(doc, root, xmlVec);
+    createXmlLang(doc, root, xmlVec);
+    XMLError xml_err = doc.SaveFile(m_path.c_str());
+    std::cout << xml_err << std::endl;
+}
+
+void ConfigXml::createXmlEngines(XMLDocument &doc, XMLNode* root) {
     XMLElement *rEngine = doc.NewElement("Engine");
     XMLElement *rEspeak = doc.NewElement("Espeak");
     rEspeak->SetText(false);
@@ -189,6 +206,9 @@ void ConfigXml::createXML() {
     rEngine->InsertEndChild(rGoogle);
     rEngine->InsertEndChild(rPico);
     root->InsertEndChild(rEngine);
+}
+
+void ConfigXml::createXmlSlider(XMLDocument &doc, XMLNode* root, std::vector<XMLElement*> &xmlVec) {
     XMLElement *rSlider = doc.NewElement("Slider");
     xmlVec.push_back(doc.NewElement("Speed"));
     xmlVec.at(xmlVec.size()-1)->SetText(10);
@@ -200,6 +220,9 @@ void ConfigXml::createXML() {
         rSlider->InsertEndChild(itm);
     } xmlVec.clear();
     root->InsertEndChild(rSlider);
+}
+
+void ConfigXml::createXmlLang(XMLDocument &doc, XMLNode* root, std::vector<XMLElement*> &xmlVec) {
     XMLElement *rLang = doc.NewElement("Lang");
     xmlVec.push_back(doc.NewElement("de"));
     xmlVec.at(xmlVec.size()-1)->SetText(true);
@@ -215,8 +238,19 @@ void ConfigXml::createXML() {
         rLang->InsertEndChild(itm);
     } xmlVec.clear();
     root->InsertEndChild(rLang);
-    XMLError xml_err = xml.SaveFile(m_path.c_str());
-    std::cout << xml_err << std::endl;
+}
+
+
+void ConfigXml::disableUiLang(QComboBox* cbl, std::string lang) {
+    if(lang == "de")  cbl->setItemData(Language::DE, QSize(-1,-1), Qt::SizeHintRole);
+    if(lang == "en") {
+        cbl->setItemData(Language::EN_US, QSize(-1,-1), Qt::SizeHintRole);
+        cbl->setItemData(Language::EN_UK, QSize(-1,-1), Qt::SizeHintRole);
+    }
+    if(lang == "es")  cbl->setItemData(Language::ES, QSize(-1,-1), Qt::SizeHintRole);
+    if(lang == "fr")  cbl->setItemData(Language::FR, QSize(-1,-1), Qt::SizeHintRole);
+    if(lang == "it")  cbl->setItemData(Language::IT, QSize(-1,-1), Qt::SizeHintRole);
+
 }
 
 void ConfigXml::read(Ui::QPicoSpeaker *ui) {
@@ -236,15 +270,16 @@ void ConfigXml::read(Ui::QPicoSpeaker *ui) {
     } else {
         ui->cmbEng->setCurrentIndex(static_cast<int>(Engine::PICO2WAVE));
     }
+    ui->cmbLang->setCurrentIndex(getDefTextLang());
 
     QComboBox* cbl = ui->cmbLang;
     std::vector<XMLElement*> xlVec = getXmlLang();
     if(static_cast<size_t>(cbl->count()) == xlVec.size()+1) {
-        for(size_t i = 0; i < xlVec.size(); i++) {
-            cbl->setCurrentIndex(static_cast<int>(i));
-            if(!xlVec[i]->BoolText()) {
+        for(auto& lang : xlVec) {
+            if(!lang->BoolText()) {
+               disableUiLang(cbl, std::string(lang->Name()));
             }
-         }
+        }
     } xlVec.clear();
 }
 

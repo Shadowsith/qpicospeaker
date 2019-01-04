@@ -1,0 +1,3 @@
+[submodule "src/lib/qdocker"]
+	path = src/lib/qdocker
+	url = https://github.com/Shadowsith/qdocker

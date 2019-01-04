@@ -31,6 +31,7 @@ SOURCES += \
     src/settings.cpp \
     src/configxml.cpp \
     src/lib/tinyxml/tinyxml2.cpp \
+    src/lib/qdocker/qdocker.cpp
 
 HEADERS += \
     src/qpicospeaker.h \
@@ -39,6 +40,8 @@ HEADERS += \
     src/settings.h \
     src/configxml.h \
     src/lib/tinyxml/tinyxml2.h \
+    src/lib/qdocker/qdocker.h \
+    src/lib/qdocker/qdocker_global.h
 
 FORMS += \
     src/qpicospeaker.ui \

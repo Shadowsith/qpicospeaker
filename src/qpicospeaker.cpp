@@ -64,8 +64,13 @@ QPicoSpeaker::QPicoSpeaker(QWidget *parent) :
     resize(false);
 
     // hide Espeak QComboBox item without deleting it and change index structure
-    ConfigXml xml;
-    xml.read(ui);
+    try{
+        ConfigXml xml;
+        xml.read(ui);
+    } catch(std::exception ex) {
+        std::cout << ex.what() << std::endl;
+    }
+
 }
 
 QPicoSpeaker::~QPicoSpeaker()
@@ -281,7 +286,7 @@ void QPicoSpeaker::openFile() {
         QFile file(filePath);
         if(!file.open(QIODevice::ReadOnly)) {
             //Some translation here?
-            QMessageBox::information(0,"error", file.errorString());
+            QMessageBox::information(nullptr ,"error", file.errorString());
         }
         QTextStream in(&file);
         while(!in.atEnd()) {
@@ -296,7 +301,7 @@ void QPicoSpeaker::openFile() {
 
 void QPicoSpeaker::openInfo() {
     info = AboutInfo::open();
-    if (info != 0) {
+    if (info != nullptr) {
         const int fHeight = info->height();
         const int fWidth = info->width();
         info->setFixedSize(fWidth, fHeight);
@@ -306,7 +311,7 @@ void QPicoSpeaker::openInfo() {
 
 void QPicoSpeaker::openSettings() {
     settings = Settings::open();
-    if (settings != 0) {
+    if (settings != nullptr) {
         const int fHeight = settings->height();
         const int fWidth = settings->width();
         settings->setFixedSize(fWidth, fHeight);

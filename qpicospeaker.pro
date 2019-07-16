@@ -23,8 +23,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 
-SOURCES += \
-    src/qpicospeaker.cpp \
+SOURCES += src/qpicospeaker.cpp \
     src/texttospeech.cpp \
     src/aboutinfo.cpp \
     src/main.cpp \
@@ -33,8 +32,7 @@ SOURCES += \
     src/lib/tinyxml/tinyxml2.cpp \
     src/lib/qdocker/qdocker.cpp
 
-HEADERS += \
-    src/qpicospeaker.h \
+HEADERS += src/qpicospeaker.h \
     src/texttospeech.h \
     src/aboutinfo.h \
     src/settings.h \
@@ -43,18 +41,15 @@ HEADERS += \
     src/lib/qdocker/qdocker.h \
     src/lib/qdocker/qdocker_global.h
 
-FORMS += \
-    src/qpicospeaker.ui \
+FORMS += src/qpicospeaker.ui \
     src/aboutinfo.ui \
     src/settings.ui
 
-TRANSLATIONS += \
-    lang/qpicospeaker_en.ts \
+TRANSLATIONS += lang/qpicospeaker_en.ts \
     lang/qpicospeaker_es.ts \
     lang/qpicospeaker_de.ts \
     lang/qpicospeaker_fr.ts \
     lang/qpicospeaker_it.ts
 
-DISTFILES += \
-    src/qpicospeaker_conf.xml \
+DISTFILES += src/qpicospeaker_conf.xml \
     src/lib/tinyxml/LICENSE.md

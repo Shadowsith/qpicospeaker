@@ -30,7 +30,7 @@ along with QPicoSpeaker.  If not, see <http://www.gnu.org/licenses/>.
 #include <sys/stat.h>
 #include <unistd.h>
 #include <sys/stat.h>
-
+#include <iostream>
 
 using namespace tinyxml2;
 
@@ -38,20 +38,16 @@ using namespace tinyxml2;
 // TODO check if file exists
 
 ConfigXml::ConfigXml() {
-    //TODO add file exisits and create XML if not exists
     m_path = QString(QDir::homePath()+m_configPath).toStdString();
-    std::string config_dir = QDir::homePath().toStdString()+"/.config/qpicospeaker/";
-    struct stat buffer;
-    if(stat (config_dir.c_str(), &buffer) != 0) {
-        mkdir(config_dir.c_str(), S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
-        if(stat (m_path.c_str(), &buffer) != 0) {
-            createXml();
-        }
-    } else {
-         if(stat (m_path.c_str(), &buffer) != 0) {
-            createXml();
-        }
+    std::string config_dir =
+            QDir::homePath().toStdString()+"/.config/qpicospeaker/";
+    if( !QDir(config_dir.c_str()).exists() ) {
+        QDir().mkdir(config_dir.c_str());
     }
+    if( !QFileInfo::exists(m_path.c_str())) {
+        createXml();
+    }
+
     xml.LoadFile(m_path.c_str());
     node = xml.FirstChildElement("QPicoSpeaker");
 }

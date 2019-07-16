@@ -41,9 +41,9 @@ enum Language {
 
 class TextToSpeech {
       private:
-        std::string m_cmd = "";
-        Engine m_eng; 
-        std::string m_lang = "-l=";
+        std::string _cmd = "";
+        Engine _eng; 
+        std::string _lang = "-l=";
         const std::string m_tmp = "/tmp/picoTmp.wav";
         const std::string m_pico = "pico2wave";
         const std::string m_mplayer = "mplayer";
@@ -51,10 +51,10 @@ class TextToSpeech {
             "http://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&q=";
         const std::string m_rm = "rm";
         const std::string m_sox = "sox";
-        std::string m_out = "/tmp/picospeak.wav";
-        std::string m_text = "";
-        std::string m_speed = "1.0";
-        std::string m_pitch = "0";
+        std::string _out = "/tmp/picospeak.wav";
+        std::string _text = "";
+        std::string _speed = "1.0";
+        std::string _pitch = "0";
         const size_t m_gRequestLength = 200;
         int m_gTmpFiles = 1; 
         std::vector<std::string> m_gMsgParts;

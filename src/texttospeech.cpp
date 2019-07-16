@@ -26,45 +26,46 @@ along with QPicoSpeaker.  If not, see <http://www.gnu.org/licenses/>.
 #include <cstdio>
 #include <regex>
 #include <vector>
+#include <algorithm>
 #include "texttospeech.h"
 
 // constructor & destructor -----------------------------------------------------------------------
 TextToSpeech::TextToSpeech(const Language lang,
     std::string& speed, std::string& pitch, std::string& output,
     std::string& text, Engine eng) {
-    m_eng = eng;
+    _eng = eng;
     checkLanguage(lang);
-    if(speed != "")     m_speed = speed;
-    if(pitch != "")     m_pitch = pitch;
-    if(output != "")    m_out = output;
-    if(text != "")      m_text = text;
+    if(speed != "")     _speed = speed;
+    if(pitch != "")     _pitch = pitch;
+    if(output != "")    _out = output;
+    if(text != "")      _text = text;
 }
 
 TextToSpeech::~TextToSpeech() {}
 
 // privat methods --------------------------------------------------------------------------------- 
 void TextToSpeech::checkLanguage(const Language& lang) {
-    switch(m_eng) {
+    switch(_eng) {
         case Engine::ESPEAK: break;
         case Engine::GOOGLE: {
             switch(lang) {
-                case Language::DE:    m_lang = "&tl=de"; break;
-                case Language::EN_US: m_lang = "&tl=en"; break;
-                case Language::EN_UK: m_lang = "&tl=en"; break;
-                case Language::ES:    m_lang = "&tl=es"; break;
-                case Language::FR:    m_lang = "&tl=fr"; break;
-                case Language::IT:    m_lang = "&tl=it"; break;
+                case Language::DE:    _lang = "&tl=de"; break;
+                case Language::EN_US: _lang = "&tl=en"; break;
+                case Language::EN_UK: _lang = "&tl=en"; break;
+                case Language::ES:    _lang = "&tl=es"; break;
+                case Language::FR:    _lang = "&tl=fr"; break;
+                case Language::IT:    _lang = "&tl=it"; break;
             }
         } break;
         case Engine::PICO2WAVE: {
             switch(lang) {
-                case Language::DE:    m_lang += "de-DE"; break;
-                case Language::EN_US: m_lang += "en-US"; break;
-                case Language::EN_UK: m_lang += "en-GB"; break;
-                case Language::ES: m_lang += "es-ES"; break;
-                case Language::FR: m_lang += "fr-FR"; break;
-                case Language::IT: m_lang += "it-IT"; break;
-                default: m_lang += "en-US"; break;
+                case Language::DE:    _lang += "de-DE"; break;
+                case Language::EN_US: _lang += "en-US"; break;
+                case Language::EN_UK: _lang += "en-GB"; break;
+                case Language::ES: _lang += "es-ES"; break;
+                case Language::FR: _lang += "fr-FR"; break;
+                case Language::IT: _lang += "it-IT"; break;
+                // default: _lang += "en-US"; break;
             }
         } break;
     }
@@ -74,15 +75,15 @@ void TextToSpeech::checkLanguage(const Language& lang) {
 void TextToSpeech::recordFiles() {
     for (size_t i = 0; i < m_gMsgParts.size(); i++) {
         std::string tmp = "/tmp/gTmp" + std::to_string(i) + ".wav";
-        std::string message = "\"" + m_google + m_gMsgParts[i] + m_lang + "\"";
-        m_cmd = "mplayer "+message+" -vc null -vo null -ao pcm:fast:waveheader:file="+tmp;
-        std::system(m_cmd.c_str());
+        std::string message = "\"" + m_google + m_gMsgParts[i] + _lang + "\"";
+        _cmd = "mplayer "+message+" -vc null -vo null -ao pcm:fast:waveheader:file="+tmp;
+        std::system(_cmd.c_str());
     }
 }
 
 
 void TextToSpeech::saveParts() {
-    std::vector<std::string> words = split(m_text," ");  
+    std::vector<std::string> words = split(_text," ");
     std::string request = "";
     for(auto& word : words) {
         if(request.length()+word.length()+1 <= m_gRequestLength) {
@@ -129,39 +130,39 @@ bool TextToSpeech::checkProgram(const std::string cmd) {
 }
 
 void TextToSpeech::clearTmp() {
-    switch(m_eng) {
+    switch(_eng) {
         case Engine::ESPEAK: break;
         case Engine::PICO2WAVE: 
-            m_cmd = m_rm+" "+m_tmp;
+            _cmd = m_rm+" "+m_tmp;
             break;
         case Engine::GOOGLE:
-            m_cmd = m_rm+" /tmp/gTmp*.wav "+m_tmp;
+            _cmd = m_rm+" /tmp/gTmp*.wav "+m_tmp;
             break;
     }
-    std::system(m_cmd.c_str());
+    std::system(_cmd.c_str());
 }
 
 void TextToSpeech::createAudio() {
-    switch(m_eng) {
+    switch(_eng) {
         case Engine::ESPEAK: break;
         case Engine::GOOGLE: { 
             saveParts();
             recordFiles();
-            m_cmd = m_sox+" "+"/tmp/gTmp*.wav"+" "+m_tmp;
-            std::system(m_cmd.c_str());
+            _cmd = m_sox+" "+"/tmp/gTmp*.wav"+" "+m_tmp;
+            std::system(_cmd.c_str());
         } break;
         case Engine::PICO2WAVE: {
             std::string tmp = "-w=" + m_tmp;
-            m_text = "\"" + m_text + "\"";
-            m_cmd = m_pico+" "+m_lang+" "+tmp+" "+m_text;
-            std::system(m_cmd.c_str());
+            _text = "\"" + _text + "\"";
+            _cmd = m_pico+" "+_lang+" "+tmp+" "+_text;
+            std::system(_cmd.c_str());
         } break;
     }
 }
 
 void TextToSpeech::setSpeedAndPitch() {
-    m_cmd = m_sox+" "+m_tmp+" "+m_out+" "+"tempo"+" "+m_speed+" "+"pitch"+" "+m_pitch;
-    std::system(m_cmd.c_str());
+    _cmd = m_sox+" "+m_tmp+" "+_out+" "+"tempo"+" "+_speed+" "+"pitch"+" "+_pitch;
+    std::system(_cmd.c_str());
 }
 
 void TextToSpeech::start() {

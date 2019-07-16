@@ -59,6 +59,7 @@ There is a offical maintained package in the AUR:
 
 ## Future planned
 * eSpeak speech synthesizer as alternative to pico2wave and Google
+* IBM Watson TTS support
 
 ## Restictions
 * no male voice for Google TTS (no acces about connection string possible)

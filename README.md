@@ -25,11 +25,19 @@ As better solution for the unstatisfied TTS situation on the Linux desktop I dev
 For building you also need qt5 + multimedia packages:<br>
 <code>sudo apt-get install qt5-default qtmultimedia5-dev</code>
 
+* `git clone https://github.com/Shadowsith/qpicospeaker`
+* `cd qpicospeaker`
+* `sudo ./install.sh`
+
+Install paths:
+* Binary: /usr/bin/qpicospeaker
+* Config: /home/\<user\>/.config/qpicospeaker/config.xml
+
 If the project is in a more finished state there will be a package in the Ubuntu launchpad too.
 
 ### Arch Linux
 There is a offical maintained package in the AUR:
-<code>trizen -S qpicospeaker-git</code>
+<code>yay -S qpicospeaker-git</code>
 
 ### Tested Systems
 * Manjaro/Arch Linux (KDE)
@@ -55,6 +63,8 @@ There is a offical maintained package in the AUR:
 * Default Settings
 * Translation to other languages
 * All Languages for Google TTS
+* removing mplayer to curl
+* resizing UI
 * Help documentation
 
 ## Future planned

@@ -4,3 +4,4 @@
 build-qpicospeaker-Desktop-Debug/
 qpicospeaker.pro.user
 tags
+bin/*

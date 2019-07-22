@@ -47,6 +47,7 @@ along with QPicoSpeaker.  If not, see <http://www.gnu.org/licenses/>.
 #include <QDesktopServices>
 #include <QStandardItemModel>
 #include <QtMultimedia/QMediaPlayer>
+#include "./lib/qdocker/qdocker.h"
 
 QPicoSpeaker::QPicoSpeaker(QWidget *parent) :
     QMainWindow(parent),
@@ -58,10 +59,6 @@ QPicoSpeaker::QPicoSpeaker(QWidget *parent) :
     conMenu();
     conTranl();
     setSpecialCharsToUiItms();
-
-    /* init */
-    ui->cbSettings->setChecked(false);
-    resize(false);
 
     // hide Espeak QComboBox item without deleting it and change index structure
     try{
@@ -90,9 +87,6 @@ void QPicoSpeaker::conWin() {
     });
     connect(ui->btnStop, &QPushButton::clicked, [=] {
         stop();
-    });
-    connect(ui->cbSettings, &QCheckBox::stateChanged, [=] {
-        resize(ui->cbSettings->isChecked());
     });
     /* slider */
     connect(ui->hsSpeed, &QSlider::valueChanged, [=] {
@@ -239,42 +233,50 @@ void QPicoSpeaker::play() {
     }
 }
 
-void QPicoSpeaker::resize(bool checked) {
-    int teNewH = 190;
-    if(checked) {
-        int shrink = ui->tePlay->height()-teNewH;
-        ui->tePlay->setGeometry(ui->tePlay->x(), ui->tePlay->y(),ui->tePlay->width(),teNewH);
-        ui->lblLang->setGeometry(ui->lblLang->x(), ui->lblLang->y()-shrink,
-                                 ui->lblLang->width(), ui->lblLang->height());
-        ui->cmbLang->setGeometry(ui->cmbLang->x(), ui->cmbLang->y()-shrink,
-                                 ui->cmbLang->width(), ui->cmbLang->height());
-        ui->lblEng->setGeometry(ui->lblEng->x(), ui->lblEng->y()-shrink,
-                                ui->lblEng->width(), ui->lblEng->height());
-        ui->cmbEng->setGeometry(ui->cmbEng->x(), ui->cmbEng->y()-shrink,
-                                 ui->cmbEng->width(), ui->cmbEng->height());
-        ui->cbSettings->setGeometry(ui->cbSettings->x(), ui->cbSettings->y()-shrink,
-                                    ui->cbSettings->width(), ui->cbSettings->height());
-        ui->saSliders->show();
-    } else {
-        teNewH = 300;
-        int growth = teNewH-ui->tePlay->height();
-        ui->tePlay->setGeometry(ui->tePlay->x(), ui->tePlay->y(),ui->tePlay->width(),teNewH);
-        ui->lblLang->setGeometry(ui->lblLang->x(), ui->lblLang->y()+growth,
-                                 ui->lblLang->width(), ui->lblLang->height());
-        ui->cmbLang->setGeometry(ui->cmbLang->x(), ui->cmbLang->y()+growth,
-                                 ui->cmbLang->width(), ui->cmbLang->height());
-                ui->lblEng->setGeometry(ui->lblEng->x(), ui->lblEng->y()+growth,
-                                 ui->lblEng->width(), ui->lblEng->height());
-        ui->cmbEng->setGeometry(ui->cmbEng->x(), ui->cmbEng->y()+growth,
-                                 ui->cmbEng->width(), ui->cmbEng->height());
-                ui->cbSettings->setGeometry(ui->cbSettings->x(), ui->cbSettings->y()+growth,
-                                    ui->cbSettings->width(), ui->cbSettings->height());
-        ui->saSliders->hide();
-    }
+void QPicoSpeaker::resizeEvent(QResizeEvent* e) {
+    QDocker qd;
+    qd.dockCorner(ui->btnClose, QDocker::BottomRight, 10, 10);
+    qd.dockCorner(ui->btnPlay, QDocker::BottomLeft, 10, 10);
+    qd.dockRight(ui->btnStop, ui->btnPlay, QDocker::VerticalPos::AlignTop, 10);
+    qd.dockAbove(ui->saSliders, ui->btnPlay,
+                 QDocker::HorizontalPos::AlignLeft, 120);
+    qd.dockAbove(ui->cmbEng, ui->saSliders,
+                 QDocker::HorizontalPos::AlignLeft, -90);
+    qd.dockRight(ui->cmbLang, ui->cmbEng,
+                 QDocker::VerticalPos::AlignTop, 15);
+    qd.dockAbove(ui->lblEng, ui->cmbEng,
+                 QDocker::HorizontalPos::AlignLeft, -5);
+    qd.dockAbove(ui->lblLang, ui->cmbLang,
+                 QDocker::HorizontalPos::AlignLeft, -5);
+
+    ui->tePlay->resize(this->width() - 20,
+                       ui->lblEng->geometry().y() -
+                       ui->tePlay->geometry().y() - 5);
+
+    ui->saSliders->resize(this->width() - 20, ui->saSliders->height());
+    ui->hsSpeed->resize(ui->saSliders->width() - 170, ui->saSliders->height());
+
+    qd.dockRight(ui->lblSpeedVal, ui->hsSpeed,
+                 QDocker::VerticalPos::AlignTop, 10);
+
+    ui->hsVolume->resize(ui->saSliders->width() - 170,
+                         ui->saSliders->height());
+
+    qd.dockRight(ui->lblVolumeVal, ui->hsVolume,
+                 QDocker::VerticalPos::AlignTop, 10);
+
+    ui->hsPitch->resize(ui->saSliders->width() - 170, ui->saSliders->height());
+    qd.dockRight(ui->lblPitchVal, ui->hsPitch,
+                QDocker::VerticalPos::AlignTop, 10);
+
+    qd.dockCorner(ui->lblInputDesc, QDocker::TopLeft, 10, 5);
+    qd.dockBelow(ui->tePlay, ui->lblInputDesc,
+                 QDocker::HorizontalPos::AlignLeft, 5);
 }
 
 void QPicoSpeaker::stop() {
     player->stop();
+    ui->btnPlay->setText("Play");
 }
 
 void QPicoSpeaker::openFile() {

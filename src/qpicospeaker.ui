@@ -23,8 +23,8 @@
    <widget class="QComboBox" name="cmbLang">
     <property name="geometry">
      <rect>
-      <x>130</x>
-      <y>250</y>
+      <x>120</x>
+      <y>290</y>
       <width>115</width>
       <height>30</height>
      </rect>
@@ -89,10 +89,10 @@
    <widget class="QTextEdit" name="tePlay">
     <property name="geometry">
      <rect>
-      <x>20</x>
+      <x>10</x>
       <y>30</y>
-      <width>411</width>
-      <height>190</height>
+      <width>431</width>
+      <height>231</height>
      </rect>
     </property>
     <property name="html">
@@ -106,11 +106,18 @@ p, li { white-space: pre-wrap; }
    <widget class="QLabel" name="lblLang">
     <property name="geometry">
      <rect>
-      <x>130</x>
-      <y>230</y>
+      <x>120</x>
+      <y>270</y>
       <width>115</width>
       <height>20</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>11</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
     </property>
     <property name="text">
      <string>Language</string>
@@ -119,11 +126,18 @@ p, li { white-space: pre-wrap; }
    <widget class="QPushButton" name="btnClose">
     <property name="geometry">
      <rect>
-      <x>350</x>
-      <y>470</y>
+      <x>360</x>
+      <y>480</y>
       <width>80</width>
       <height>26</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>11</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
     </property>
     <property name="cursor">
      <cursorShape>PointingHandCursor</cursorShape>
@@ -135,7 +149,7 @@ p, li { white-space: pre-wrap; }
    <widget class="QLabel" name="lblInputDesc">
     <property name="geometry">
      <rect>
-      <x>20</x>
+      <x>10</x>
       <y>10</y>
       <width>321</width>
       <height>20</height>
@@ -160,11 +174,18 @@ p, li { white-space: pre-wrap; }
    <widget class="QPushButton" name="btnStop">
     <property name="geometry">
      <rect>
-      <x>110</x>
-      <y>470</y>
+      <x>100</x>
+      <y>480</y>
       <width>80</width>
       <height>26</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>11</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
     </property>
     <property name="cursor">
      <cursorShape>PointingHandCursor</cursorShape>
@@ -176,8 +197,8 @@ p, li { white-space: pre-wrap; }
    <widget class="QPushButton" name="btnPlay">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>470</y>
+      <x>10</x>
+      <y>480</y>
       <width>80</width>
       <height>26</height>
      </rect>
@@ -187,6 +208,13 @@ p, li { white-space: pre-wrap; }
       <horstretch>0</horstretch>
       <verstretch>0</verstretch>
      </sizepolicy>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>11</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
     </property>
     <property name="cursor">
      <cursorShape>PointingHandCursor</cursorShape>
@@ -198,9 +226,9 @@ p, li { white-space: pre-wrap; }
    <widget class="QScrollArea" name="saSliders">
     <property name="geometry">
      <rect>
-      <x>20</x>
+      <x>10</x>
       <y>330</y>
-      <width>411</width>
+      <width>431</width>
       <height>131</height>
      </rect>
     </property>
@@ -212,21 +240,31 @@ p, li { white-space: pre-wrap; }
       <rect>
        <x>0</x>
        <y>0</y>
-       <width>409</width>
+       <width>429</width>
        <height>129</height>
       </rect>
      </property>
      <widget class="QLabel" name="lblPitchVal">
       <property name="geometry">
        <rect>
-        <x>350</x>
+        <x>380</x>
         <y>90</y>
-        <width>40</width>
+        <width>31</width>
         <height>20</height>
        </rect>
       </property>
+      <property name="font">
+       <font>
+        <pointsize>11</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
       <property name="text">
        <string>0</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
       </property>
      </widget>
      <widget class="QLabel" name="lblSpeed">
@@ -237,6 +275,14 @@ p, li { white-space: pre-wrap; }
         <width>81</width>
         <height>18</height>
        </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>11</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+        <underline>true</underline>
+       </font>
       </property>
       <property name="styleSheet">
        <string notr="true">#lblSpeed {
@@ -250,17 +296,27 @@ p, li { white-space: pre-wrap; }
      <widget class="QLabel" name="lblSpeedVal">
       <property name="geometry">
        <rect>
-        <x>350</x>
+        <x>380</x>
         <y>10</y>
-        <width>40</width>
+        <width>31</width>
         <height>20</height>
        </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>11</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
       </property>
       <property name="styleSheet">
        <string notr="true"/>
       </property>
       <property name="text">
        <string>1.0</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
       </property>
      </widget>
      <widget class="QLabel" name="lblPitch">
@@ -271,6 +327,14 @@ p, li { white-space: pre-wrap; }
         <width>81</width>
         <height>18</height>
        </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>11</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+        <underline>true</underline>
+       </font>
       </property>
       <property name="styleSheet">
        <string notr="true">#lblPitch {
@@ -284,9 +348,9 @@ p, li { white-space: pre-wrap; }
      <widget class="QSlider" name="hsSpeed">
       <property name="geometry">
        <rect>
-        <x>120</x>
+        <x>100</x>
         <y>10</y>
-        <width>201</width>
+        <width>271</width>
         <height>31</height>
        </rect>
       </property>
@@ -309,9 +373,9 @@ p, li { white-space: pre-wrap; }
      <widget class="QSlider" name="hsPitch">
       <property name="geometry">
        <rect>
-        <x>120</x>
+        <x>100</x>
         <y>90</y>
-        <width>201</width>
+        <width>271</width>
         <height>31</height>
        </rect>
       </property>
@@ -349,6 +413,15 @@ p, li { white-space: pre-wrap; }
         <height>18</height>
        </rect>
       </property>
+      <property name="font">
+       <font>
+        <family>Noto Sans</family>
+        <pointsize>11</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+        <underline>true</underline>
+       </font>
+      </property>
       <property name="styleSheet">
        <string notr="true">#lblVolume {
 	text-decoration: underline
@@ -361,22 +434,32 @@ p, li { white-space: pre-wrap; }
      <widget class="QLabel" name="lblVolumeVal">
       <property name="geometry">
        <rect>
-        <x>350</x>
+        <x>380</x>
         <y>50</y>
-        <width>40</width>
+        <width>31</width>
         <height>20</height>
        </rect>
       </property>
+      <property name="font">
+       <font>
+        <pointsize>11</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
       <property name="text">
        <string>50</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
       </property>
      </widget>
      <widget class="QSlider" name="hsVolume">
       <property name="geometry">
        <rect>
-        <x>120</x>
+        <x>100</x>
         <y>50</y>
-        <width>201</width>
+        <width>271</width>
         <height>31</height>
        </rect>
       </property>
@@ -401,24 +484,11 @@ p, li { white-space: pre-wrap; }
      </widget>
     </widget>
    </widget>
-   <widget class="QCheckBox" name="cbSettings">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>300</y>
-      <width>401</width>
-      <height>24</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Advanced Settings:</string>
-    </property>
-   </widget>
    <widget class="QComboBox" name="cmbEng">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>250</y>
+      <x>10</x>
+      <y>290</y>
       <width>90</width>
       <height>30</height>
      </rect>
@@ -450,11 +520,18 @@ p, li { white-space: pre-wrap; }
    <widget class="QLabel" name="lblEng">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>230</y>
+      <x>10</x>
+      <y>270</y>
       <width>90</width>
       <height>20</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>11</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
     </property>
     <property name="text">
      <string>Engine</string>
@@ -467,7 +544,7 @@ p, li { white-space: pre-wrap; }
      <x>0</x>
      <y>0</y>
      <width>454</width>
-     <height>23</height>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">

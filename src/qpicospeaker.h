@@ -40,7 +40,7 @@ class QPicoSpeaker : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit QPicoSpeaker(QWidget *parent = 0);
+    explicit QPicoSpeaker(QWidget *parent = nullptr);
     ~QPicoSpeaker();
 
 private:
@@ -55,12 +55,14 @@ private:
     void conTranl();
     void clearTmp();
     //@Override
-    void closeEvent(QCloseEvent *cev);
+    void closeEvent(QCloseEvent* e);
     //@Override
-    void changeEvent(QEvent* ev);
+    void changeEvent(QEvent* e);
+    //@Override
+    void resizeEvent(QResizeEvent* e);
     void play();
     void stop();
-    void resize(bool checked);
+    void resize();
     QString m_text = "";
     QString m_audio = "/tmp/picospeak.wav";
     void openFile();

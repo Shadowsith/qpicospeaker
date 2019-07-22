@@ -30,11 +30,11 @@ int main(int argc, char *argv[])
 
     QPicoSpeaker w;
 
-    const int heigth = w.height();
+    //const int heigth = w.height();
 
 
-    const int width = w.width();
-    w.setFixedSize(width, heigth);
+    //const int width = w.width();
+    //w.setFixedSize(width, heigth);
 
     w.show();
 

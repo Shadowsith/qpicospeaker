@@ -33,6 +33,8 @@ Install paths:
 * Binary: /usr/bin/qpicospeaker
 * Config: /home/\<user\>/.config/qpicospeaker/config.xml
 
+To uninstall QPicospeaker write ./install.sh --uninstall
+
 If the project is in a more finished state there will be a package in the Ubuntu launchpad too.
 
 ### Arch Linux

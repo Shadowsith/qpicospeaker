@@ -26,6 +26,7 @@ along with QPicoSpeaker.  If not, see <http://www.gnu.org/licenses/>.
 #include "ui_settings.h"
 #include "ui_qpicospeaker.h"
 #include <QDir>
+#include <memory>
 #include "lib/tinyxml/tinyxml2.h"
 
 using namespace tinyxml2;
@@ -56,8 +57,11 @@ class ConfigXml {
         bool m_IT;
         void createXml();
         void createXmlEngines(XMLDocument &doc, XMLNode* root);
-        void createXmlSlider(XMLDocument &doc, XMLNode* root, std::vector<XMLElement*> &xmlVec);
-        void createXmlLang(XMLDocument &doc, XMLNode* root, std::vector<XMLElement*> &xmlVec);
+        void createXmlSlider(XMLDocument &doc, XMLNode* root,
+                             std::vector<XMLElement*> &xmlVec);
+
+        void createXmlLang(XMLDocument &doc, XMLNode* root,
+                           std::vector<XMLElement*> &xmlVec);
         void disableUiLang(QComboBox* cbl, std::string lang);
 
     public:
@@ -72,7 +76,7 @@ class ConfigXml {
         int getVolume();
         int getSpeed();
         int getPitch();
-        std::vector<QCheckBox*> getUiLang(Ui::Settings *ui);
+        std::vector<QCheckBox*> getUiLang(std::shared_ptr<Ui::Settings> ui);
         std::vector<XMLElement*> getXmlLang();
 
         void setAudioPath();
@@ -81,9 +85,9 @@ class ConfigXml {
         void setSpeed(int speed);
         void setPitch(int pitch);
 
-        void read(Ui::QPicoSpeaker *ui);
-        void read(Ui::Settings *ui);
-        void write(Ui::Settings *ui);
+        void read(std::shared_ptr<Ui::QPicoSpeaker> ui);
+        void read(std::shared_ptr<Ui::Settings> ui);
+        void write(std::shared_ptr<Ui::Settings> ui);
 
 };
 

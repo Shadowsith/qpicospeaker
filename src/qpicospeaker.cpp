@@ -25,6 +25,7 @@ along with QPicoSpeaker.  If not, see <http://www.gnu.org/licenses/>.
 #include "aboutinfo.h"
 #include "configxml.h"
 #include <iostream>
+#include <future>
 #include <QApplication>
 #include <QSlider>
 #include <thread>
@@ -47,6 +48,7 @@ along with QPicoSpeaker.  If not, see <http://www.gnu.org/licenses/>.
 #include <QDesktopServices>
 #include <QStandardItemModel>
 #include <QtMultimedia/QMediaPlayer>
+#include <QThread>
 #include "./lib/qdocker/qdocker.h"
 
 QPicoSpeaker::QPicoSpeaker(QWidget *parent) :
@@ -70,11 +72,7 @@ QPicoSpeaker::QPicoSpeaker(QWidget *parent) :
 
 }
 
-QPicoSpeaker::~QPicoSpeaker()
-{
-    delete ui;
-    delete player;
-}
+QPicoSpeaker::~QPicoSpeaker() {}
 
 void QPicoSpeaker::conWin() {
     ui->setupUi(this);
@@ -108,7 +106,7 @@ void QPicoSpeaker::conWin() {
     });
 
     /* Media player */
-    connect(player, &QMediaPlayer::stateChanged, [=] {
+    connect(player.get(), &QMediaPlayer::stateChanged, [=] {
         if(player->state() == QMediaPlayer::StoppedState) {
             ui->btnPlay->setText(tr("&Play"));
         }
@@ -137,14 +135,13 @@ void QPicoSpeaker::conMenu() {
         close();
     });
     connect(ui->actionPlay, &QAction::triggered, [=] {
-       play();
+       std::future<int> fut = std::async(&QPicoSpeaker::play, this);
     });
     connect(ui->actionPause, &QAction::triggered, [=] {
         player->pause();
     });
     connect(ui->actionStop, &QAction::triggered, [=] {
        player->stop();
-
     });
     connect(ui->actionSettings, &QAction::triggered, [=] {
        openSettings();
@@ -191,18 +188,20 @@ void QPicoSpeaker::changeEvent(QEvent *ev) {
     if(ev->type() == QEvent::LanguageChange) {
         setSpecialCharsToUiItms();
         if(info->isAlloc()) {
-            info->ui->retranslateUi(info);
+            info->ui->retranslateUi(info.get());
         }
     }
 }
 
 void QPicoSpeaker::closeEvent(QCloseEvent *cev) {
+    info->close();
+    settings->close();
     cev->accept();
     clearTmp();
     QApplication::instance()->exit();
 }
 
-void QPicoSpeaker::play() {
+int QPicoSpeaker::play() {
     if(player->state() == QMediaPlayer::StoppedState) {
         const int lang = ui->cmbLang->currentIndex();
         const int eng = ui->cmbEng->currentIndex();
@@ -212,14 +211,17 @@ void QPicoSpeaker::play() {
         std::string output = m_audio.toStdString();
         switch(eng) {
             case 0: {
-                TextToSpeech t(static_cast<Language>(lang), speed, pitch, output, text, Engine::ESPEAK);
+                TextToSpeech t(static_cast<Language>(lang),
+                               speed, pitch, output, text, Engine::ESPEAK);
             } break;
             case 1: {
-                TextToSpeech t(static_cast<Language>(lang), speed, pitch, output, text, Engine::GOOGLE);
+                TextToSpeech t(static_cast<Language>(lang),
+                               speed, pitch, output, text, Engine::GOOGLE);
                 t.start();
             } break;
             default: {
-                TextToSpeech t(static_cast<Language>(lang), speed, pitch, output, text, Engine::PICO2WAVE);
+                TextToSpeech t(static_cast<Language>(lang),
+                               speed, pitch, output, text, Engine::PICO2WAVE);
                 t.start();
             } break;
         }
@@ -231,6 +233,7 @@ void QPicoSpeaker::play() {
     } else {
         player->play();
     }
+    return 0;
 }
 
 void QPicoSpeaker::resizeEvent(QResizeEvent* e) {

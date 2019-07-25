@@ -27,10 +27,10 @@ along with QPicoSpeaker.  If not, see <http://www.gnu.org/licenses/>.
 #include <QComboBox>
 #include <iostream>
 #include <string>
+#include <memory>
 #include <sys/stat.h>
 #include <unistd.h>
 #include <sys/stat.h>
-#include <iostream>
 
 using namespace tinyxml2;
 
@@ -126,25 +126,28 @@ void ConfigXml::setDefEngine(Engine eng) {
 }
 
 void ConfigXml::setPitch(int val) {
-    XMLElement* pitch = node->FirstChildElement("Slider")->FirstChildElement("Pitch");
+    XMLElement* pitch = node->FirstChildElement("Slider")->
+            FirstChildElement("Pitch");
     pitch->SetText(val);
     xml.SaveFile(m_path.c_str());
 
 }
 
 void ConfigXml::setSpeed(int val) {
-    XMLElement* speed = node->FirstChildElement("Slider")->FirstChildElement("Speed");
+    XMLElement* speed = node->FirstChildElement("Slider")->
+            FirstChildElement("Speed");
     speed->SetText(val);
     xml.SaveFile(m_path.c_str());
 }
 
 void ConfigXml::setVolume(int val) {
-    XMLElement* volume = node->FirstChildElement("Slider")->FirstChildElement("Volume");
+    XMLElement* volume = node->FirstChildElement("Slider")->
+            FirstChildElement("Volume");
     volume->SetText(val);
     xml.SaveFile(m_path.c_str());
 }
 
-std::vector<QCheckBox*> ConfigXml::getUiLang(Ui::Settings *ui) {
+std::vector<QCheckBox*> ConfigXml::getUiLang(std::shared_ptr<Ui::Settings> ui) {
     std::vector<QCheckBox*> uiVec;
     uiVec.push_back(ui->cbDE);
     uiVec.push_back(ui->cbEN);
@@ -204,7 +207,8 @@ void ConfigXml::createXmlEngines(XMLDocument &doc, XMLNode* root) {
     root->InsertEndChild(rEngine);
 }
 
-void ConfigXml::createXmlSlider(XMLDocument &doc, XMLNode* root, std::vector<XMLElement*> &xmlVec) {
+void ConfigXml::createXmlSlider(XMLDocument &doc, XMLNode* root,
+                                std::vector<XMLElement*> &xmlVec) {
     XMLElement *rSlider = doc.NewElement("Slider");
     xmlVec.push_back(doc.NewElement("Speed"));
     xmlVec.at(xmlVec.size()-1)->SetText(10);
@@ -218,7 +222,8 @@ void ConfigXml::createXmlSlider(XMLDocument &doc, XMLNode* root, std::vector<XML
     root->InsertEndChild(rSlider);
 }
 
-void ConfigXml::createXmlLang(XMLDocument &doc, XMLNode* root, std::vector<XMLElement*> &xmlVec) {
+void ConfigXml::createXmlLang(XMLDocument &doc, XMLNode* root,
+                              std::vector<XMLElement*> &xmlVec) {
     XMLElement *rLang = doc.NewElement("Lang");
     xmlVec.push_back(doc.NewElement("de"));
     xmlVec.at(xmlVec.size()-1)->SetText(true);
@@ -238,18 +243,21 @@ void ConfigXml::createXmlLang(XMLDocument &doc, XMLNode* root, std::vector<XMLEl
 
 
 void ConfigXml::disableUiLang(QComboBox* cbl, std::string lang) {
-    if(lang == "de")  cbl->setItemData(Language::DE, QSize(-1,-1), Qt::SizeHintRole);
+    if(lang == "de")  cbl->setItemData(Language::DE, QSize(-1,-1),
+                                       Qt::SizeHintRole);
     if(lang == "en") {
         cbl->setItemData(Language::EN_US, QSize(-1,-1), Qt::SizeHintRole);
         cbl->setItemData(Language::EN_UK, QSize(-1,-1), Qt::SizeHintRole);
     }
-    if(lang == "es")  cbl->setItemData(Language::ES, QSize(-1,-1), Qt::SizeHintRole);
-    if(lang == "fr")  cbl->setItemData(Language::FR, QSize(-1,-1), Qt::SizeHintRole);
-    if(lang == "it")  cbl->setItemData(Language::IT, QSize(-1,-1), Qt::SizeHintRole);
-
+    if(lang == "es")  cbl->setItemData(Language::ES, QSize(-1,-1),
+                                       Qt::SizeHintRole);
+    if(lang == "fr")  cbl->setItemData(Language::FR, QSize(-1,-1),
+                                       Qt::SizeHintRole);
+    if(lang == "it")  cbl->setItemData(Language::IT, QSize(-1,-1),
+                                       Qt::SizeHintRole);
 }
 
-void ConfigXml::read(Ui::QPicoSpeaker *ui) {
+void ConfigXml::read(std::shared_ptr<Ui::QPicoSpeaker> ui) {
     ui->hsSpeed->setValue(getSpeed());
     ui->hsVolume->setValue(getVolume());
     ui->hsPitch->setValue(getPitch());
@@ -279,7 +287,7 @@ void ConfigXml::read(Ui::QPicoSpeaker *ui) {
     } xlVec.clear();
 }
 
-void ConfigXml::read(Ui::Settings *ui) {
+void ConfigXml::read(std::shared_ptr<Ui::Settings> ui) {
     ui->sbDefVol->setValue(getVolume());
     ui->sbDefPitch->setValue(getPitch());
     ui->sbDefSpeed->setValue(getSpeed());
@@ -302,7 +310,7 @@ void ConfigXml::read(Ui::Settings *ui) {
     } xlVec.clear();
 }
 
-void ConfigXml::write(Ui::Settings *ui) {
+void ConfigXml::write(std::shared_ptr<Ui::Settings> ui) {
     setDefEngine(static_cast<Engine>(ui->cmbDefEng->currentIndex()));
     setPitch(ui->sbDefPitch->value());
     setSpeed(ui->sbDefSpeed->value());

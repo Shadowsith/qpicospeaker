@@ -31,14 +31,13 @@ AboutInfo::AboutInfo(QWidget *parent) :
 
 AboutInfo::~AboutInfo()
 {
-    delete ui;
 }
 
-AboutInfo* AboutInfo::instance = 0;
+std::shared_ptr<AboutInfo> AboutInfo::instance = nullptr;
 
-AboutInfo* AboutInfo::open() {
+std::shared_ptr<AboutInfo> AboutInfo::open() {
     if(!instance) {
-        instance = new AboutInfo();
+        instance = std::shared_ptr<AboutInfo>(new AboutInfo());
         return instance;
     } else {
         return instance;

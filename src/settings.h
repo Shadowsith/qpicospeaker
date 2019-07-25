@@ -23,6 +23,7 @@ along with QPicoSpeaker.  If not, see <http://www.gnu.org/licenses/>.
 #define SETTINGS_H
 
 #include <QWidget>
+#include <memory>
 #include "ui_settings.h"
 
 namespace Ui {
@@ -34,14 +35,15 @@ class Settings : public QWidget
     Q_OBJECT
 
 public:
-    static Settings* open();
+    static std::shared_ptr<Settings> open();
     static bool isAlloc();
-    Ui::Settings *ui;
+    std::shared_ptr<Ui::Settings> ui;
+    ~Settings();
 
 private:
-    explicit Settings(QWidget *parent = 0);
-    ~Settings();
-    static Settings* instance;
+    explicit Settings(QWidget *parent = nullptr);
+
+    static std::shared_ptr<Settings> instance;
     void resize(bool check);
 
 };

@@ -371,6 +371,9 @@ p, li { white-space: pre-wrap; }
       </property>
      </widget>
      <widget class="QSlider" name="hsPitch">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
       <property name="geometry">
        <rect>
         <x>100</x>

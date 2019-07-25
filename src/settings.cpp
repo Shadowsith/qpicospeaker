@@ -47,15 +47,13 @@ Settings::Settings(QWidget *parent) : QWidget(parent),
     resize(false);
 }
 
-Settings::~Settings() {
-    delete ui;
-}
+Settings::~Settings() {}
 
-Settings* Settings::instance = 0;
+std::shared_ptr<Settings> Settings::instance;
 
-Settings* Settings::open() {
+std::shared_ptr<Settings> Settings::open() {
     if(!instance) {
-        instance = new Settings();
+        instance = std::shared_ptr<Settings>(new Settings());
         return instance;
     } else {
         return instance;

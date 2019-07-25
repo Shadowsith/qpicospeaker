@@ -28,6 +28,7 @@ along with QPicoSpeaker.  If not, see <http://www.gnu.org/licenses/>.
 #include <QMainWindow>
 #include <QDir>
 #include <QTranslator>
+#include <QThread>
 #include <QtMultimedia/QMediaPlayer>
 
 
@@ -44,11 +45,13 @@ public:
     ~QPicoSpeaker();
 
 private:
-    Ui::QPicoSpeaker *ui;
-    AboutInfo* info;
-    Settings* settings;
-    QMediaPlayer *player = new QMediaPlayer;
+    std::shared_ptr<Ui::QPicoSpeaker> ui;
+    std::shared_ptr<AboutInfo> info;
+    std::shared_ptr<Settings> settings;
+    std::unique_ptr<QMediaPlayer> player =
+            std::unique_ptr<QMediaPlayer>(new QMediaPlayer);
     QTranslator tl;
+    std::unique_ptr<QThread> worker;
     void setSpecialCharsToUiItms();
     void conWin();
     void conMenu();
@@ -60,7 +63,7 @@ private:
     void changeEvent(QEvent* e);
     //@Override
     void resizeEvent(QResizeEvent* e);
-    void play();
+    int play();
     void stop();
     void resize();
     QString m_text = "";
@@ -70,6 +73,7 @@ private:
     void openSettings();
     void saveText();
     void saveAudio();
+
 };
 
 #endif // QPICOSPEAKER_H

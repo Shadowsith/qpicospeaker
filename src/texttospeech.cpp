@@ -27,6 +27,7 @@ along with QPicoSpeaker.  If not, see <http://www.gnu.org/licenses/>.
 #include <regex>
 #include <vector>
 #include <algorithm>
+#include <future>
 #include "texttospeech.h"
 
 // constructor & destructor -----------------------------------------------------------------------
@@ -76,7 +77,9 @@ void TextToSpeech::recordFiles() {
     for (size_t i = 0; i < m_gMsgParts.size(); i++) {
         std::string tmp = "/tmp/gTmp" + std::to_string(i) + ".wav";
         std::string message = "\"" + m_google + m_gMsgParts[i] + _lang + "\"";
-        _cmd = "mplayer "+message+" -vc null -vo null -ao pcm:fast:waveheader:file="+tmp;
+        _cmd = "mplayer " + message +
+                " -vc null -vo null -ao pcm:fast:waveheader:file=" +
+                tmp;
         std::system(_cmd.c_str());
     }
 }
@@ -99,7 +102,8 @@ void TextToSpeech::saveParts() {
     }
 }
 
-std::vector<std::string> TextToSpeech::split(std::string &str, const std::string delimiter) {
+std::vector<std::string> TextToSpeech::split(std::string &str,
+                                             const std::string delimiter) {
     std::vector<std::string> parts;
     std::size_t pos = 0;
     std::string token;
@@ -136,7 +140,7 @@ void TextToSpeech::clearTmp() {
             _cmd = m_rm+" "+m_tmp;
             break;
         case Engine::GOOGLE:
-            _cmd = m_rm+" /tmp/gTmp*.wav "+m_tmp;
+            _cmd = m_rm + " /tmp/gTmp*.wav " + m_tmp + " &";
             break;
     }
     std::system(_cmd.c_str());
@@ -148,27 +152,28 @@ void TextToSpeech::createAudio() {
         case Engine::GOOGLE: { 
             saveParts();
             recordFiles();
-            _cmd = m_sox+" "+"/tmp/gTmp*.wav"+" "+m_tmp;
+            _cmd = m_sox + " /tmp/gTmp*.wav " + m_tmp;
             std::system(_cmd.c_str());
         } break;
         case Engine::PICO2WAVE: {
             std::string tmp = "-w=" + m_tmp;
             _text = "\"" + _text + "\"";
-            _cmd = m_pico+" "+_lang+" "+tmp+" "+_text;
+            _cmd = m_pico + " " + _lang + " " +tmp + " " + _text;
             std::system(_cmd.c_str());
         } break;
     }
 }
 
 void TextToSpeech::setSpeedAndPitch() {
-    _cmd = m_sox+" "+m_tmp+" "+_out+" "+"tempo"+" "+_speed+" "+"pitch"+" "+_pitch;
+    _cmd = m_sox + " " + m_tmp + " " + _out + " tempo " + _speed +
+            " pitch " + _pitch;
     std::system(_cmd.c_str());
 }
 
 void TextToSpeech::start() {
     createAudio();
-    setSpeedAndPitch();
-    clearTmp();
+    std::async(&TextToSpeech::setSpeedAndPitch, this);
+    std::async(&TextToSpeech::clearTmp, this);
 }
 
 // operators-----------------------------------------------------------------------------------------

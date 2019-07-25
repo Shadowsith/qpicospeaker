@@ -24,6 +24,7 @@ along with QPicoSpeaker.  If not, see <http://www.gnu.org/licenses/>.
 #define ABOUTINFO_H
 
 #include <QWidget>
+#include <memory>
 
 namespace Ui {
 class AboutInfo;
@@ -34,14 +35,14 @@ class AboutInfo : public QWidget
     Q_OBJECT
 
 public:
-    static AboutInfo* open();
+    static std::shared_ptr<AboutInfo> open();
     static bool isAlloc();
-    Ui::AboutInfo *ui;
+    std::unique_ptr<Ui::AboutInfo> ui;
+    ~AboutInfo();
 
 private:
-    explicit AboutInfo(QWidget *parent = 0);
-    ~AboutInfo();
-    static AboutInfo* instance;
+    explicit AboutInfo(QWidget *parent = nullptr);
+    static std::shared_ptr<AboutInfo> instance;
 
 };
 

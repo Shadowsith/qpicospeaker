@@ -1,3 +1,5 @@
+[![Build status](https://ci.appveyor.com/api/projects/status/c0vgtl5t23s1axq0?svg=true)](https://ci.appveyor.com/project/Shadowsith/qpicospeaker)
+
 # QPicoSpeaker
 
 QPicoSpeaker is a Qt text to speech (TTS) GUI for the pico2wave console application.

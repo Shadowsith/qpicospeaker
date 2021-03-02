@@ -23,6 +23,7 @@ As better solution for the unstatisfied TTS situation on the Linux desktop I dev
 ## Install requirements:
 ### Debian/Ubuntu
 <code>sudo apt-get install sox mplayer libttspico-utils</code>
+<code>sudo apt-get install libqt5multimedia5-plugins</code>
 
 For building you also need qt5 + multimedia packages:<br>
 <code>sudo apt-get install qt5-default qtmultimedia5-dev</code>

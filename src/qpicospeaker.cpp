@@ -254,20 +254,20 @@ void QPicoSpeaker::resizeEvent(QResizeEvent* e) {
                        ui->tePlay->geometry().y() - 5);
 
     ui->saSliders->resize(this->width() - 20, ui->saSliders->height());
-    ui->hsSpeed->resize(ui->saSliders->width() - 170, ui->saSliders->height());
+    ui->hsSpeed->resize(ui->saSliders->width() - 148, ui->saSliders->height() - 101);
 
     qd.dockRight(ui->lblSpeedVal, ui->hsSpeed,
-                 QDocker::VerticalPos::AlignTop, 10);
+                 QDocker::VerticalPos::AlignTop, 8);
 
-    ui->hsVolume->resize(ui->saSliders->width() - 170,
-                         ui->saSliders->height());
+    ui->hsVolume->resize(ui->saSliders->width() - 148,
+                         ui->saSliders->height() - 101);
 
     qd.dockRight(ui->lblVolumeVal, ui->hsVolume,
-                 QDocker::VerticalPos::AlignTop, 10);
+                 QDocker::VerticalPos::AlignTop, 8);
 
-    ui->hsPitch->resize(ui->saSliders->width() - 170, ui->saSliders->height());
+    ui->hsPitch->resize(ui->saSliders->width() - 148, ui->saSliders->height() - 101);
     qd.dockRight(ui->lblPitchVal, ui->hsPitch,
-                QDocker::VerticalPos::AlignTop, 10);
+                QDocker::VerticalPos::AlignTop, 8);
 
     qd.dockCorner(ui->lblInputDesc, QDocker::TopLeft, 10, 5);
     qd.dockBelow(ui->tePlay, ui->lblInputDesc,

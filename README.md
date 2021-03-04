@@ -46,6 +46,7 @@ There is a offical maintained package in the AUR:
 ### Tested Systems
 * Manjaro/Arch Linux (KDE)
 * Ubuntu (MATE) 18.04
+* Ubuntu 20.04
 
 ## Supported languages (TTS):
 * English (US)
